@@ -1,0 +1,60 @@
+.navbar .container-fluid {
+    justify-content: left !important;
+    align-items: center !important;
+}
+
+.navbar .container-fluid h1 {
+    color: rgb(255, 255, 255);
+}
+
+.navbar {
+    background-color: #072238 !important;
+}
+
+.center1 {
+    width: 100%;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.center1 .verificaton {
+    width: 40%;
+    display: block !important;
+    justify-content: center !important;
+}
+
+.center1 .verificaton form {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: #ffffff !important;
+    border-radius: 5px;
+    display: block;
+    -webkit-box-shadow: 0px 0px 23px -6px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 0px 0px 23px -6px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 23px -6px rgba(0, 0, 0, 1);
+}
+
+.center1 .verificaton form .form-label {
+    text-align: left !important;
+}
+
+.center1 .verificaton form .btn {
+    margin-top: 10px !important;
+    width: 100% !important;
+}
+
+.center1 .verificaton form .alre {
+    margin-top: 10px !important;
+    width: 100% !important;
+    display: flex;
+    text-align: justify!important;
+    justify-content: center;
+}
+
+.center1 .verificaton form .alre #sp {
+    background-color: #072238;
+    text-decoration: none !important;
+}

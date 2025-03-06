@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISSG</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/client_css/style.css">
+</head>
+
+<body>
+    <nav class="navbar bg-warning p-3">
+        <div class="container-fluid ">
+            <a class="navbar-brand" href="/">
+                <img src="../../static/media/images/cissg logo png.png" alt="Logo" width="80" class="d-inline-block align-text-top">
+            </a>
+            <h1 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; padding-top:15px;">CGETDC Installations and Service Support Group </h1>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <div class="center1">
+        <div class="verificaton">
+            <h3 style="text-align: center !important;">Profile Verification</h3>
+            <br>
+            <form action="{% url 'activities:signin_function' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h6 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Login</h6>
+                <hr>
+                <div class="mb-3">
+                    <label for="lastname" class="form-label">Username:</label>
+                    <input type="text" class="form-control" id="lastname" name="username" required placeholder="Serial Number">
+
+
+                </div>
+
+                <div class="mb-3">
+                    <label for="serial" class="form-label">Password:</label>
+                    <input placeholder="Password" type="password" class="form-control" id="serial" name="password" required>
+
+                </div>
+
+                <div class="mb-3">
+                    <label for="birthdate" class="form-label">Birthday</label>
+                    <input type="date" class="form-control" id="birthdate" name="birthday" required>
+                </div>
+
+
+                <br>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <br>
+                <br>
+                <p class="alre">Don't have an Account? <a href="/">Signup</a></p>
+
+            </form>
+            <br>
+            <br>
+
+        </div>
+    </div>
+
+    <!-- {% for s in details %}
+
+    <h1>{{s.lastname}}</h1>
+
+    {% endfor %} -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
