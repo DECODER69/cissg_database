@@ -127,13 +127,14 @@ a.sidebar-link:hover {
     background-color: #ffffff !important;
     border-radius: 5px;
     display: flex;
+    justify-content: space-between !important;
     -webkit-box-shadow: 0px 0px 23px -6px rgba(0, 0, 0, 1);
     -moz-box-shadow: 0px 0px 23px -6px rgba(0, 0, 0, 1);
     box-shadow: 0px 0px 23px -6px rgba(0, 0, 0, 1);
 }
 
 .profile .left {
-    width: 45%;
+    width: 55%;
     padding-right: 20px;
 }
 
@@ -166,6 +167,12 @@ a.sidebar-link:hover {
     color: black !important;
 }
 
+.profile .left .row .inside .inside2 #insideleft {
+    width: 100% !important;
+    color: black !important;
+    background-color: red;
+}
+
 .profile .left .row .inside .inside2 .insideleft .mb-3 {
     width: 100% !important;
     justify-content: space-between !important;
@@ -196,5 +203,92 @@ a.sidebar-link:hover {
 
 .profile .right {
     padding-left: 20px;
-    width: 50%;
+    width: 45%;
+}
+
+
+/* right */
+
+.profile .right {
+    width: 45%;
+    padding-left: 20px !important;
+}
+
+.profile .right .row {
+    display: flex !important;
+    color: rgb(0, 0, 0) !important;
+}
+
+.profile .right .row h5 {
+    font-size: 20px !important;
+}
+
+.profile .right .row .inside {
+    width: 100% !important;
+    padding-right: 5%;
+    color: black !important;
+}
+
+.profile .right .row .inside .inside2 {
+    width: 100% !important;
+    display: flex;
+    justify-content: space-between !important;
+    color: black !important;
+    margin-top: -20px !important;
+}
+
+.profile .right .row .inside .inside2 .insideleft,
+.insideright {
+    width: 45% !important;
+    color: black !important;
+}
+
+.profile .right .row .inside .inside2 #insideleft {
+    width: 100% !important;
+    color: black !important;
+}
+
+.profile .right .row .inside .inside2 .insideleft .mb-3 {
+    width: 100% !important;
+    justify-content: space-between !important;
+    display: flex !important;
+}
+
+.profile .right .row .inside .inside2 .insideright .mb-3 {
+    width: 100% !important;
+    justify-content: space-between !important;
+    display: flex !important;
+}
+
+.profile .right .row .inside .form-control {
+    border: rgb(200, 200, 200) 1px solid !important;
+}
+
+.profile .right .row .inside .col {
+    width: 10% !important;
+}
+
+.profile .right .row .inside .inside2 .insideleft .mb-3 img {
+    width: 250px !important;
+    height: auto;
+    align-items: right !important;
+}
+
+
+/* 
+.profile .right .row .inside #inside22 {
+    background-color: red;
+    display: flex;
+    justify-content: space-between !important;
+} */
+
+.right #submit {
+    background-color: #840f03;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer!important;
+    float: right !important;
+    font-weight: bolder;
 }
