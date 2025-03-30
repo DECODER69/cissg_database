@@ -25,6 +25,10 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('signin_function/', views.signin_function, name='signin_function'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path ('education/', views.education, name='education'),
+    path ('delete_item/<str:serialnumber>', views.delete_item, name='delete_item'),
+    path('update_table1/<str:id>', views.update_table1, name='update_table1'),
+    path('academic_input/', views.academic_input, name='academic_input' )
  
     ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

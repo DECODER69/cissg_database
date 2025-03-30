@@ -85,6 +85,9 @@
                 </button> {% for s in data %}
 
                 <h5 style=" width:100%; text-align:right !important;"><span style="font-weight: bolder;">CISSG Personnel: </span> &nbsp; {{s.lastname}}, {{s.firstname}}</h5>
+
+
+
                 {% endfor %}
 
             </nav>
@@ -94,6 +97,9 @@
                         <h1><i class="lni lni-user"></i>
                             <span>Profile</span></h1>
                     </div>
+
+
+
 
                     <div class="profile" style="padding: 20px;">
 
@@ -473,6 +479,34 @@
 
                                     </div>
                                 </div>
+
+
+                                <div class="inside ">
+                                    <div class="inside2">
+                                        <div class="insideleft">
+                                            <div class="mb-3" id="mb3">
+                                                <label for="staticEmail" class="form-label">SSS Number:</label>
+                                                <div>
+                                                    <input type="email" class="form-control form-control-sm" id="staticEmail" placeholder="SSS Number" style="width: 100%;" name=" sss ">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="insideright ">
+                                            <div class="mb-3 " id="mb3 ">
+                                                <label for="stat " class="form-label ">GSIS Number: </label>
+                                                <div>
+                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="GSIS Number" style="width: 100%; " name="gsis ">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
                                 <!-- part 12 -->
                                 <div class="inside ">
                                     <div class="inside2">
@@ -575,46 +609,36 @@
                                 <h5>Dependents
                                     <p style="font-weight: 200;">Entry will include (1) Name; (2) Relationship; (3) Birth date occasional</p>
                                 </h5><br><br><br>
-
                                 <div class="inside ">
-
-
                                     <table id="dynamicTable" class="table table-bordered table-hover">
                                         <thead class="table-dark">
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Relationship</th>
                                                 <th>Birthday</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {% for s in data %}
                                             <tr>
-                                                <td>{{ s.firstname }}</td>
-                                                <td>{{ s.middlename }}</td>
-                                                <td>{{ s.lastname }}</td>
-
+                                                <td>{{ s.firstname }} {{ s.middlename }} {{ s.lastname }}</td>
+                                                <td>Wife</td>
+                                                <td>09/15/1998</td>
                                             </tr>
                                             {% endfor %}
-
                                         </tbody>
                                     </table>
                                     <button onclick="addRow()" class="btn btn-primary">Add Row</button>
                                 </div>
-
-
-
                             </div>
                             <br>
                             <br>
                             <hr>
                             <!-- <button class="btn btn-success" id="submit">Next</button> -->
 
-                            <button class="btn btn-primary" id="submit"> Next Step &nbsp;
+                            <a class="btn btn-primary" href="{% url 'activities:education' %}" id="submit" type="submit"> Next Step &nbsp;
                                 <img src="../../static/media/images/arrow.png" alt="Icon" class="me-2" width="50">
-                               
-                            </button>
+                            </a>
                         </div>
 
 
@@ -628,11 +652,13 @@
         </div>
     </div>
 
+    <!-- <h1>I love you</h1> -->
+
 
     <script>
         const toggler = document.querySelector(".toggler-btn");
         toggler.addEventListener("click ", function() {
-            document.querySelector("#sidebar ").classList.toggle("collapsed ");
+            document.querySelector("#s idebar ").classList.toggle("collapsed ");
         });
     </script>
     <script src="script.js "></script>

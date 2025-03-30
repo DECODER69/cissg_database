@@ -138,7 +138,7 @@ a.sidebar-link:hover {
 }
 
 .profile .left {
-    width: 55%;
+    width: 50%;
     padding-right: 20px;
 }
 
@@ -155,59 +155,6 @@ a.sidebar-link:hover {
     width: 100% !important;
     padding-left: 5%;
     color: black !important;
-}
-
-.profile .left .row .inside .inside2 {
-    width: 100% !important;
-    display: flex;
-    justify-content: space-between !important;
-    color: black !important;
-    margin-top: -20px !important;
-}
-
-.profile .left .row .inside .inside2 .insideleft,
-.insideright {
-    width: 45% !important;
-    color: black !important;
-}
-
-.profile .left .row .inside .inside2 #insideleft {
-    width: 100% !important;
-    color: black !important;
-    background-color: red;
-}
-
-.profile .left .row .inside .inside2 .insideleft .mb-3 {
-    width: 100% !important;
-    justify-content: space-between !important;
-    display: flex !important;
-}
-
-.profile .left .row .inside .inside2 .insideright .mb-3 {
-    width: 100% !important;
-    justify-content: space-between !important;
-    display: flex !important;
-}
-
-
-/* hgfhg */
-
-.profile .left .row .inside .form-control {
-    border: rgb(200, 200, 200) 1px solid !important;
-}
-
-.profile .left .row .inside .col {
-    width: 10% !important;
-}
-
-.profile .right .row .inside .col {
-    width: 10% !important;
-    padding: 5px;
-}
-
-.profile .right {
-    padding-left: 20px;
-    width: 45%;
 }
 
 
@@ -233,66 +180,12 @@ a.sidebar-link:hover {
     color: black !important;
 }
 
-.profile .right .row .inside .inside2 {
-    width: 100% !important;
-    display: flex;
-    justify-content: space-between !important;
-    color: black !important;
-    margin-top: -20px !important;
-}
 
-.profile .right .row .inside .inside2 .insideleft,
-.insideright {
-    width: 45% !important;
-    color: black !important;
-}
+/* table button */
 
-.profile .right .row .inside .inside2 #insideleft {
-    width: 100% !important;
-    color: black !important;
-}
-
-.profile .right .row .inside .inside2 .insideleft .mb-3 {
-    width: 100% !important;
-    justify-content: space-between !important;
-    display: flex !important;
-}
-
-.profile .right .row .inside .inside2 .insideright .mb-3 {
-    width: 100% !important;
-    justify-content: space-between !important;
-    display: flex !important;
-}
-
-.profile .right .row .inside .form-control {
-    border: rgb(200, 200, 200) 1px solid !important;
-}
-
-.profile .right .row .inside .col {
-    width: 10% !important;
-}
-
-.profile .right .row .inside .inside2 .insideleft .mb-3 img {
-    width: 250px !important;
-    height: auto;
-    align-items: right !important;
+.tbtn {
+    width: 100px !important;
 }
 
 
-/* 
-.profile .right .row .inside #inside22 {
-    background-color: red;
-    display: flex;
-    justify-content: space-between !important;
-} */
-
-.right #submit {
-    background-color: #840f03;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer!important;
-    float: right !important;
-    font-weight: bolder;
-}
+/* modal css */

@@ -20,3 +20,16 @@ class extenduser(models.Model):
         return self.serialnumber
     
     
+class academic(models.Model):
+    serialnumber = models.CharField(max_length=100, default='')
+    course = models.CharField(max_length=100, default='')
+    school = models.CharField(max_length=100, default='')
+    start_date = models.CharField(max_length=20, default='')
+    end_date = models.CharField(max_length=20, default='')
+    standing = models.CharField(max_length=100, default='')
+    
+    def __str__(self):
+        return self.serialnumber
+    
+    
+    
