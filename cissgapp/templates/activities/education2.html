@@ -87,11 +87,11 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel">Educational Attainment (Civilian: Academic)</h1>
+                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel">Educational Attainment (Service Related: A. Coast Guard)</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{% url 'activities:academic_input' %} " method="POST">
+                        <form action="{% url 'activities:coastguard_input' %} " method="POST">
                             {% csrf_token %}
 
                             <div class="row g-3 ">
@@ -100,6 +100,11 @@
                                     <div class="col">
                                         <label for="" style="font-weight: bolder;">Course</label>
                                         <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Course" name="course" required>
+                                    </div>
+                                    <br>
+                                    <div class="col">
+                                        <label for="" style="font-weight: bolder;">Authority</label>
+                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Authority" name="authority" required>
                                     </div>
                                     <br>
                                     <div class="col">
@@ -134,61 +139,126 @@
         </div>
 
 
+        <!-- TABLE 2 MODAL  -->
+
+        <div class="modal fade" id="modal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel">Educational Attainment (A.1. Others: Courses / Seminars: (Local))</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{% url 'activities:cglocal_input' %} " method="POST">
+                            {% csrf_token %}
+
+                            <div class="row g-3 ">
+
+                                <div class="inside ">
+                                    <div class="col">
+                                        <label for="" style="font-weight: bolder;">Course</label>
+                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Course" name="course" required>
+                                    </div>
+                                    <br>
+                                    <div class="col">
+                                        <label for="" style="font-weight: bolder;">Authority</label>
+                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Authority" name="authority" required>
+                                    </div>
+                                    <br>
+                                    <div class="col">
+                                        <label for="" style="font-weight: bolder;">School / Institution</label>
+                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="School / Institution" name="school" required>
+                                    </div>
+                                    <br>
+                                    <div class="col">
+                                        <label for="" style="font-weight: bolder;">Period of Attendance (From - To)</label>
+
+                                        <div style="display: flex;">
+                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="start_date">
+                                            <br> &nbsp;
+                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="end_date">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="col">
+                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Standing / Honors / Remarks" name="standing" required>
+                                    </div>
+                                    <br>
+                                    <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- MODAL FOR TABLE 3 -->
+
+        <div class="modal fade" id="modal3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel">Educational Attainment (A.2. Others: Courses / Seminars: (Foreign))</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{% url 'activities:cgforeign_input' %} " method="POST">
+                            {% csrf_token %}
+
+                            <div class="row g-3 ">
+
+                                <div class="inside ">
+                                    <div class="col">
+                                        <label for="" style="font-weight: bolder;">Course</label>
+                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Course" name="course" required>
+                                    </div>
+                                    <br>
+                                    <div class="col">
+                                        <label for="" style="font-weight: bolder;">Authority</label>
+                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Authority" name="authority" required>
+                                    </div>
+                                    <br>
+                                    <div class="col">
+                                        <label for="" style="font-weight: bolder;">School / Institution</label>
+                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="School / Institution" name="school" required>
+                                    </div>
+                                    <br>
+                                    <div class="col">
+                                        <label for="" style="font-weight: bolder;">Period of Attendance (From - To)</label>
+
+                                        <div style="display: flex;">
+                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="start_date">
+                                            <br> &nbsp;
+                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="end_date">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="col">
+                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Standing / Honors / Remarks" name="standing" required>
+                                    </div>
+                                    <br>
+                                    <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <!-- END OF MODAL -->
         <!-- 
         OTHER TRAININGS MODAL -->
 
 
 
-        <div class="modal fade" id="modal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel">Educational Attainment (Civilian: Other Trainings / Workshops)</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{% url 'activities:other_input' %} " method="POST">
-                            {% csrf_token %}
-
-                            <div class="row g-3 ">
-
-                                <div class="inside ">
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">Course</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Course" name="course" required>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">School / Institution</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="School / Institution" name="school" required>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">Period of Attendance (From - To)</label>
-
-                                        <div style="display: flex;">
-                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="start_date">
-                                            <br> &nbsp;
-                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="end_date">
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Standing / Honors / Remarks" name="standing" required>
-                                    </div>
-                                    <br>
-                                    <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
-                                </div>
-                            </div>
-
-
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
 
         <!-- END OF OTHER TRAINING SMODAL -->
 
@@ -197,55 +267,6 @@
 
 
 
-        <div class="modal fade" id="modal3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel">Educational Attainment (Civilian: Vocational)</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{% url 'activities:vocational_input' %} " method="POST">
-                            {% csrf_token %}
-
-                            <div class="row g-3 ">
-
-                                <div class="inside ">
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">Course</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Course" name="course" required>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">School / Institution</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="School / Institution" name="school" required>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">Period of Attendance (From - To)</label>
-
-                                        <div style="display: flex;">
-                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="start_date">
-                                            <br> &nbsp;
-                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="end_date">
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Standing / Honors / Remarks" name="standing" required>
-                                    </div>
-                                    <br>
-                                    <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
-                                </div>
-                            </div>
-
-
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
 
         <!-- 
         end of vocational modal -->
@@ -272,23 +293,24 @@
                         <div class="left">
                             <div class="row g-3">
                                 <h5>E. EDUCATIONAL ATTAINMENT <br>
-                                    <p style="font-weight: 200;">&nbsp;&nbsp; 1. Civilian: Entry shall be from Present to Past</p>
+                                    <p style="font-weight: 200;">&nbsp;&nbsp; 2. Service Related: Entry shall be from Present to Past</p>
 
                                 </h5>
 
                                 <h5>
-                                    <p style="font-weight: 200; margin-left:50px;">A. Academic</p>
+                                    <p style="font-weight: 200; margin-left:50px;">A. Coast Guard</p>
                                 </h5>
                                 <br>
                                 <br>
                                 <div class="inside">
-                                    {% if acad %}
+                                    {% if coastguard %}
 
 
                                     <table id="dynamicTable1" class="table table-bordered table-hover">
                                         <thead class="table-primary thead1">
                                             <tr style="text-align: center !important;">
                                                 <th>COURSE</th>
+                                                <th>Authority</th>
                                                 <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
                                                 <th>PERIOD OF ATTENDANCE (From – To)
                                                 </th>
@@ -297,14 +319,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for s in acad %}
-                                            <form action="{% url 'activities:update_table1' s.id %} " method="POST">
+                                            {% for s in coastguard %}
+                                            <form action="{% url 'activities:update_coastguard' s.id %} " method="POST">
                                                 {% csrf_token %}
                                                 <tr>
-                                                    <td> <textarea type="text" name="course" class="form-control" style="border: none; outline:none;">{{s.course}}</textarea>
+                                                    <td> <textarea type="text" name="course" class="form-control" style="border: none; outline:none;">{{s.course}}</textarea> </td>
 
-                                                        <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
+                                                    <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
+
+                                                    <td>
+                                                        <textarea type="text" name="authority" class="form-control" style="border: none; outline:none;">{{s.authority}}</textarea>
                                                     </td>
+
                                                     <td> <textarea type="text" name="school" class="form-control" style="border: none; outline:none;">{{s.school}}</textarea>
                                                     </td>
                                                     <td style="display: flex;">
@@ -334,6 +360,7 @@
                                         <thead class="table-dark">
                                             <tr>
                                                 <th>COURSE</th>
+                                                <th>Authority</th>
                                                 <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
                                                 <th>PERIOD OF ATTENDANCE (From – To)
                                                 </th>
@@ -345,35 +372,36 @@
 
                                             <tr>
                                                 <td>
-                                                    <td colspan="3" align="center ">No data available</td>
+                                                    <td colspan="3" align="center">No data available</td>
                                                 </td>
 
                                             </tr>
                                         </tbody>
                                     </table>
                                     {% endif %}
-                                    <button data-bs-target="#modal1" data-bs-toggle="modal" class="btn btn-primary" id="add">Add Academic Record +</button>
+                                    <button data-bs-target="#modal1" data-bs-toggle="modal" class="btn btn-primary" id="add">Add Coast Guard Record +</button>
 
                                 </div>
 
                                 <br> &nbsp;
                                 <br>
-                                <!-- END OF ACADEMIIIIIIIIIIIIIIIIIIIIIIIIIC -->
+                                <!-- END OF COAST GUARD -->
                                 <hr>
-                                <!-- START OF VOCATIONALLLLLLLLLLLLL -->
+                                <!-- START OF CG LOCALLLL -->
                                 <h5>
-                                    <p style="font-weight: 200; margin-left:50px;">B. Vocational</p>
+                                    <p style="font-weight: 200; margin-left:50px;">A.1. Others: Courses / Seminars: (Local)</p>
                                 </h5>
                                 <br>
                                 <br>
                                 <div class="inside ">
-                                    {% if vocation %}
+                                    {% if local%}
 
 
                                     <table id="dynamicTable1" class="table table-bordered table-hover">
                                         <thead class="table-primary">
                                             <tr style="text-align: center !important;">
                                                 <th>COURSE</th>
+                                                <th>AUTHORITY</th>
                                                 <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
                                                 <th>PERIOD OF ATTENDANCE (From – To)
                                                 </th>
@@ -382,14 +410,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for s in vocation %}
-                                            <form action="{% url 'activities:update_vocational' s.id %}" method="POST">
+                                            {% for s in local %}
+                                            <form action="{% url 'activities:update_cglocal' s.id %}" method="POST">
                                                 {% csrf_token %}
                                                 <tr>
                                                     <td> <textarea type="text" name="course" class="form-control" style="border: none; outline:none;">{{s.course}}</textarea>
 
-                                                        <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
                                                     </td>
+
+                                                    <td>
+                                                        <textarea type="text" name="authority" class="form-control" style="border: none; outline:none;">{{s.authority}}</textarea>
+                                                    </td>
+
                                                     <td> <textarea type="text" name="school" class="form-control" style="border: none; outline:none;">{{s.school}}</textarea>
                                                     </td>
                                                     <td style="display: flex;">
@@ -419,11 +451,12 @@
                                         <thead class="table-dark">
                                             <tr>
                                                 <th>COURSE</th>
+                                                <th>AUTHORITY</th>
                                                 <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
                                                 <th>PERIOD OF ATTENDANCE (From – To)
                                                 </th>
                                                 <th>STANDING / HONORS / REMARKS</th>
-                                                <th>ACTION</th>
+                                                <th>Edit</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -437,7 +470,7 @@
                                         </tbody>
                                     </table>
                                     {% endif %}
-                                    <button data-bs-target="#modal3" data-bs-toggle="modal" class="btn btn-primary" id="add">Add Vocational Record +</button>
+                                    <button data-bs-target="#modal2" data-bs-toggle="modal" class="btn btn-primary" id="add">A.1.Others: Courses/Seminars: (Local) +</button>
 
                                 </div>
 
@@ -448,18 +481,19 @@
                                 <!-- start of  other traininghs -->
 
                                 <h5>
-                                    <p style="font-weight: 200; margin-left:50px;">C. Other Trainings (Seminars/Workshops)</p>
+                                    <p style="font-weight: 200; margin-left:50px;">A.2. Others: Courses / Seminars: (Foreign)</p>
                                 </h5>
                                 <br>
                                 <br>
                                 <div class="inside ">
-                                    {% if vocation %}
+                                    {% if foreign %}
 
 
                                     <table id="dynamicTable1" class="table table-bordered table-hover">
                                         <thead class="table-primary">
                                             <tr style="text-align: center !important;">
                                                 <th>COURSE</th>
+                                                <th>AUTHORITY</th>
                                                 <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
                                                 <th>PERIOD OF ATTENDANCE (From – To)
                                                 </th>
@@ -468,13 +502,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for s in other %}
-                                            <form action="{% url 'activities:update_other' s.id %}" method="POST">
+                                            {% for s in foreign %}
+                                            <form action="{% url 'activities:update_cgforeign' s.id %}" method="POST">
                                                 {% csrf_token %}
                                                 <tr>
                                                     <td> <textarea type="text" name="course" class="form-control" style="border: none; outline:none;">{{s.course}}</textarea>
 
                                                         <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
+                                                    </td>
+
+                                                    <td>
+                                                        <textarea type="text" name="authority" class="form-control" style="border: none; outline:none;">{{s.authority}}</textarea>
                                                     </td>
                                                     <td> <textarea type="text" name="school" class="form-control" style="border: none; outline:none;">{{s.school}}</textarea>
                                                     </td>
@@ -502,14 +540,15 @@
                                     {% else %}
 
                                     <table id="dynamicTable1" class="table table-bordered table-hover ">
-                                        <thead class="table-dark">
+                                        <thead class="table-primary">
                                             <tr>
                                                 <th>COURSE</th>
+                                                <th>AUTHORITY</th>
                                                 <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
                                                 <th>PERIOD OF ATTENDANCE (From – To)
                                                 </th>
                                                 <th>STANDING / HONORS / REMARKS</th>
-                                                <th>ACTION</th>
+                                                <th>Edit</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -523,7 +562,7 @@
                                         </tbody>
                                     </table>
                                     {% endif %}
-                                    <button data-bs-target="#modal2" data-bs-toggle="modal" class="btn btn-primary" id="add">Add Other Training Record +</button>
+                                    <button data-bs-target="#modal3" data-bs-toggle="modal" class="btn btn-primary" id="add">A.2.Others: Courses/Seminars:(Foreign) +</button>
 
                                 </div>
 
@@ -545,7 +584,7 @@
                         <br>
 
 
-                        <a class="btn btn-primary" href="{% url 'activities:education2' %}" id="submit" type="submit"> Next Step &nbsp;
+                        <a class="btn btn-primary" href="{% url 'activities:education3' %}" id="submit" type="submit"> Next Step &nbsp;
                             <img src="../../static/media/images/arrow.png" alt="Icon" class="me-2" width="50">
                         </a>
 
