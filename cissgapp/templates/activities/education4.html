@@ -91,7 +91,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{% url 'activities:military_input' %} " method="POST">
+                        <form action="{% url 'activities:appointment_input' %} " method="POST">
                             {% csrf_token %}
 
                             <div class="row g-3 ">
@@ -180,7 +180,7 @@
                                 <br>
                                 <br>
                                 <div class="inside">
-                                    {% if military %}
+                                    {% if appointment %}
 
 
                                     <table id="dynamicTable1" class="table table-bordered table-hover">
@@ -193,28 +193,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for s in military %}
-                                            <form action="{% url 'activities:update_military' s.id %} " method="POST">
+                                            {% for s in appointment %}
+                                            <form action="{% url 'activities:appointment_update' s.id %} " method="POST">
                                                 {% csrf_token %}
                                                 <tr>
-                                                    <td> <textarea type="text" name="course" class="form-control" style="border: none; outline:none;">{{s.course}}</textarea> </td>
+                                                    <td> <textarea type="text" name="description" class="form-control" style="border: none; outline:none;">{{s.description}}</textarea> </td>
 
                                                     <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
 
                                                     <td>
-                                                        <textarea type="text" name="authority" class="form-control" style="border: none; outline:none;">{{s.authority}}</textarea>
+                                                        <textarea type="text" name="date" class="form-control" style="border: none; outline:none;">{{s.date}}</textarea>
                                                     </td>
 
-                                                    <td> <textarea type="text" name="school" class="form-control" style="border: none; outline:none;">{{s.school}}</textarea>
+                                                    <td> <textarea type="text" name="authority" class="form-control" style="border: none; outline:none;">{{s.authority}}</textarea>
                                                     </td>
-                                                    <td style="display: flex;">
-                                                        <input type="date" name="start_date" value="{{ s.start_date }}" class="form-control"> <br> &nbsp;
 
-                                                        <input type="date" name="end_date" value="{{ s.end_date }}" class="form-control ">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text " name="standing" value="{{ s.standing }}" class="form-control" style="border: none; outline:none; ">
-                                                    </td>
                                                     <td style="display: flex; justify-content: center; align-items: center; height: 100px">
 
                                                         <button type="submit " class="btn btn-success tbtn ">Update</button>

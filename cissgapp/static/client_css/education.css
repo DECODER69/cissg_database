@@ -137,8 +137,36 @@ a.sidebar-link:hover {
     box-shadow: 0px 0px 23px -6px rgba(0, 0, 0, 1);
 }
 
-.profile .left {
+.profile1 {
     width: 100%;
+    height: auto !important;
+    background-color: #ffffff !important;
+    border-radius: 5px;
+    display: block;
+    justify-content: space-between !important;
+    -webkit-box-shadow: 0px 0px 23px -6px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 0px 0px 23px -6px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 23px -6px rgba(0, 0, 0, 1);
+}
+
+#fluid {
+    display: block;
+}
+
+.profile2 {
+    width: 45%;
+    height: auto !important;
+    background-color: #881313 !important;
+    border-radius: 5px;
+    display: block;
+    justify-content: space-between !important;
+    -webkit-box-shadow: 0px 0px 23px -6px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 0px 0px 23px -6px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 23px -6px rgba(0, 0, 0, 1);
+}
+
+.profile1 .left {
+    width: 50%;
 }
 
 .profile .left .row {

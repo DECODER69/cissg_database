@@ -1,12 +1,13 @@
 from django.shortcuts import render
 
-from .models import extenduser, academic, other_trainings,vocational, coastguard, coastguard_foreign, coastguard_local, military, military_local, military_foreign, appointments, shipboard, collateral, shorebased, collateral2, government, nongovernment, cgawards, cglcommendation, cgappreciation, cgplaque, mawards, mlcommendation, mappreciation, mplaque, clcommendation, cappreciation, cplaque, career, organization, eligibility, retirement
+from .models import extenduser, academic, other_trainings,vocational, coastguard, coastguard_foreign, coastguard_local, military, military_local, military_foreign, appointments, shipboard, collateral, shorebased, collateral2, government, nongovernment, cgawards, cglcommendation, cgappreciation, cgplaque, mawards, mlcommendation, mappreciation, mplaque, clcommendation, cappreciation, cplaque, career, organization, eligibility, retirement, profile
 from django.contrib.auth.models import User, auth
 from django.contrib import messages 
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
+import os
 # Create your views here.
 def index (request):
      return render(request, 'activities/index.html')
@@ -48,10 +49,12 @@ def login(request):
 def dashboard(request):
      data = extenduser.objects.filter(serialnumber = request.user)
      user = request.user
+     dp = profile.objects.filter(serialnumber = request.user)
 
      context = {
           'data': data,
-          'user': user
+          'user': user,
+          'dp': dp
      }
      
      
@@ -569,6 +572,33 @@ def education4(request):
      }
      return render(request, 'activities/education4.html', context)
 
+def appointment_input(request):
+     if request.method == 'POST':
+          des = request.POST.get('description')
+          date = request.POST.get('date')
+          authority = request.POST.get('authority')
+          
+          data = appointments(serialnumber = request.user,
+               description=des, date=date, authority=authority
+               
+          )
+          
+          data.save()
+          return redirect('/education4')
+     
+     
+
+def appointment_update(request, id):
+     if request.method == 'POST':
+          des = request.POST.get('description')
+          date = request.POST.get('date')
+          authority = request.POST.get('authority')
+          
+          appointments.objects.filter(id=id).update(
+               description=des, date=date, authority=authority)
+         
+          return redirect('/education4')
+
 
 
 def education5(request):
@@ -841,3 +871,354 @@ def update_nongov(request, id):
           return redirect('/education7')
      print("negative")
      return redirect('/education7')
+
+
+
+
+# H. AWARDS AND RECOGNITIONS:
+
+
+
+def education8(request):
+     awards = cgawards.objects.filter(serialnumber = request.user)
+     commendations = cglcommendation.objects.filter(serialnumber = request.user)
+     appreciations = cgappreciation.objects.filter(serialnumber = request.user)
+     plaque = cgplaque.objects.filter(serialnumber = request.user)
+     context = {
+          'awards': awards,
+          'commendations': commendations,
+          'appreciations': appreciations,
+          'plaque':plaque,
+     }
+     return render(request, 'activities/education8.html', context)
+
+
+
+
+def award_input(request):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          data = cgawards(serialnumber = request.user,
+                                   award = awards, 
+                                   authority = auth)
+          data.save()
+          return redirect('/education8')
+     
+def commendation_input(request):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          data = cglcommendation(serialnumber = request.user,
+                                   award = awards, 
+                                   authority = auth)
+          data.save()
+          return redirect('/education8')
+     
+def appreciation_input(request):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          data = cgappreciation(serialnumber = request.user,
+                                   award = awards, 
+                                   authority = auth)
+          data.save()
+          return redirect('/education8')
+     
+def plaque_input(request):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          data = cgplaque(serialnumber = request.user,
+                                   award = awards, 
+                                   authority = auth)
+          data.save()
+          return redirect('/education8')
+     
+     
+def update_award(request, id):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          cgawards.objects.filter(id=id).update(award=awards, authority=auth)
+
+          return redirect('/education8')
+     print("negative")
+     return redirect('/education8')
+
+def update_commendation(request, id):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          cglcommendation.objects.filter(id=id).update(award=awards, authority=auth)
+
+          return redirect('/education8')
+     print("negative")
+     return redirect('/education8')
+
+def update_appreciation(request, id):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          cgappreciation.objects.filter(id=id).update(award=awards, authority=auth)
+
+          return redirect('/education8')
+     print("negative")
+     return redirect('/education8')
+
+def update_plaque(request, id):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          cgplaque.objects.filter(id=id).update(award=awards, authority=auth)
+
+          return redirect('/education8')
+     print("negative")
+     return redirect('/education8')
+
+
+
+
+
+          # 2. Military (AFP)
+          
+def education9(request):
+     awards = mawards.objects.filter(serialnumber = request.user)
+     commendations = mlcommendation.objects.filter(serialnumber = request.user)
+     appreciations = mappreciation.objects.filter(serialnumber = request.user)
+     plaque = mplaque.objects.filter(serialnumber = request.user)
+     context = {
+          'awards': awards,
+          'commendations': commendations,
+          'appreciations': appreciations,
+          'plaque':plaque,
+     }
+     return render(request, 'activities/education9.html', context)
+
+
+
+def maward_input(request):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          data = mawards(serialnumber = request.user,
+                                   award = awards, 
+                                   authority = auth)
+          data.save()
+          return redirect('/education9')
+     
+def mcommendation_input(request):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          data = mlcommendation(serialnumber = request.user,
+                                   award = awards, 
+                                   authority = auth)
+          data.save()
+          return redirect('/education9')
+     
+def mappreciation_input(request):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          data = mappreciation(serialnumber = request.user,
+                                   award = awards, 
+                                   authority = auth)
+          data.save()
+          return redirect('/education9')
+     
+def mplaque_input(request):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          data = mplaque(serialnumber = request.user,
+                                   award = awards, 
+                                   authority = auth)
+          data.save()
+          return redirect('/education9')
+     
+     
+def update_maward(request, id):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          mawards.objects.filter(id=id).update(award=awards, authority=auth)
+
+          return redirect('/education9')
+     print("negative")
+     return redirect('/education9')
+
+def update_mcommendation(request, id):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          mlcommendation.objects.filter(id=id).update(award=awards, authority=auth)
+
+          return redirect('/education9')
+     print("negative")
+     return redirect('/education9')
+
+def update_mappreciation(request, id):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          mappreciation.objects.filter(id=id).update(award=awards, authority=auth)
+
+          return redirect('/education9')
+     print("negative")
+     return redirect('/education9')
+
+def update_mplaque(request, id):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          mplaque.objects.filter(id=id).update(award=awards, authority=auth)
+
+          return redirect('/education9')
+     print("negative")
+     return redirect('/education9')
+
+
+
+          # 3. Civilian (Commendations/Appreciations/Plaque)
+          
+def education10(request):
+     commendations = clcommendation.objects.filter(serialnumber = request.user)
+     appreciations = cappreciation.objects.filter(serialnumber = request.user)
+     plaque = cplaque.objects.filter(serialnumber = request.user)
+     context = {
+          'commendations': commendations,
+          'appreciations': appreciations,
+          'plaque':plaque,
+     }
+     return render(request, 'activities/education10.html', context)
+
+
+
+def ccommendation_input(request):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          data = clcommendation(serialnumber = request.user,
+                                   award = awards, 
+                                   authority = auth)
+          data.save()
+          return redirect('/education10')
+     
+     
+def cappreciation_input(request):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          data = cappreciation(serialnumber = request.user,
+                                   award = awards, 
+                                   authority = auth)
+          data.save()
+          return redirect('/education10')
+     
+def cplaque_input(request):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          data = cplaque(serialnumber = request.user,
+                                   award = awards, 
+                                   authority = auth)
+          data.save()
+          return redirect('/education10')
+     
+     # UPDATE
+
+def update_ccommendation(request, id):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          clcommendation.objects.filter(id=id).update(award=awards, authority=auth)
+
+          return redirect('/education10')
+     print("negative")
+     return redirect('/education10')
+     
+def update_cappreciation(request, id):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          cappreciation.objects.filter(id=id).update(award=awards, authority=auth)
+
+          return redirect('/education10')
+     print("negative")
+     return redirect('/education10')
+
+def update_cplaque(request, id):
+     if request.method == 'POST':
+          awards = request.POST.get('awards')
+          auth = request.POST.get('auth')
+          cplaque.objects.filter(id=id).update(award=awards, authority=auth)
+
+          return redirect('/education10')
+     print("negative")
+     return redirect('/education10')
+
+
+def education11(request):
+     careers = career.objects.filter(serialnumber = request.user)
+     
+     
+     context = {
+          'careers': careers,
+          
+     }
+     return render(request, 'activities/education11.html', context)
+
+
+
+
+
+def upload_image(request):
+    if request.method == 'POST':
+        image = request.FILES.get('image')
+
+        if image:
+            try:
+                # Check if profile already exists
+                existing_profile = profile.objects.get(serialnumber=request.user)
+
+                # Delete old image file
+                if existing_profile.profile:
+                    old_image_path = existing_profile.profile.path
+                    if os.path.isfile(old_image_path):
+                        os.remove(old_image_path)
+
+                # Update with new image
+                existing_profile.profile = image
+                existing_profile.save()
+
+            except profile.DoesNotExist:
+                # Create new profile if it doesn't exist
+                new_profile = profile(serialnumber=request.user, profile=image)
+                new_profile.save()
+
+        return redirect('/education11')
+
+
+def career_input(request):
+
+     if request.method == 'POST':
+          student = request.POST.get('student')
+          sea = request.POST.get('sea')
+          staff = request.POST.get('staff')
+          instructor = request.POST.get('instructor')
+          command = request.POST.get('command')
+
+          # Try to get existing record
+          data, created = career.objects.update_or_create(
+               serialnumber=request.user,
+               defaults={
+                    'student_tour': student,
+                    'sea_duty': sea,
+                    'staff_duty': staff,
+                    'instructor_duty': instructor,
+                    'command': command
+               }
+          )
+
+          return redirect('/education11')

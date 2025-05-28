@@ -548,19 +548,12 @@
                                 <br>&nbsp;
                                 <div class="inside ">
                                     <div class="inside2" style="" id="inside22">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">2x2 Picture:</label>
-                                                <div>
-                                                    <input type="file" accept="image/*" class="form-control form-control-sm" id="staticEmail" placeholder="2x2" style="width: 100%;" name=" pagibig ">
-                                                </div>
-                                            </div>
 
-                                        </div>
 
                                         <div class="insideleft">
                                             <div class="mb-3" id="mb3">
-                                                <img src="../../static/media/images/dp.jpg" alt="" class="profile">
+                                                {% for s in dp %}
+                                                <img src="{{ s.profile.url }}" alt="" class="profile"> {% endfor %}
                                             </div>
 
                                         </div>

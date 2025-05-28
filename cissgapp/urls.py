@@ -42,10 +42,16 @@ urlpatterns = [
     path('education5/', views.education5, name='education5'),
     path('education6/', views.education6, name='education6'),
     path('education7/', views.education7, name='education7'),
+    path('education8/', views.education8, name='education8'),
+    path('education9/', views.education9, name='education9'),
+    path('education10/', views.education10, name='education10'),
+    path('education11/', views.education11, name='education11'),
     path('update_coastguard/<str:id>', views.update_coastguard, name='update_coastguard'),
     path('update_cglocal/<str:id>', views.update_cglocal, name='update_cglocal'),
     path('update_cgforeign/<str:id>', views.update_cgforeign, name='update_cgforeign'),
     path('military_input/', views.military_input, name='military_input' ),
+    path('appointment_input/', views.appointment_input, name='appointment_input'),
+    path('appointment_update/<str:id>', views.appointment_update, name='appointment_update'),
     path('mlocal"_input/', views.mlocal_input, name='mlocal_input' ),
     path('mforeign_input/', views.mforeign_input, name='mforeign_input' ),
     path('update_military/<str:id>', views.update_military, name='update_military'),
@@ -68,6 +74,35 @@ urlpatterns = [
     path('update_nongov/<str:id>', views.update_nongov, name='update_nongov'),
     
     
+    path('award_input/', views.award_input, name='award_input' ),
+    path('commendation_input/', views.commendation_input, name='commendation_input' ),
+    path('appreciation_input/', views.appreciation_input, name='appreciation_input' ),
+    path('plaque_input/', views.plaque_input, name='plaque_input' ),
+    path('update_award/<str:id>', views.update_award, name='update_award'),
+    path('update_commendation/<str:id>', views.update_commendation, name='update_commendation'),
+    path('update_appreciation/<str:id>', views.update_appreciation, name='update_appreciation'),
+    path('update_plaque/<str:id>', views.update_plaque, name='update_plaque'),
+    
+    path('maward_input/', views.maward_input, name='maward_input' ),
+    path('mcommendation_input/', views.mcommendation_input, name='mcommendation_input' ),
+    path('mappreciation_input/', views.mappreciation_input, name='mappreciation_input' ),
+    path('mplaque_input/', views.mplaque_input, name='mplaque_input' ),
+    path('update_maward/<str:id>', views.update_maward, name='update_maward'),
+    path('update_mcommendation/<str:id>', views.update_mcommendation, name='update_mcommendation'),
+    path('update_mappreciation/<str:id>', views.update_mappreciation, name='update_mappreciation'),
+    path('update_mplaque/<str:id>', views.update_mplaque, name='update_mplaque'),
+    
+  
+    path('ccommendation_input/', views.ccommendation_input, name='ccommendation_input' ),
+    path('cappreciation_input/', views.cappreciation_input, name='cappreciation_input' ),
+    path('cplaque_input/', views.cplaque_input, name='cplaque_input' ),
+    path('update_ccommendation/<str:id>', views.update_ccommendation, name='update_ccommendation'),
+    path('update_cappreciation/<str:id>', views.update_cappreciation, name='update_cappreciation'),
+    path('update_cplaque/<str:id>', views.update_cplaque, name='update_cplaque'),
+    
+    path('upload_image/', views.upload_image, name='upload_image'),
+    
+    path('career_input/', views.career_input, name='career_input' ),
     ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
