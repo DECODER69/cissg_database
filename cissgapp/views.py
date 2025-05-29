@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import extenduser, academic, other_trainings,vocational, coastguard, coastguard_foreign, coastguard_local, military, military_local, military_foreign, appointments, shipboard, collateral, shorebased, collateral2, government, nongovernment, cgawards, cglcommendation, cgappreciation, cgplaque, mawards, mlcommendation, mappreciation, mplaque, clcommendation, cappreciation, cplaque, career, organization, eligibility, retirement, profile
+from .models import extenduser, academic, details, other_trainings,vocational, coastguard, coastguard_foreign, coastguard_local, military, military_local, military_foreign, appointments, shipboard, collateral, shorebased, collateral2, government, nongovernment, cgawards, cglcommendation, cgappreciation, cgplaque, mawards, mlcommendation, mappreciation, mplaque, clcommendation, cappreciation, cplaque, career, organization, eligibility, retirement, profile
 from django.contrib.auth.models import User, auth
 from django.contrib import messages 
 from django.shortcuts import render, redirect
@@ -1182,13 +1182,13 @@ def upload_image(request):
                 # Check if profile already exists
                 existing_profile = profile.objects.get(serialnumber=request.user)
 
-                # Delete old image file
+                # Delete old image file....
                 if existing_profile.profile:
                     old_image_path = existing_profile.profile.path
                     if os.path.isfile(old_image_path):
                         os.remove(old_image_path)
 
-                # Update with new image
+                # Update with new image inseerrtttt
                 existing_profile.profile = image
                 existing_profile.save()
 
@@ -1222,3 +1222,53 @@ def career_input(request):
           )
 
           return redirect('/education11')
+     
+     
+     
+     
+     
+     
+     
+                                   #  DASHBOARD FUNCTIONS
+                                   
+                                   
+def dashboard_input(request):
+     if request.method == 'POST':
+          lastname = request.POST.get('lastname')
+          firstname = request.POST.get('firstname')
+          middlename = request.POST.get('middlename')
+          serialnumber = request.POST.get('serialnumber')
+          birthday = request.POST.get('birthday')
+          birthplace = request.POST.get('birthplace')
+          nickname = request.POST.get('nickname')
+          gender = request.POST.get('gender')
+          religion = request.POST.get('religion')
+          height = request.POST.get('height')
+          headsize = request.POST.get('headsize')
+          waistsize = request.POST.get('waistsize')
+          skincolor = request.POST.get('skincolor')
+          distinct = request.POST.get('distinct')
+          civilstatus = request.POST.get('civilstatus')
+          citizenship = request.POST.get('citizenship')
+          bloodtype = request.POST.get('bloodtype')
+          weight = request.POST.get('weight')
+          footsize = request.POST.get('footsize')
+          bodybuild = request.POST.get('bodybuild')
+          eyecolor = request.POST.get('eyecolor')
+          haircolor = request.POST.get('haircolor')
+          homeaddress = request.POST.get('homeaddress')
+          permanentaddress = request.POST.get('permanentaddress')
+          email = request.POST.get('email')
+          contactnumber = request.POST.get('contactnumber')
+          pagibig = request.POST.get('pagibig')
+          philhealth = request.POST.get('philhealth')
+          sssnumber  = request.POST.get('sssnumber')
+          gsis = request.POST.get('gsis')
+          tin = request.POST.get('tin')
+          driver = request.POST.get('driver')
+          rank = request.POST.get('rank')
+          
+          data = details(serialnumber = request.user,
+                         )
+          
+          return redirect('/dashboard')

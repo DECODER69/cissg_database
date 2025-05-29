@@ -19,6 +19,42 @@ class extenduser(models.Model):
     def __str__(self):
         return self.serialnumber
     
+class details(models.Model):
+    lastname = models.CharField(max_length=50, default='')
+    firstname = models.CharField(max_length=50, default='')
+    middlename = models.CharField(max_length=50, default='')
+    serialnumber = models.CharField(max_length=50, default='')
+    birthday = models.CharField(max_length=15, default='')
+    birthplace = models.CharField(max_length=50, default='')
+    nickname = models.CharField(max_length=50, default='')
+    gender= models.CharField(max_length=10, default='')
+    religion = models.CharField(max_length=50, default='')
+    height= models.CharField(max_length=10, default='')
+    headsize= models.CharField(max_length=10, default='')
+    waistsize = models.CharField(max_length=10, default='')
+    skincolor= models.CharField(max_length=20, default='')
+    distinct= models.CharField(max_length=100, default='')
+    civilstatus = models.CharField(max_length=20, default='')
+    citizenship = models.CharField(max_length=20, default='')
+    bloodtype = models.CharField(max_length=5, default='')
+    weight= models.CharField(max_length=10, default='')
+    footsize= models.CharField(max_length=10, default='')
+    bodybuild = models.CharField(max_length=20, default='')
+    eyecolor = models.CharField(max_length=20, default='')
+    haircolor = models.CharField(max_length=20, default='')
+    homeaddress = models.CharField(max_length=100, default='')
+    permanentaddress = models.CharField(max_length=100, default='')
+    email = models.CharField(max_length=50, default='')
+    contactnumber = models.CharField(max_length=15, default='')
+    pagibig = models.CharField(max_length=20, default='')
+    philhealth = models.CharField(max_length=20, default='')
+    sssnumber = models.CharField(max_length=20, default='')
+    gsis = models.CharField(max_length=20, default='')
+    tin = models.CharField(max_length=20, default='')
+    driver = models.CharField(max_length=20, default='')
+    rank = models.CharField(max_length=20, default='')
+    
+    
     
 class academic(models.Model):
     serialnumber = models.CharField(max_length=100, default='')
@@ -361,3 +397,8 @@ class profile(models.Model):
     
     def __str__(self):
         return self.serialnumber
+    
+    
+    
+    
+    
