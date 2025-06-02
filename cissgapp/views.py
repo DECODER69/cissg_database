@@ -36,6 +36,8 @@ def signup_function(request):
                user = User.objects.create_user(username=serial, password=password, first_name=firstname, last_name=lastname)
                user.save()
                data = extenduser(firstname=firstname, middlename=middle, lastname=lastname, serialnumber=serial, birthday=birthday, division=division, password=password)
+               data2 = details(serialnumber=serial, firstname=firstname, middlename=middle, lastname=lastname, birthday=birthday, division=division)
+               data2.save()
                data.save()
                return render(request, 'activities/index.html')
           
@@ -47,14 +49,17 @@ def login(request):
      return render(request, 'activities/login.html', context)
 
 def dashboard(request):
+     detail2 = details.objects.filter(serialnumber = request.user)
      data = extenduser.objects.filter(serialnumber = request.user)
      user = request.user
      dp = profile.objects.filter(serialnumber = request.user)
+   
 
      context = {
           'data': data,
           'user': user,
-          'dp': dp
+          'dp': dp,
+          'detail2': detail2,
      }
      
      
@@ -1237,8 +1242,8 @@ def dashboard_input(request):
           lastname = request.POST.get('lastname')
           firstname = request.POST.get('firstname')
           middlename = request.POST.get('middlename')
-          serialnumber = request.POST.get('serialnumber')
-          birthday = request.POST.get('birthday')
+         
+          birthday = request.POST.get('birthdate')
           birthplace = request.POST.get('birthplace')
           nickname = request.POST.get('nickname')
           gender = request.POST.get('gender')
@@ -1267,8 +1272,111 @@ def dashboard_input(request):
           tin = request.POST.get('tin')
           driver = request.POST.get('driver')
           rank = request.POST.get('rank')
-          
           data = details(serialnumber = request.user,
-                         )
+                         lastname = lastname,
+                         firstname = firstname,
+                         middlename = middlename,
+                         birthday = birthday,
+                         birthplace = birthplace,
+                         nickname = nickname,
+                         gender = gender, 
+                         religion = religion,
+                         height = height,
+                         headsize = headsize,
+                         waistsize = waistsize,
+                         skincolor = skincolor,
+                         distinct = distinct,
+                         civilstatus = civilstatus,
+                         citizenship = citizenship,
+                         bloodtype = bloodtype,
+                         weight = weight,
+                         footsize = footsize,
+                         bodybuild = bodybuild,
+                         eyecolor = eyecolor,
+                         haircolor = haircolor,
+                         homeaddress = homeaddress,
+                         permanentaddress = permanentaddress,
+                         email = email,
+                         contactnumber = contactnumber,
+                         pagibig = pagibig,
+                         philhealth = philhealth,
+                         sssnumber = sssnumber,
+                         gsis = gsis,
+                         tin = tin,
+                         driver = driver,
+                         rank = rank)
+          data.save()
+          
+          return redirect('/dashboard')
+     
+     
+def dashboard_input_update(request, id):
+     if request.method == 'POST':
+          lastname = request.POST.get('lastname')
+          firstname = request.POST.get('firstname')
+          middlename = request.POST.get('middlename')
+          
+          birthday = request.POST.get('birthdate')
+          birthplace = request.POST.get('birthplace')
+          nickname = request.POST.get('nickname')
+          gender = request.POST.get('gender')
+          religion = request.POST.get('religion')
+          height = request.POST.get('height')
+          headsize = request.POST.get('headsize')
+          waistsize = request.POST.get('waistsize')
+          skincolor = request.POST.get('skincolor')
+          distinct = request.POST.get('distinct')
+          civilstatus = request.POST.get('civilstatus')
+          citizenship = request.POST.get('citizenship')
+          bloodtype = request.POST.get('bloodtype')
+          weight = request.POST.get('weight')
+          footsize = request.POST.get('footsize')
+          bodybuild = request.POST.get('bodybuild')
+          eyecolor = request.POST.get('eyecolor')
+          haircolor = request.POST.get('haircolor')
+          homeaddress = request.POST.get('homeaddress')
+          permanentaddress = request.POST.get('permanentaddress')
+          email = request.POST.get('email')
+          contactnumber = request.POST.get('contactnumber')
+          pagibig = request.POST.get('pagibig')
+          philhealth = request.POST.get('philhealth')
+          sssnumber  = request.POST.get('sssnumber')
+          gsis = request.POST.get('gsis')
+          tin = request.POST.get('tin')
+          driver = request.POST.get('driver')
+          rank = request.POST.get('rank')
+          details.objects.filter(id=id).update(lastname = lastname,
+                         firstname = firstname,
+                         middlename = middlename,
+                         birthday = birthday,
+                         birthplace = birthplace,
+                         nickname = nickname,
+                         gender = gender, 
+                         religion = religion,
+                         height = height,
+                         headsize = headsize,
+                         waistsize = waistsize,
+                         skincolor = skincolor,
+                         distinct = distinct,
+                         civilstatus = civilstatus,
+                         citizenship = citizenship,
+                         bloodtype = bloodtype,
+                         weight = weight,
+                         footsize = footsize,
+                         bodybuild = bodybuild,
+                         eyecolor = eyecolor,
+                         haircolor = haircolor,
+                         homeaddress = homeaddress,
+                         permanentaddress = permanentaddress,
+                         email = email,
+                         contactnumber = contactnumber,
+                         pagibig = pagibig,
+                         philhealth = philhealth,
+                         sssnumber = sssnumber,
+                         gsis = gsis,
+                         tin = tin,
+                         driver = driver,
+                         rank = rank)
+          # data.save()
           
           return redirect('/dashboard')
