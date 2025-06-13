@@ -52,7 +52,7 @@ class details(models.Model):
     gsis = models.CharField(max_length=20, default='')
     tin = models.CharField(max_length=20, default='')
     driver = models.CharField(max_length=20, default='')
-    rank = models.CharField(max_length=20, default='')
+    rank = models.CharField(max_length=100, default='')
     
     
     
@@ -398,6 +398,14 @@ class profile(models.Model):
     def __str__(self):
         return self.serialnumber
     
+class dependents(models.Model):
+    serialnumber = models.CharField(max_length=100, default='')
+    name = models.CharField(max_length=100, default='')
+    relationship = models.CharField(max_length=50, default='')
+    birthday = models.CharField(max_length=15, default='')
+    
+    def __str__(self):
+        return self.serialnumber
     
     
     

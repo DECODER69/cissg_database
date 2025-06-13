@@ -64,11 +64,6 @@ body {
 
 /*----------------page-wrapper----------------*/
 
-.page-wrapper {
-    height: 100vh;
-    /* background-color: #16c7ff !important; */
-}
-
 .page-wrapper .theme {
     width: 40px;
     height: 40px;
@@ -78,7 +73,7 @@ body {
 }
 
 .page-wrapper .theme.chiller-theme {
-    background: #1e2229 !important;
+    background: #1e2229;
 }
 
 
@@ -492,7 +487,7 @@ body {
 }
 
 .chiller-theme .sidebar-footer {
-    background: #3a3f48 !important;
+    background: #3a3f48;
     box-shadow: 0px -1px 5px #282c33;
     border-top: 1px solid #464a52;
 }

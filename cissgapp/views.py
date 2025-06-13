@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import extenduser, academic, details, other_trainings,vocational, coastguard, coastguard_foreign, coastguard_local, military, military_local, military_foreign, appointments, shipboard, collateral, shorebased, collateral2, government, nongovernment, cgawards, cglcommendation, cgappreciation, cgplaque, mawards, mlcommendation, mappreciation, mplaque, clcommendation, cappreciation, cplaque, career, organization, eligibility, retirement, profile
+from .models import extenduser, academic, details, dependents, other_trainings,vocational, coastguard, coastguard_foreign, coastguard_local, military, military_local, military_foreign, appointments, shipboard, collateral, shorebased, collateral2, government, nongovernment, cgawards, cglcommendation, cgappreciation, cgplaque, mawards, mlcommendation, mappreciation, mplaque, clcommendation, cappreciation, cplaque, career, organization, eligibility, retirement, profile
 from django.contrib.auth.models import User, auth
 from django.contrib import messages 
 from django.shortcuts import render, redirect
@@ -8,10 +8,14 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 import os
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index (request):
      return render(request, 'activities/index.html')
 
+def logout_view(request):
+    logout(request)
+    return redirect('/login')
 
 def signup_page(request):
      return render(request, 'activities/signup.html')
@@ -36,7 +40,7 @@ def signup_function(request):
                user = User.objects.create_user(username=serial, password=password, first_name=firstname, last_name=lastname)
                user.save()
                data = extenduser(firstname=firstname, middlename=middle, lastname=lastname, serialnumber=serial, birthday=birthday, division=division, password=password)
-               data2 = details(serialnumber=serial, firstname=firstname, middlename=middle, lastname=lastname, birthday=birthday, division=division)
+               data2 = details(serialnumber=serial, firstname=firstname, middlename=middle, lastname=lastname, birthday=birthday)
                data2.save()
                data.save()
                return render(request, 'activities/index.html')
@@ -47,8 +51,9 @@ def login(request):
           'details': details
      }
      return render(request, 'activities/login.html', context)
-
+@login_required(login_url='/login')
 def dashboard(request):
+     depend = dependents.objects.filter(serialnumber = request.user)
      detail2 = details.objects.filter(serialnumber = request.user)
      data = extenduser.objects.filter(serialnumber = request.user)
      user = request.user
@@ -60,6 +65,7 @@ def dashboard(request):
           'user': user,
           'dp': dp,
           'detail2': detail2,
+          'depend': depend,
      }
      
      
@@ -94,13 +100,15 @@ def  education (request):
      acad = academic.objects.filter(serialnumber = request.user)
      other = other_trainings.objects.filter(serialnumber = request.user)
      vocation = vocational.objects.filter(serialnumber = request.user)
+     dp = profile.objects.filter(serialnumber = request.user)
      user = request.user
      context = {
           'data': data,
           'user': user,
           'acad':acad,
           'other':other,
-          'vocation':vocation
+          'vocation':vocation,
+          'dp': dp,
      }
      print("data", data)
      return render(request, 'activities/education.html', context)
@@ -113,6 +121,7 @@ def  education2 (request):
      mlocal = military_local.objects.filter(serialnumber = request.user)
      mforeign = military_foreign.objects.filter(serialnumber = request.user)
      user = request.user
+     dp = profile.objects.filter(serialnumber = request.user)
      context = {
           'coastguard': coastguards,
           'local': local,
@@ -120,6 +129,8 @@ def  education2 (request):
           'military': military1,
           'mlocal': mlocal,
           'mforeign': mforeign,
+          'user': user,
+          'dp': dp,
      }
    
      return render(request, 'activities/education2.html', context)
@@ -132,10 +143,13 @@ def  education3 (request):
      mlocal = military_local.objects.filter(serialnumber = request.user)
      mforeign = military_foreign.objects.filter(serialnumber = request.user)
      user = request.user
+     dp = profile.objects.filter(serialnumber = request.user)
      context = {
           'military': military1,
           'mlocal': mlocal,
           'mforeign': mforeign,
+          'user': user,
+          'dp': dp,
      }
    
      return render(request, 'activities/education3.html', context)
@@ -572,8 +586,10 @@ def update_mforeign(request, id):
                
 def education4(request):
      appointment = appointments.objects.filter(serialnumber = request.user)
+     dp = profile.objects.filter(serialnumber = request.user)
      context = {
           'appointment': appointment,
+          'dp': dp,
      }
      return render(request, 'activities/education4.html', context)
 
@@ -613,6 +629,7 @@ def education5(request):
      collateral1a = collateral2.objects.filter(serialnumber = request.user)
      government1 = government.objects.filter(serialnumber = request.user)
      nongovernment1 = nongovernment.objects.filter(serialnumber = request.user)
+     dp = profile.objects.filter(serialnumber = request.user)
      context = {
           'shipboard': shipboards,
           'collateral': collateral1,
@@ -620,6 +637,7 @@ def education5(request):
           'collateral2': collateral1a,
           'government': government1,
           'nongovernment': nongovernment1,
+          'dp': dp,
      }
      return render(request, 'activities/education5.html', context)
 
@@ -712,9 +730,11 @@ def update_collateral(request, id):
 def education6(request):
      shorebased1 = shorebased.objects.filter(serialnumber = request.user)
      collateral1a = collateral2.objects.filter(serialnumber = request.user)
+     dp = profile.objects.filter(serialnumber = request.user)
      context = {
           'shorebased': shorebased1,
           'collateral2': collateral1a,
+          'dp': dp,
      }
      return render(request, 'activities/education6.html', context)
 
@@ -801,9 +821,11 @@ def update_collateral2(request, id):
 def education7(request):
      gov = government.objects.filter(serialnumber = request.user)
      nongov = nongovernment.objects.filter(serialnumber = request.user)
+     dp = profile.objects.filter(serialnumber = request.user)
      context = {
           'gov': gov,
           'nongov': nongov,
+          'dp': dp,
      }
      return render(request, 'activities/education7.html', context)
 
@@ -889,11 +911,13 @@ def education8(request):
      commendations = cglcommendation.objects.filter(serialnumber = request.user)
      appreciations = cgappreciation.objects.filter(serialnumber = request.user)
      plaque = cgplaque.objects.filter(serialnumber = request.user)
+     dp = profile.objects.filter(serialnumber = request.user)
      context = {
           'awards': awards,
           'commendations': commendations,
           'appreciations': appreciations,
           'plaque':plaque,
+          'dp': dp,
      }
      return render(request, 'activities/education8.html', context)
 
@@ -992,11 +1016,13 @@ def education9(request):
      commendations = mlcommendation.objects.filter(serialnumber = request.user)
      appreciations = mappreciation.objects.filter(serialnumber = request.user)
      plaque = mplaque.objects.filter(serialnumber = request.user)
+     dp = profile.objects.filter(serialnumber = request.user)
      context = {
           'awards': awards,
           'commendations': commendations,
           'appreciations': appreciations,
           'plaque':plaque,
+          'dp': dp,
      }
      return render(request, 'activities/education9.html', context)
 
@@ -1091,10 +1117,12 @@ def education10(request):
      commendations = clcommendation.objects.filter(serialnumber = request.user)
      appreciations = cappreciation.objects.filter(serialnumber = request.user)
      plaque = cplaque.objects.filter(serialnumber = request.user)
+     dp = profile.objects.filter(serialnumber = request.user)
      context = {
           'commendations': commendations,
           'appreciations': appreciations,
           'plaque':plaque,
+          'dp': dp,
      }
      return render(request, 'activities/education10.html', context)
 
@@ -1166,10 +1194,20 @@ def update_cplaque(request, id):
 
 def education11(request):
      careers = career.objects.filter(serialnumber = request.user)
+     data = extenduser.objects.filter(serialnumber = request.user)
+     dp = profile.objects.filter(serialnumber = request.user)
+     org = organization.objects.filter(serialnumber = request.user)
+     retired = retirement.objects.filter(serialnumber = request.user)
+     elig = eligibility.objects.filter(serialnumber = request.user)
      
      
      context = {
           'careers': careers,
+          'data': data,
+          'dp':dp,
+          'org': org,
+          'retired': retired,
+          'elig': elig,
           
      }
      return render(request, 'activities/education11.html', context)
@@ -1239,10 +1277,6 @@ def career_input(request):
                                    
 def dashboard_input(request):
      if request.method == 'POST':
-          lastname = request.POST.get('lastname')
-          firstname = request.POST.get('firstname')
-          middlename = request.POST.get('middlename')
-         
           birthday = request.POST.get('birthdate')
           birthplace = request.POST.get('birthplace')
           nickname = request.POST.get('nickname')
@@ -1273,9 +1307,7 @@ def dashboard_input(request):
           driver = request.POST.get('driver')
           rank = request.POST.get('rank')
           data = details(serialnumber = request.user,
-                         lastname = lastname,
-                         firstname = firstname,
-                         middlename = middlename,
+                         
                          birthday = birthday,
                          birthplace = birthplace,
                          nickname = nickname,
@@ -1312,9 +1344,7 @@ def dashboard_input(request):
      
 def dashboard_input_update(request, id):
      if request.method == 'POST':
-          lastname = request.POST.get('lastname')
-          firstname = request.POST.get('firstname')
-          middlename = request.POST.get('middlename')
+          
           
           birthday = request.POST.get('birthdate')
           birthplace = request.POST.get('birthplace')
@@ -1345,10 +1375,7 @@ def dashboard_input_update(request, id):
           tin = request.POST.get('tin')
           driver = request.POST.get('driver')
           rank = request.POST.get('rank')
-          details.objects.filter(id=id).update(lastname = lastname,
-                         firstname = firstname,
-                         middlename = middlename,
-                         birthday = birthday,
+          details.objects.filter(id=id).update(birthday = birthday,
                          birthplace = birthplace,
                          nickname = nickname,
                          gender = gender, 
@@ -1380,3 +1407,77 @@ def dashboard_input_update(request, id):
           # data.save()
           
           return redirect('/dashboard')
+     
+     
+
+def dependents_input(request):
+
+     if request.method == 'POST':
+          name = request.POST.get('name')
+          relationship = request.POST.get('relationship')
+          birthday = request.POST.get('birthday')
+          
+
+          # Try to get existing record
+          data = dependents(serialnumber=request.user, 
+                            name=name, 
+                            relationship=relationship, 
+                            birthday=birthday
+          )
+          data.save()
+
+          return redirect('/dashboard')
+     
+     
+     
+     
+     
+     
+     # ADMIN PART
+     
+def admin_dashboard(request):
+     return render(request, 'activities/admindashboard.html')
+
+
+def triple(request):
+     # if request.method == 'POST':
+     #      org  = request.POST.get('organization')
+     #      elig= request.POST.get('eligibility')
+     #      retire = request.POST.get('compulsory')
+     #      data1 = organization(serialnumber = request.user, org = org)
+     #      data2 = eligibility(serialnumber = request.user, license = elig)
+     #      data3 = retirement(serialnumber = request.user, date = retire)
+     #      data1.save()
+     #      data2.save()
+     #      data3.save()
+          
+     #      return redirect('/education11')
+     
+     if request.method == 'POST':
+          org  = request.POST.get('organization')
+          elig= request.POST.get('eligibility')
+          retire = request.POST.get('compulsory')
+
+               # Try to get existing record
+          data, created = organization.objects.update_or_create(
+                    serialnumber=request.user,
+                    defaults={
+                         'org': org,
+                    }
+               )
+          
+          data, created = eligibility.objects.update_or_create(
+                    serialnumber=request.user,
+                    defaults={
+                         'license': elig,
+                    }
+               )
+          
+          data, created = retirement.objects.update_or_create(
+                    serialnumber=request.user,
+                    defaults={
+                         'date': retire,
+                    }
+               )
+
+          return redirect('/education11')

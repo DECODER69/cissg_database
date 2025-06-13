@@ -20,6 +20,7 @@ app_name = 'activities'
 urlpatterns = [
     path('', views.index, name='index'),
     path('signup_page/', views.signup_page, name='signup_page'),
+    path('logout_view/', views.logout_view, name='logout_view'),
     path('signup/', views.signup, name='signup'),
     path('signup_function/', views.signup_function, name='signup_function'),
     path('login/', views.login, name='login'),
@@ -105,6 +106,16 @@ urlpatterns = [
     path('upload_image/', views.upload_image, name='upload_image'),
     
     path('career_input/', views.career_input, name='career_input' ),
+    path('dependents_input/', views.dependents_input, name='dependents_input'),
+    path('triple/', views.triple, name='triple'),
+    
+    
+    
+    # ADMINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+    
+    path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    
+    
     ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
