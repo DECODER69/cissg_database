@@ -9,6 +9,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 import os
 from django.contrib.auth.decorators import login_required
+from datetime import date
+
 # Create your views here.
 def index (request):
      return render(request, 'activities/index.html')
@@ -40,7 +42,7 @@ def signup_function(request):
                user = User.objects.create_user(username=serial, password=password, first_name=firstname, last_name=lastname)
                user.save()
                data = extenduser(firstname=firstname, middlename=middle, lastname=lastname, serialnumber=serial, birthday=birthday, division=division, password=password)
-               data2 = details(serialnumber=serial, firstname=firstname, middlename=middle, lastname=lastname, birthday=birthday)
+               data2 = details(serialnumber=serial, firstname=firstname, middlename=middle, lastname=lastname, birthday=birthday, division=division)
                data2.save()
                data.save()
                return render(request, 'activities/index.html')
@@ -1435,8 +1437,7 @@ def dependents_input(request):
      
      # ADMIN PART
      
-def admin_dashboard(request):
-     return render(request, 'activities/admindashboard.html')
+
 
 
 def triple(request):
@@ -1481,3 +1482,81 @@ def triple(request):
                )
 
           return redirect('/education11')
+     
+      
+from datetime import date
+
+from datetime import date, datetime
+
+from datetime import date, datetime
+
+def admin_dashboard(request):
+    today = date.today()
+    personnels = details.objects.filter(leave_start__lte=today).exclude(status='Duty')
+    passes = details.objects.filter(leave_start__lte=today).filter(status='Passes').count()
+    rr = details.objects.filter(status='R&R').count()
+
+   
+
+    context = {
+        'personnels': personnels,
+        'passes': passes,
+        'rr': rr,
+    }
+    print(today)
+
+    return render(request, 'activities/admindashboard.html', context)
+
+
+
+
+def add_personnel(request):
+     person = details.objects.all()
+     
+     context = {
+          'person': person,
+     }
+    
+     
+     return render(request, 'activities/addpers.html', context)
+
+
+def add_status(request):
+     if request.method == 'POST':
+          serial = request.POST.get('serial')
+          leave = request.POST.get('leave')
+          startdate = request.POST.get('startdate')
+          enddate = request.POST.get('enddate')
+          # Debugging output (optional)
+          print(serial, leave, startdate, enddate)
+
+          # Create or update the record
+          try:
+               data, created = details.objects.update_or_create(
+                    serialnumber=serial,
+                    defaults={
+                         'status': leave,
+                         'leave_start': startdate,
+                         'leave_end': enddate,
+                    }
+               )
+          except Exception as e:
+               print("Error saving to DB:", e)
+          # Redirect after successful update or create
+          return redirect('/admin_dashboard')
+    
+def update_status(request):
+    if request.method == 'POST':
+        serialnumber = request.POST.get('serialnumber')
+        status = request.POST.get('status')
+        
+
+        try:
+            personnel = details.objects.get(serialnumber=serialnumber)
+            personnel.status = status
+            personnel.save()
+            messages.success(request, f"Status for {personnel.firstname} {personnel.lastname} updated successfully.")
+        except details.DoesNotExist:
+            pass  # handle not found if needed
+
+    return redirect('/admin_dashboard') 

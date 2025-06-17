@@ -114,6 +114,9 @@ urlpatterns = [
     # ADMINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
     
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    path('add_personnel/', views.add_personnel, name='add_personnel'),
+    path('add_status/', views.add_status, name='add_status'),
+    path('update_status/', views.update_status, name='update_status'),
     
     
     ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

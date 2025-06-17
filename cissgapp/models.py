@@ -28,6 +28,7 @@ class details(models.Model):
     birthplace = models.CharField(max_length=50, default='')
     nickname = models.CharField(max_length=50, default='')
     gender= models.CharField(max_length=10, default='')
+    division = models.CharField(max_length=50, default='')
     religion = models.CharField(max_length=50, default='')
     height= models.CharField(max_length=10, default='')
     headsize= models.CharField(max_length=10, default='')
@@ -53,6 +54,16 @@ class details(models.Model):
     tin = models.CharField(max_length=20, default='')
     driver = models.CharField(max_length=20, default='')
     rank = models.CharField(max_length=100, default='')
+    
+    
+    status = models.CharField(max_length=100, default='')
+    leave_start = models.CharField(max_length=20, default='')
+    leave_end = models.CharField(max_length=20, default='')
+    
+    status_overridden = models.BooleanField(default=True)
+    
+    def __str__(self):
+        return self.serialnumber
     
     
     
@@ -406,6 +417,9 @@ class dependents(models.Model):
     
     def __str__(self):
         return self.serialnumber
+    
+    
+
     
     
     

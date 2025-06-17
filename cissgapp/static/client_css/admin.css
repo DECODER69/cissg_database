@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+
+/* add */
+
+body {
+    /* background-color: rgb(19, 25, 47) !important; */
+    /* background-image: url(../media/images/bg2.png);
+    align-items: center !important; */
+    background-repeat: no-repeat;
+    background-color: rgb(255, 255, 255) !important;
+    display: flex;
+}
+
+section {
+    display: inline-block;
+    width: 100%;
+    padding-left: 0px;
+}
+
+section>div {
+    padding: 20px 40px;
+}
+
+section {
+    overflow-x: hidden;
+}
+
+.heads {
+    justify-content: space-between;
+    display: flex;
+    height: 60px !important;
+}
+
+.heads .text {
+    color: #000000;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.bold-line {
+    border: none;
+    /* Remove default border */
+    height: 3px;
+    /* Thickness of the line (makes it look bold) */
+    background-color: rgb(86, 86, 86);
+    /* Color of the line */
+    margin: 20px 0;
+    /* Optional spacing */
+    border-radius: 2px;
+    /* Optional rounded edges */
+}
+
+
+/* eof new */
+
+.sidebar.open~.home-section {
+    left: 250px;
+    width: calc(100% - 250px);
+}
+
+.home-section .text {
+    /* background: #c51c39; */
+    display: inline-block;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 18px
+}
+
+.bg {
+    background-attachment: fixed;
+    /* background-image: url(../images/tupc2.jpg); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: auto;
+}
+
+
+/* own css */
+
+.container-fluid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+    width: 100% !important;
+}
+
+
+/* Card layout */
+
+.container-fluid .card1,
+.container-fluid .card2,
+.container-fluid .card3,
+.container-fluid .card4,
+.container-fluid .card5,
+.container-fluid .card6 {
+    width: 15%;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #c7c7c7;
+    background-color: #232323;
+    display: flex;
+    align-items: center;
+    height: auto;
+}
+
+
+/* Flex container inside each card */
+
+.card-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+
+/* Big icon on left */
+
+.card-icon {
+    font-size: 30px;
+    /* Icon size */
+    margin-right: 15px;
+    /* Space between icon and text */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* If using <img> instead of <i> */
+
+.card-icon i {
+    width: 40px;
+    height: 40px;
+    color: rgb(159, 159, 159) !important;
+}
+
+
+/* Text on right */
+
+.card-text a {
+    margin: 0;
+    font-size: 1.5em;
+    color: #fff;
+}
+
+.card-text p {
+    margin: 0;
+    font-size: 1em;
+    color: #aaa;
+}
+
+
+/* Responsive handling */
+
+@media (max-width: 1200px) {
+    .container-fluid .card1,
+    .container-fluid .card2,
+    .container-fluid .card3,
+    .container-fluid .card4,
+    .container-fluid .card5,
+    .container-fluid .card6 {
+        width: 30%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-fluid .card1,
+    .container-fluid .card2,
+    .container-fluid .card3,
+    .container-fluid .card4,
+    .container-fluid .card5,
+    .container-fluid .card6 {
+        width: 48%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container-fluid .card1,
+    .container-fluid .card2,
+    .container-fluid .card3,
+    .container-fluid .card4,
+    .container-fluid .card5,
+    .container-fluid .card6 {
+        width: 100%;
+    }
+}
+
+
+/* color themes */
+
+
+/* tableee */
+
+#leaves {
+    border: 1px solid #ccc;
+    /* small, light-gray border */
+    border-radius: 8px;
+    /* rounded corners */
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    /* soft shadow */
+    padding: 16px;
+    /* optional: space inside */
+    background-color: #fff;
+    /* optional: background color */
+    width: fit-content;
+    /* adjusts width to content */
+}
+
+.colored {
+    width: fit-content;
+    height: 30px;
+    padding: 10px;
+    background-color: rgb(222, 222, 222);
+    display: flex;
+}
+
+#containers {
+    background-color: rgb(255, 255, 255);
+}
+
+#form-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.32);
+}

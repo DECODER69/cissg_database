@@ -268,27 +268,27 @@
                                             <form action="{% url 'activities:update_coastguard' s.id %} " method="POST">
                                                 {% csrf_token %}
                                                 <tr>
-                                                    <td> <textarea type="text" name="course" class="form-control" style="border: none; outline:none;">{{s.course}}</textarea> </td>
+                                                    <td> <input type="text" name="course" class="form-control" style="border: none; outline:none;" value="{{s.course}}"></td>
 
                                                     <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
 
                                                     <td>
-                                                        <textarea type="text" name="authority" class="form-control" style="border: none; outline:none;">{{s.authority}}</textarea>
+                                                        <input type="text" name="authority" class="form-control" style="border: none; outline:none;" value="{{s.authority}}">
                                                     </td>
 
-                                                    <td> <textarea type="text" name="school" class="form-control" style="border: none; outline:none;">{{s.school}}</textarea>
+                                                    <td> <input type="text" name="school" class="form-control" style="border: none; outline:none;" value="{{s.school}}">
                                                     </td>
-                                                    <td style="display: flex;">
-                                                        <input type="date" name="start_date" value="{{ s.start_date }}" class="form-control"> <br> &nbsp;
-
-                                                        <input type="date" name="end_date" value="{{ s.end_date }}" class="form-control ">
+                                                    <td style="vertical-align: top;">
+                                                        <div style="display: flex; ">
+                                                            <input type="date" name="start_date" value="{{ s.start_date }}" class="form-control"> <br> &nbsp;
+                                                            <input type="date" name="end_date" value="{{ s.end_date }}" class="form-control">
+                                                        </div>
                                                     </td>
                                                     <td>
                                                         <input type="text " name="standing" value="{{ s.standing }}" class="form-control" style="border: none; outline:none; ">
                                                     </td>
-                                                    <td style="display: flex; justify-content: center; align-items: center; height: 100px">
-
-                                                        <button type="submit " class="btn btn-success tbtn ">Update</button>
+                                                    <td style="display: flex; justify-content: center; align-items: flex-start; ">
+                                                        <button type="submit" class="btn btn-success tbtn">Update</button>
                                                     </td>
 
                                                 </tr>
@@ -359,15 +359,15 @@
                                             <form action="{% url 'activities:update_cglocal' s.id %}" method="POST">
                                                 {% csrf_token %}
                                                 <tr>
-                                                    <td> <textarea type="text" name="course" class="form-control" style="border: none; outline:none;">{{s.course}}</textarea>
+                                                    <td> <input type="text" name="course" class="form-control" style="border: none; outline:none;" value="{{s.course}}">
 
                                                     </td>
 
                                                     <td>
-                                                        <textarea type="text" name="authority" class="form-control" style="border: none; outline:none;">{{s.authority}}</textarea>
+                                                        <input type="text" name="authority" class="form-control" style="border: none; outline:none;" value="{{s.authority}}">
                                                     </td>
 
-                                                    <td> <textarea type="text" name="school" class="form-control" style="border: none; outline:none;">{{s.school}}</textarea>
+                                                    <td> <input type="text" name="school" class="form-control" style="border: none; outline:none;" value="{{s.school}}">
                                                     </td>
                                                     <td style="display: flex;">
                                                         <input type="date" name="start_date" value="{{ s.start_date }}" class="form-control"><br> &nbsp;
@@ -451,15 +451,15 @@
                                             <form action="{% url 'activities:update_cgforeign' s.id %}" method="POST">
                                                 {% csrf_token %}
                                                 <tr>
-                                                    <td> <textarea type="text" name="course" class="form-control" style="border: none; outline:none;">{{s.course}}</textarea>
+                                                    <td> <input type="text" name="course" class="form-control" style="border: none; outline:none;" value="{{s.course}}">
 
                                                         <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
                                                     </td>
 
                                                     <td>
-                                                        <textarea type="text" name="authority" class="form-control" style="border: none; outline:none;">{{s.authority}}</textarea>
+                                                        <input type="text" name="authority" class="form-control" style="border: none; outline:none;" value="{{s.authority}}">
                                                     </td>
-                                                    <td> <textarea type="text" name="school" class="form-control" style="border: none; outline:none;">{{s.school}}</textarea>
+                                                    <td> <input type="text" name="school" class="form-control" style="border: none; outline:none;" value="{{s.school}}">
                                                     </td>
                                                     <td style="display: flex;">
                                                         <input type="date" name="start_date" value="{{ s.start_date }}" class="form-control"><br> &nbsp;
