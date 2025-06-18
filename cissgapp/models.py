@@ -54,6 +54,7 @@ class details(models.Model):
     tin = models.CharField(max_length=20, default='')
     driver = models.CharField(max_length=20, default='')
     rank = models.CharField(max_length=100, default='')
+    profile = models.FileField(upload_to='profile_pics/', default='')
     
     
     status = models.CharField(max_length=100, default='')

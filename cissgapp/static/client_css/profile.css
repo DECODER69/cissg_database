@@ -1,0 +1,129 @@
+.profile {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border: solid rgb(234, 234, 234) 2px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.profile.first {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.first .left {
+    background-color: rgb(255, 255, 255);
+    width: auto;
+}
+
+.first .right {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+}
+
+.right label {
+    display: block;
+    margin-top: 5px;
+    color: #555;
+    font-size: 14px;
+    text-align: center;
+}
+
+
+/* first  */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.name-row,
+.rank-row,
+.birth-row {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.name-boxes {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.box {
+    border-bottom: 1px solid #000;
+    text-align: center;
+    padding: 5px;
+    width: 30%;
+}
+
+.box2 {
+    text-align: center;
+    padding: 5px;
+    width: 30%;
+}
+
+.sub-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    font-style: italic;
+    margin-top: 2px;
+}
+
+.rank-box {
+    border-bottom: 1px solid #000;
+    padding: 5px;
+    flex: 1;
+}
+
+.serial-number {
+    margin-left: 10px;
+    border-bottom: 1px solid #000;
+    padding: 5px;
+    flex: 1;
+}
+
+.birth-info {
+    border-bottom: 1px solid #000;
+    padding: 5px;
+    margin-left: 10px;
+    flex: 1;
+}
+
+
+/* 2nd part */
+
+.section-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+td {
+    border: 1px solid #000;
+    padding: 5px;
+    vertical-align: top;
+    justify-content: space-between !important;
+}
+
+td strong {
+    font-weight: bold;
+}

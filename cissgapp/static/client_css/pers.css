@@ -1,0 +1,13 @@
+.left {
+    width: 70%;
+    background-color: rgb(209, 209, 209);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.right {
+    background-color: rgb(209, 209, 209);
+    padding: 10px;
+    border-radius: 5px;
+    width: 30%;
+}

@@ -1,19 +1,15 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const today = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
-    const rows = document.querySelectorAll('tr.date-row');
+function updateDateTime() {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+            const date = now.toLocaleDateString(undefined, options);
+            const time = now.toLocaleTimeString();
+            document.getElementById('datetime').innerHTML = `${date} | ${time}`;
+        }
 
-    rows.forEach(row => {
-      const endDateInput = row.querySelector('input[name="end_date"]');
-      if (!endDateInput) return;
-
-      const endDate = endDateInput.value;
-
-      if (endDate < today) {
-        row.classList.add('table-info'); // Before today
-      } else if (endDate === today) {
-        row.style.backgroundColor = 'yellow'; // Equal to today
-      } else if (endDate > today) {
-        row.classList.add('table-danger'); // After today
-      }
-    });
-  });
+        setInterval(updateDateTime, 1000);
+        updateDateTime(); // Initial call

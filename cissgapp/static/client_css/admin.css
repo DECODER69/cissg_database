@@ -36,12 +36,15 @@ section {
     justify-content: space-between;
     display: flex;
     height: 60px !important;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
 }
 
 .heads .text {
     color: #000000;
-    font-size: 25px;
+    font-size: 30px;
     font-weight: 500;
+    text-shadow: -1px -1px 0 rgb(255, 145, 0), 1px -1px 0 rgb(255, 153, 0), -1px 1px 0 yellow, 1px 1px 0 yellow;
 }
 
 .bold-line {
@@ -72,15 +75,6 @@ section {
     font-size: 20px;
     font-weight: 500;
     margin: 18px
-}
-
-.bg {
-    background-attachment: fixed;
-    /* background-image: url(../images/tupc2.jpg); */
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: auto;
 }
 
 

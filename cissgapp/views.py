@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 import os
 from django.contrib.auth.decorators import login_required
 from datetime import date
+from django.utils import timezone
 
 # Create your views here.
 def index (request):
@@ -59,7 +60,7 @@ def dashboard(request):
      detail2 = details.objects.filter(serialnumber = request.user)
      data = extenduser.objects.filter(serialnumber = request.user)
      user = request.user
-     dp = profile.objects.filter(serialnumber = request.user)
+     dp = details.objects.filter(serialnumber = request.user)
    
 
      context = {
@@ -102,7 +103,7 @@ def  education (request):
      acad = academic.objects.filter(serialnumber = request.user)
      other = other_trainings.objects.filter(serialnumber = request.user)
      vocation = vocational.objects.filter(serialnumber = request.user)
-     dp = profile.objects.filter(serialnumber = request.user)
+     dp = details.objects.filter(serialnumber = request.user)
      user = request.user
      context = {
           'data': data,
@@ -123,7 +124,7 @@ def  education2 (request):
      mlocal = military_local.objects.filter(serialnumber = request.user)
      mforeign = military_foreign.objects.filter(serialnumber = request.user)
      user = request.user
-     dp = profile.objects.filter(serialnumber = request.user)
+     dp = details.objects.filter(serialnumber = request.user)
      context = {
           'coastguard': coastguards,
           'local': local,
@@ -145,7 +146,7 @@ def  education3 (request):
      mlocal = military_local.objects.filter(serialnumber = request.user)
      mforeign = military_foreign.objects.filter(serialnumber = request.user)
      user = request.user
-     dp = profile.objects.filter(serialnumber = request.user)
+     dp = details.objects.filter(serialnumber = request.user)
      context = {
           'military': military1,
           'mlocal': mlocal,
@@ -588,7 +589,7 @@ def update_mforeign(request, id):
                
 def education4(request):
      appointment = appointments.objects.filter(serialnumber = request.user)
-     dp = profile.objects.filter(serialnumber = request.user)
+     dp = details.objects.filter(serialnumber = request.user)
      context = {
           'appointment': appointment,
           'dp': dp,
@@ -631,7 +632,7 @@ def education5(request):
      collateral1a = collateral2.objects.filter(serialnumber = request.user)
      government1 = government.objects.filter(serialnumber = request.user)
      nongovernment1 = nongovernment.objects.filter(serialnumber = request.user)
-     dp = profile.objects.filter(serialnumber = request.user)
+     dp = details.objects.filter(serialnumber = request.user)
      context = {
           'shipboard': shipboards,
           'collateral': collateral1,
@@ -732,7 +733,7 @@ def update_collateral(request, id):
 def education6(request):
      shorebased1 = shorebased.objects.filter(serialnumber = request.user)
      collateral1a = collateral2.objects.filter(serialnumber = request.user)
-     dp = profile.objects.filter(serialnumber = request.user)
+     dp = details.objects.filter(serialnumber = request.user)
      context = {
           'shorebased': shorebased1,
           'collateral2': collateral1a,
@@ -823,7 +824,7 @@ def update_collateral2(request, id):
 def education7(request):
      gov = government.objects.filter(serialnumber = request.user)
      nongov = nongovernment.objects.filter(serialnumber = request.user)
-     dp = profile.objects.filter(serialnumber = request.user)
+     dp = details.objects.filter(serialnumber = request.user)
      context = {
           'gov': gov,
           'nongov': nongov,
@@ -913,7 +914,7 @@ def education8(request):
      commendations = cglcommendation.objects.filter(serialnumber = request.user)
      appreciations = cgappreciation.objects.filter(serialnumber = request.user)
      plaque = cgplaque.objects.filter(serialnumber = request.user)
-     dp = profile.objects.filter(serialnumber = request.user)
+     dp = details.objects.filter(serialnumber = request.user)
      context = {
           'awards': awards,
           'commendations': commendations,
@@ -1018,7 +1019,7 @@ def education9(request):
      commendations = mlcommendation.objects.filter(serialnumber = request.user)
      appreciations = mappreciation.objects.filter(serialnumber = request.user)
      plaque = mplaque.objects.filter(serialnumber = request.user)
-     dp = profile.objects.filter(serialnumber = request.user)
+     dp = details.objects.filter(serialnumber = request.user)
      context = {
           'awards': awards,
           'commendations': commendations,
@@ -1119,7 +1120,7 @@ def education10(request):
      commendations = clcommendation.objects.filter(serialnumber = request.user)
      appreciations = cappreciation.objects.filter(serialnumber = request.user)
      plaque = cplaque.objects.filter(serialnumber = request.user)
-     dp = profile.objects.filter(serialnumber = request.user)
+     dp = details.objects.filter(serialnumber = request.user)
      context = {
           'commendations': commendations,
           'appreciations': appreciations,
@@ -1197,7 +1198,7 @@ def update_cplaque(request, id):
 def education11(request):
      careers = career.objects.filter(serialnumber = request.user)
      data = extenduser.objects.filter(serialnumber = request.user)
-     dp = profile.objects.filter(serialnumber = request.user)
+     dp = details.objects.filter(serialnumber = request.user)
      org = organization.objects.filter(serialnumber = request.user)
      retired = retirement.objects.filter(serialnumber = request.user)
      elig = eligibility.objects.filter(serialnumber = request.user)
@@ -1224,22 +1225,23 @@ def upload_image(request):
 
         if image:
             try:
-                # Check if profile already exists
-                existing_profile = profile.objects.get(serialnumber=request.user)
+                # Check if record exists for this user
+                existing_profile = details.objects.get(serialnumber=request.user.username)  # or use request.user.id if applicable
 
-                # Delete old image file....
-                if existing_profile.profile:
-                    old_image_path = existing_profile.profile.path
-                    if os.path.isfile(old_image_path):
-                        os.remove(old_image_path)
+                # Delete old image if exists
+                if existing_profile.profile and os.path.isfile(existing_profile.profile.path):
+                    os.remove(existing_profile.profile.path)
 
-                # Update with new image inseerrtttt
+                # Update image
                 existing_profile.profile = image
                 existing_profile.save()
 
-            except profile.DoesNotExist:
-                # Create new profile if it doesn't exist
-                new_profile = profile(serialnumber=request.user, profile=image)
+            except details.DoesNotExist:
+                # Create new record if none exists
+                new_profile = details(
+                    serialnumber=request.user.username,  # or use request.user.id
+                    profile=image
+                )
                 new_profile.save()
 
         return redirect('/education11')
@@ -1489,19 +1491,44 @@ from datetime import date
 from datetime import date, datetime
 
 from datetime import date, datetime
-
+from django.core.paginator import Paginator
 def admin_dashboard(request):
     today = date.today()
     personnels = details.objects.filter(leave_start__lte=today).exclude(status='Duty')
     passes = details.objects.filter(leave_start__lte=today).filter(status='Passes').count()
-    rr = details.objects.filter(status='R&R').count()
+    manda = details.objects.filter(leave_start__lte=today).filter(status='Mandatory Leave').count()
+    rr = details.objects.filter(leave_start__lte=today).filter(status='R&R').count()
+    sick = details.objects.filter(leave_start__lte=today).filter(status='Sick Leave').count()
+    informal = details.objects.filter(leave_start__lte=today).filter(status='Informal Leave').count()
+    convalescent = details.objects.filter(leave_start__lte=today).filter(status='Convalescent Leave').count()
+    ordinary = details.objects.filter(leave_start__lte=today).filter(status='Ordinary Leave').count()
+    maternity = details.objects.filter(leave_start__lte=today).filter(status='Maternity Leave').count()
+    paternity = details.objects.filter(leave_start__lte=today).filter(status='Paternity Leave').count()
+    deployed = details.objects.filter(leave_start__lte=today).filter(status='Deployed').count()
+    ds = details.objects.filter(leave_start__lte=today).filter(status='Detached Status').count()
+    compa = details.objects.filter(leave_start__lte=today).filter(status='Compassionate Leave').count()
+    
+  
+    paginator = Paginator(personnels, 10)  # Show 10 records per page
 
+    page_number = request.GET.get('page')
+    personnels = paginator.get_page(page_number)
    
 
     context = {
         'personnels': personnels,
         'passes': passes,
         'rr': rr,
+        'manda':manda,
+        'sick':sick,
+        'informal':informal,
+        'convalescent':convalescent,
+        'ordinary':ordinary,
+        'maternity':maternity,
+        'paternity':paternity,
+        'deployed':deployed,
+        'ds':ds,
+        'compa':compa,
     }
     print(today)
 
@@ -1522,28 +1549,40 @@ def add_personnel(request):
 
 
 def add_status(request):
-     if request.method == 'POST':
-          serial = request.POST.get('serial')
-          leave = request.POST.get('leave')
-          startdate = request.POST.get('startdate')
-          enddate = request.POST.get('enddate')
-          # Debugging output (optional)
-          print(serial, leave, startdate, enddate)
+    if request.method == 'POST':
+        serial = request.POST.get('serial')
+        leave = request.POST.get('leave')
+        startdate = request.POST.get('startdate')
+        enddate = request.POST.get('enddate')
 
-          # Create or update the record
-          try:
-               data, created = details.objects.update_or_create(
-                    serialnumber=serial,
-                    defaults={
-                         'status': leave,
-                         'leave_start': startdate,
-                         'leave_end': enddate,
-                    }
-               )
-          except Exception as e:
-               print("Error saving to DB:", e)
-          # Redirect after successful update or create
-          return redirect('/admin_dashboard')
+        # Convert to date object
+        try:
+            start_date_obj = datetime.strptime(startdate, '%Y-%m-%d').date()
+            end_date_obj = datetime.strptime(enddate, '%Y-%m-%d').date()
+        except ValueError as e:
+            print("Date format error:", e)
+            return redirect('/admin_dashboard')
+
+        today = timezone.now().date()
+
+        # Automatically update status if leave starts today or earlier
+        status = leave
+        if start_date_obj <= today <= end_date_obj:
+            status = 'on_leave'
+
+        try:
+            data, created = details.objects.update_or_create(
+                serialnumber=serial,
+                defaults={
+                    'status': status,
+                    'leave_start': start_date_obj,
+                    'leave_end': end_date_obj,
+                }
+            )
+        except Exception as e:
+            print("Error saving to DB:", e)
+
+        return redirect('/admin_dashboard')
     
 def update_status(request):
     if request.method == 'POST':
@@ -1560,3 +1599,48 @@ def update_status(request):
             pass  # handle not found if needed
 
     return redirect('/admin_dashboard') 
+
+
+
+from django.utils import timezone
+from datetime import datetime
+from .models import details
+
+def cissg_personnel(request):
+    personnels = details.objects.all()
+    today = timezone.now().date()
+
+    for p in personnels:
+        # Convert to date if it's a string
+        leave_start = p.leave_start
+        if isinstance(leave_start, str):
+            try:
+                leave_start = datetime.strptime(leave_start, '%Y-%m-%d').date()
+            except ValueError:
+                leave_start = None
+
+        # Override status if leave hasn't started
+        if leave_start and today < leave_start:
+            p.display_status = 'Duty'
+        else:
+            p.display_status = p.status
+
+    context = {
+        'personnels': personnels,
+    }
+    return render(request, 'activities/pers.html', context)
+
+
+def view_personnel(request, serial):
+    person = get_object_or_404(details, serialnumber=serial)
+    
+    context = {
+         'person':person,
+    }
+    print(person)
+    
+    return render(request, 'activities/view.html', context)
+
+
+def personnel_profile(request):
+     return render(request, 'activities/view.html')

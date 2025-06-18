@@ -117,6 +117,9 @@ urlpatterns = [
     path('add_personnel/', views.add_personnel, name='add_personnel'),
     path('add_status/', views.add_status, name='add_status'),
     path('update_status/', views.update_status, name='update_status'),
+    path('cissg_personnel/', views.cissg_personnel, name='cissg_personnel'),
+    path('personnel_profile/', views.personnel_profile, name='personnel_profile'),
+    path('view_personnel/<str:serial>', views.view_personnel, name='view_personnel'),
     
     
     ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
