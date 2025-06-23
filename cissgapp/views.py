@@ -1491,10 +1491,11 @@ from datetime import date
 from datetime import date, datetime
 
 from datetime import date, datetime
+from django.db.models import Q
 from django.core.paginator import Paginator
 def admin_dashboard(request):
     today = date.today()
-    personnels = details.objects.filter(leave_start__lte=today).exclude(status='Duty')
+    personnels = details.objects.filter(leave_start__lte=today).exclude(Q(status='Duty') | Q(status__isnull=True) | Q(status=''))
     passes = details.objects.filter(leave_start__lte=today).filter(status='Passes').count()
     manda = details.objects.filter(leave_start__lte=today).filter(status='Mandatory Leave').count()
     rr = details.objects.filter(leave_start__lte=today).filter(status='R&R').count()

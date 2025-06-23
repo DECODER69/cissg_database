@@ -17,7 +17,6 @@ a {
     text-decoration: none;
 }
 
-
 .toggler-btn {
     background-color: transparent;
     cursor: pointer;
@@ -90,15 +89,6 @@ a.sidebar-link:hover {
 
 /* Screen size less than 768px */
 
-@media (max-width:768px) {
-    .sidebar-toggle {
-        margin-left: -264px;
-    }
-    #sidebar.collapsed {
-        margin-left: 0;
-    }
-}
-
 .profile {
     width: 100%;
     height: auto !important;
@@ -155,9 +145,23 @@ a.sidebar-link:hover {
 }
 
 .profile .left .row .inside {
-    width: 100% !important;
-    padding-left: 5%;
-    color: black !important;
+    display: flex;
+    justify-content: space-between;
+    /* Push first and last items to the ends */
+    gap: 10px;
+    /* Optional: adds space between inputs */
+    width: 100%;
+}
+
+.profile .left .row .inside .col1 {
+    width: 100%;
+    justify-content: flex-end;
+    flex: 1;
+    /* Makes each column take equal width */
+}
+
+.profile .left .row .inside .col1 input {
+    width: 100%;
 }
 
 .profile .left .row .inside .inside2 {
@@ -364,9 +368,6 @@ a.sidebar-link:hover {
 }
 
 
-
-
-
 /* Default layout when sidebar is open */
 
 .wrapper {
@@ -394,11 +395,27 @@ a.sidebar-link:hover {
 .wrapper.sidebar-closed .main {
     flex: 1 1 100%;
 }
+
 .main nav {
     display: flex;
     align-items: flex-end !important;
 }
 
+
 /* end */
 
-
+@media (max-width: 720px) {
+    .profile .left .row .inside .col1 {
+        width: 100%;
+        padding: 5px;
+    }
+    .profile .left .row h5 {
+        font-size: 15px !important;
+    }
+    .profile .left .row .inside {
+        display: block;
+    }
+    .profile .left .row .inside .col1 .form-control {
+        width: 100% !important;
+    }
+}
