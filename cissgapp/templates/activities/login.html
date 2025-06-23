@@ -11,19 +11,19 @@
 
 <body>
     <nav class="navbar bg-warning p-3">
-        <div class="container-fluid ">
-            <a class="navbar-brand" href="/">
-                <img src="../../static/media/images/cissg logo png.png" alt="Logo" width="80" class="d-inline-block align-text-top">
+        <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap">
+            <a class="navbar-brand logo-container" href="/">
+                <img src="../../static/media/images/cissg logo png.png" alt="Logo" width="80" class="d-inline-block align-text-top logo-img">
             </a>
-            <h1 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; padding-top:15px;">CGETDC Installations and Service Support Group </h1>
+            <h1 class="navbar-title">CGETDC Installations and Service Support Group</h1>
         </div>
     </nav>
     <br>
     <br>
     <div class="center1">
         <div class="verificaton">
-            <h3 style="text-align: center !important;">Profile Verification</h3>
-            <br>
+            <!-- <h3 style="text-align: center !important;">Profile Verification</h3>
+            <br> -->
             <form action="{% url 'activities:signin_function' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <h6 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Login</h6>
@@ -43,7 +43,7 @@
 
                 <div class="mb-3">
                     <label for="birthdate" class="form-label">Birthday</label>
-                    <input type="date" class="form-control" id="birthdate" name="birthday" required>
+                    <input type="date" class="form-control" id="birthdate" name="birthday" required placeholder="Birthday">
                 </div>
 
 

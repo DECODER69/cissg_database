@@ -17,12 +17,6 @@ a {
     text-decoration: none;
 }
 
-.main {
-    margin-left: 260px;
-    overflow: hidden;
-    background-color: #ffffff;
-    overflow-y: scroll !important;
-}
 
 .toggler-btn {
     background-color: transparent;
@@ -368,3 +362,43 @@ a.sidebar-link:hover {
     color: #0123ff !important;
     font-weight: 600 !important;
 }
+
+
+
+
+
+/* Default layout when sidebar is open */
+
+.wrapper {
+    display: flex;
+}
+
+.adminnav {
+    width: 250px;
+    transition: all 0.3s ease;
+}
+
+.main {
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+
+/* Sidebar hidden */
+
+.wrapper.sidebar-closed .adminnav {
+    width: 0;
+    overflow: hidden;
+}
+
+.wrapper.sidebar-closed .main {
+    flex: 1 1 100%;
+}
+.main nav {
+    display: flex;
+    align-items: flex-end !important;
+}
+
+/* end */
+
+

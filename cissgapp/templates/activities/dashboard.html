@@ -13,206 +13,114 @@
 </head>
 
 <body>
-    {% include 'activities/adminnav.html' %}
-    <!-- Sidebar -->
+    <div class="wrapper">
+        {% include 'activities/adminnav.html' %}
+        <!-- Sidebar -->
 
-    <!-- Sidebar Ends -->
+        <!-- Sidebar Ends -->
 
 
-    <!-- MODAL FOR DEPENDENTS -->
+        <!-- MODAL FOR DEPENDENTS -->
 
-    <div class="modal fade" id="modal1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-3" id="exampleModalToggleLabel"> DEPENDENTS</h1>
+        <div class="modal fade" id="modal1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel"> DEPENDENTS</h1>
+                        <br>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;Entry will include (1) Name; (2) Relationship; (3) Birth date occasional </p>
                     <br>
 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;Entry will include (1) Name; (2) Relationship; (3) Birth date occasional </p>
-                <br>
+                    <div class="modal-body">
+                        <form action="{% url 'activities:dependents_input' %} " method="POST">
+                            {% csrf_token %}
 
-                <div class="modal-body">
-                    <form action="{% url 'activities:dependents_input' %} " method="POST">
-                        {% csrf_token %}
+                            <div class="row g-3 ">
 
-                        <div class="row g-3 ">
+                                <div class="inside" >
+                                    <div class="col">
+                                        <label for="" style="font-weight: bolder;">NAME</label>
+                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Fullname" name="name" required>
+                                    </div>
+                                    <br>
+                                    <div class="col">
+                                        <label for="" style="font-weight: bolder;">RELATIONSHIP</label>
+                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Relationship" name="relationship" required>
+                                    </div>
+                                    <br>
+                                    <div class="col">
+                                        <label for="" style="font-weight: bolder;">BIRTHDAY</label>
+                                        <input type="date" class="form-control form-control-lg" style="width: 100%;" placeholder="Authority" name="birthday" required>
+                                    </div>
 
-                            <div class="inside ">
-                                <div class="col">
-                                    <label for="" style="font-weight: bolder;">NAME</label>
-                                    <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Fullname" name="name" required>
+                                    <br>
+                                    <hr>
+                                    <br>
+                                    <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
                                 </div>
-                                <br>
-                                <div class="col">
-                                    <label for="" style="font-weight: bolder;">RELATIONSHIP</label>
-                                    <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Relationship" name="relationship" required>
-                                </div>
-                                <br>
-                                <div class="col">
-                                    <label for="" style="font-weight: bolder;">BIRTHDAY</label>
-                                    <input type="date" class="form-control form-control-lg" style="width: 100%;" placeholder="Authority" name="birthday" required>
-                                </div>
-
-                                <br>
-                                <hr>
-                                <br>
-                                <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
                             </div>
-                        </div>
 
 
-                    </form>
+                        </form>
+                    </div>
+
                 </div>
-
             </div>
         </div>
-    </div>
-    <!-- Main Component -->
-    <div class="main">
+        <!-- Main Component -->
+        <div class="main">
 
-        <div class="filing">
-            <a href="{% url 'activities:dashboard' %}">Dashboard</a>
-            <p>&nbsp;/&nbsp;</p>
+            <div class="filing">
+                <a href="{% url 'activities:dashboard' %}">Dashboard</a>
+                <p>&nbsp;/&nbsp;</p>
 
-        </div>
-
-        <hr style="height: 5px; background-color: rgb(0, 0, 0); border: none; color:black;">
-        <div class="container-fluid">
-            <div class="mb-3 text-left">
-                <h1><i class="lni lni-user"></i>
-                    <span>Profile</span></h1>
             </div>
 
+            <hr style="height: 5px; background-color: rgb(0, 0, 0); border: none; color:black;">
+            <div class="container-fluid">
+                <div class="mb-3 text-left">
+                    <h1><i class="lni lni-user"></i>
+                        <span>Profile</span></h1>
+                </div>
 
 
-            <!-- for  display only -->
-            {% if detail2 %} {% for s in detail2 %}
-            <form action="{% url 'activities:dashboard_input_update' s.id %}" method="POST">
-                {% csrf_token %}
-                <div class="profile" style="padding: 20px;">
 
-                    <div class="left">
-                        <div class="row g-3 ">
-                            <h5>A. NAME</h5>
-                            <div class="inside d-flex justify-content-between ">
-                                <div class="col">
-                                    <input type="text" class="form-control form-control-sm" style="width: 90%;" placeholder="Last name" name="lastname" value="{{s.lastname}}" disabled>
+                <!-- for  display only -->
+                {% if detail2 %} {% for s in detail2 %}
+                <form action="{% url 'activities:dashboard_input_update' s.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="profile" style="padding: 20px;">
+
+                        <div class="left">
+                            <div class="row g-3 ">
+                                <h5>A. NAME</h5>
+                                <div class="inside justify-content-between">
+                                    <div class="col1">
+                                        <input type="text" class="form-control form-control-sm" style="width: 90%;" placeholder="Last name" name="lastname" value="{{s.lastname}}" disabled>
+                                    </div>
+
+                                    <div class="col1">
+                                        <input type="text" class="form-control form-control-sm" style="width: 90%;" placeholder="First name" name="firstname" value="{{s.firstname}}" disabled>
+                                    </div>
+                                    <div class="col1">
+                                        <input type="text" class="form-control form-control-sm" style="width: 90%;" placeholder="Middle name" name="middlename" value="{{s.middlename}}" disabled>
+                                    </div>
                                 </div>
 
-                                <div class="col">
-                                    <input type="text" class="form-control form-control-sm" style="width: 90%;" placeholder="First name" name="firstname" value="{{s.firstname}}" disabled>
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control form-control-sm" style="width: 90%;" placeholder="Middle name" name="middlename" value="{{s.middlename}}" disabled>
-                                </div>
-                            </div>
-
-                            <br>
-                            <br>
-                            <h5>B. RANK and SERIAL NUMBER</h5>
-                            <div class="inside ">
                                 <br>
-                                <div class="inside2">
-                                    <div class="insideleft">
-                                        <div class="mb-3" id="mb3">
-                                            <label for="staticEmail" class="form-label">Rank:</label>
-                                            <div class="one" style=" width:50%;">
-                                                <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Rank" style="width: 100%;" name="rank" value="{{s.rank}}">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="insideright">
-                                        <div class="mb-3" id="mb3">
-                                            <label for="staticEmail" class="form-label">Serial Number:</label>
-                                            <div style=" width:50%;">
-                                                <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Serial Number" style="width: 100%;" name="civilstatus" value="{{s.serialnumber}}">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-
-
-
-                            <h5>C. BIRTH DATE AND PLACE</h5>
-                            <div class="inside ">
-                                <div class="mb-3 row">
-                                    <label for="staticEmail" class="col-sm-2 col-form-label">Birthdate:</label>
-                                    <div class="col-sm-10">
-                                        <input type="date" class="form-control form-control-sm" id="staticEmail" value="{{ s.birthday }}" name="birthdate">
-                                    </div>
-                                </div>
-                                <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-2 col-form-label">Birthplace:</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control form-control-sm" id="inputPassword" placeholder="Birth Place" name="birthplace" value="{{s.birthplace}}">
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <!-- part 1 -->
-
-                            <h5>D. PERSONAL INFORMATION</h5>
-                            <div class="inside ">
                                 <br>
-                                <div class="inside2">
-                                    <div class="insideleft">
-                                        <div class="mb-3" id="mb3">
-                                            <label for="staticEmail" class="form-label">Nickname:</label>
-                                            <div class="one" style=" width:50%;">
-                                                <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Nickname" style="width: 100%;" name="nickname" value="{{s.nickname}}">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="insideright">
-                                        <div class="mb-3" id="mb3">
-                                            <label for="staticEmail" class="form-label">Civil Status:</label>
-                                            <div style=" width:50%;">
-                                                <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Civil Status" style="width: 100%;" name="civilstatus" value="{{s.civilstatus}}">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <!-- part 2 -->
-
-                            <div class="inside ">
-                                <div class="inside2">
-                                    <div class="insideleft">
-                                        <div class="mb-3" id="mb3">
-                                            <label for="staticEmail" class="form-label">Gender:</label> {% if s.gender %}
-                                            <div style=" width:50%;">
-                                                <select name="gender" class="form-select form-select-sm" id="staticEmail" required placeholder="Gender" style="width: 100%" value="{{s.gender}}">
-                                                        
-                                                        <option value="{{s.gender}}" selected>{{s.gender}}</option>
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                       
-                                                    </select> {% else %}
-
-                                                <div style=" width:50%;">
-                                                    <select name="gender" class="form-select form-select-sm" id="staticEmail" required placeholder="Gender" style="width: 100%" value="{{s.gender}}">
-                                                        
-                                                        <option  selected disabled>Gender</option>
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                       
-                                                    </select> {% endif %}
-                                                    <!-- <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Nickname" style="width: 100%;"> -->
+                                <h5>B. RANK and SERIAL NUMBER</h5>
+                                <div class="inside ">
+                                    <br>
+                                    <div class="inside2">
+                                        <div class="insideleft">
+                                            <div class="mb-3" id="mb3">
+                                                <label for="staticEmail" class="form-label">Rank:</label>
+                                                <div class="one" style=" width:50%;">
+                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Rank" style="width: 100%;" name="rank" value="{{s.rank}}">
                                                 </div>
                                             </div>
 
@@ -220,10 +128,59 @@
 
                                         <div class="insideright">
                                             <div class="mb-3" id="mb3">
-                                                <label for="stat" class="form-label">Citizenship:</label>
+                                                <label for="staticEmail" class="form-label">Serial Number:</label>
                                                 <div style=" width:50%;">
+                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Serial Number" style="width: 100%;" name="civilstatus" value="{{s.serialnumber}}">
+                                                </div>
+                                            </div>
 
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Citizenship" style="width: 100%;" name="citizenship" value="{{s.citizenship}}">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+
+
+
+                                <h5>C. BIRTH DATE AND PLACE</h5>
+                                <div class="inside">
+                                    <div class="mb-3 row">
+                                        <label for="staticEmail" class="col-sm-2 col-form-label">Birthdate:</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" class="form-control form-control-sm" id="staticEmail" value="{{ s.birthday }}" name="birthdate">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="inputPassword" class="col-sm-2 col-form-label">Birthplace:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control form-control-sm" id="inputPassword" placeholder="Birth Place" name="birthplace" value="{{s.birthplace}}">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- part 1 -->
+
+                                <h5>D. PERSONAL INFORMATION</h5>
+                                <div class="inside ">
+                                    <br>
+                                    <div class="inside2">
+                                        <div class="insideleft">
+                                            <div class="mb-3" id="mb3">
+                                                <label for="staticEmail" class="form-label">Nickname:</label>
+                                                <div class="one" style=" width:50%;">
+                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Nickname" style="width: 100%;" name="nickname" value="{{s.nickname}}">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="insideright">
+                                            <div class="mb-3" id="mb3">
+                                                <label for="staticEmail" class="form-label">Civil Status:</label>
+                                                <div style=" width:50%;">
+                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Civil Status" style="width: 100%;" name="civilstatus" value="{{s.civilstatus}}">
                                                 </div>
                                             </div>
 
@@ -232,15 +189,59 @@
                                     </div>
                                 </div>
 
-                                <!-- part 3 -->
+                                <!-- part 2 -->
 
                                 <div class="inside ">
                                     <div class="inside2">
                                         <div class="insideleft">
                                             <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Religion:</label>
+                                                <label for="staticEmail" class="form-label">Gender:</label> {% if s.gender %}
                                                 <div style=" width:50%;">
-                                                    <select name="religion" class="form-select form-select-sm" id="staticEmail" placeholder="Nickname" style="width: 100%;">
+                                                    <select name="gender" class="form-select form-select-sm" id="staticEmail" required placeholder="Gender" style="width: 100%" value="{{s.gender}}">
+                                                        
+                                                        <option value="{{s.gender}}" selected>{{s.gender}}</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                       
+                                                    </select> {% else %}
+
+                                                    <div style=" width:50%;">
+                                                        <select name="gender" class="form-select form-select-sm" id="staticEmail" required placeholder="Gender" style="width: 100%" value="{{s.gender}}">
+                                                        
+                                                        <option  selected disabled>Gender</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                       
+                                                    </select> {% endif %}
+                                                        <!-- <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Nickname" style="width: 100%;"> -->
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="stat" class="form-label">Citizenship:</label>
+                                                    <div style=" width:50%;">
+
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Citizenship" style="width: 100%;" name="citizenship" value="{{s.citizenship}}">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- part 3 -->
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Religion:</label>
+                                                    <div style=" width:50%;">
+                                                        <select name="religion" class="form-select form-select-sm" id="staticEmail" placeholder="Nickname" style="width: 100%;">
                                                             <option value="{{s.religion}}" selected>{{s.religion}}</option>
                                                             <option value="Roman Catholic">Roman Catholic</option>
                                                             <option value="Islam">Islam</option>
@@ -256,17 +257,17 @@
                                                    
                                                     </select>
 
+                                                    </div>
                                                 </div>
+
                                             </div>
 
-                                        </div>
+                                            <div class="insideright">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="stat" class="form-label">Blood Type:</label>
+                                                    <div style=" width:50%;">
 
-                                        <div class="insideright">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="stat" class="form-label">Blood Type:</label>
-                                                <div style=" width:50%;">
-
-                                                    <select name="bloodtype" id="" class="form-select form-select-sm" style="width: 100%;" required>
+                                                        <select name="bloodtype" id="" class="form-select form-select-sm" style="width: 100%;" required>
                                                         
                                                         <option value="{{s.bloodtype}}" selected style="background-color: rgb(4, 213, 63);">{{s.bloodtype}}</option>
                                                         <option value="A+">A+</option>
@@ -278,334 +279,334 @@
                                                         <option value="O+">O+</option>
                                                         <option value="O-">O-</option>
                                                     </select>
+                                                    </div>
                                                 </div>
+
                                             </div>
 
                                         </div>
+                                    </div>
+
+
+                                    <!-- part 4 -->
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Height:</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Height (cms)" style="width: 100%;" name="height" value="{{s.height}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">Weight:</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Weight (kgs) " style="width: 100%; " name="weight" value="{{s.weight}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <!-- part 5 -->
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Head Size (cms):</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Head Size (cms): " style="width: 100%;" name="headsize" value="{{s.headsize}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">Foot Size (cms): </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Foot Size (cms): " style="width: 100%; " name="footsize" value="{{s.footsize}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- part 6 -->
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Waist Size (cms):</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Waist Size (cms): " style="width: 100%;" name="waistsize" value="{{s.waistsize}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">Body Build: </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Body Build: " style="width: 100%; " name="bodybuild" value="{{s.bodybuild}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- part 7 -->
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Skin Color:</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Skin Color " style="width: 100%;" name="skincolor" value="{{s.skincolor}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">Eye Color: </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Eye Color " style="width: 100%; " name="eyecolor" value="{{s.eyecolor}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- part 8 -->
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Distinct Feature:</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Distinct Feature " style="width: 100%;" name="distinct" value="{{s.distinct}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">Hair Color: </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Hair Color " style="width: 100%; " name="haircolor" value="{{s.haircolor}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- part 9 -->
+
+                                    <div class="inside" style=" display:block;">
+                                        <div class="mb-3 row">
+                                            <label for="staticEmail" class="col-sm-2 col-form-label">Home Address:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Home Address" name="homeaddress" value="{{s.homeaddress}}">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">Permanent Address:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control form-control-sm" id="inputPassword" placeholder="Permanent Address" name="permanentaddress" value="{{s.permanentaddress}}">
+                                            </div>
+                                        </div>
 
                                     </div>
+
+                                    <!-- part 10 -->
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Email Address:</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="email" class="form-control form-control-sm" id="staticEmail" placeholder="Email Address" style="width: 100%;" name="email" value="{{s.email}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">Contact Number(s): </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Contact Number(s)" style="width: 100%; " name="contactnumber" value="{{s.contactnumber}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <!-- part 11 -->
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Pag-Ibig Number:</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Pag-Ibig Number" style="width: 100%;" name="pagibig" value="{{s.pagibig}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">PhilHealth Number: </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="PhilHealth Number" style="width: 100%; " name="philhealth" value="{{s.philhealth}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">SSS Number:</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="SSS Number" style="width: 100%;" name="sssnumber" value="{{s.sssnumber}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">GSIS Number: </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="GSIS Number" style="width: 100%; " name="gsis" value="{{s.gsis}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- part 12 -->
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Tax Identification Number(TIN):</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="TIN" style="width: 100%;" name="tin" value="{{s.tin}}">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">Driver’s License Number:  </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Driver's License" style="width: 100%; " name="driver" value="{{s.driver}}">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+
                                 </div>
-
-
-                                <!-- part 4 -->
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Height:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Height (cms)" style="width: 100%;" name="height" value="{{s.height}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">Weight:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Weight (kgs) " style="width: 100%; " name="weight" value="{{s.weight}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-                                <!-- part 5 -->
-
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Head Size (cms):</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Head Size (cms): " style="width: 100%;" name="headsize" value="{{s.headsize}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">Foot Size (cms): </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Foot Size (cms): " style="width: 100%; " name="footsize" value="{{s.footsize}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <!-- part 6 -->
-
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Waist Size (cms):</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Waist Size (cms): " style="width: 100%;" name="waistsize" value="{{s.waistsize}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">Body Build: </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Body Build: " style="width: 100%; " name="bodybuild" value="{{s.bodybuild}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <!-- part 7 -->
-
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Skin Color:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Skin Color " style="width: 100%;" name="skincolor" value="{{s.skincolor}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">Eye Color: </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Eye Color " style="width: 100%; " name="eyecolor" value="{{s.eyecolor}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <!-- part 8 -->
-
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Distinct Feature:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Distinct Feature " style="width: 100%;" name="distinct" value="{{s.distinct}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">Hair Color: </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Hair Color " style="width: 100%; " name="haircolor" value="{{s.haircolor}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <!-- part 9 -->
-
-                                <div class="inside ">
-                                    <div class="mb-3 row">
-                                        <label for="staticEmail" class="col-sm-2 col-form-label">Home Address:</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Home Address" name="homeaddress" value="{{s.homeaddress}}">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row">
-                                        <label for="inputPassword" class="col-sm-2 col-form-label">Permanent Address:</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control form-control-sm" id="inputPassword" placeholder="Permanent Address" name="permanentaddress" value="{{s.permanentaddress}}">
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!-- part 10 -->
-
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Email Address:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="email" class="form-control form-control-sm" id="staticEmail" placeholder="Email Address" style="width: 100%;" name="email" value="{{s.email}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">Contact Number(s): </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Contact Number(s)" style="width: 100%; " name="contactnumber" value="{{s.contactnumber}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-                                <!-- part 11 -->
-
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Pag-Ibig Number:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Pag-Ibig Number" style="width: 100%;" name="pagibig" value="{{s.pagibig}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">PhilHealth Number: </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="PhilHealth Number" style="width: 100%; " name="philhealth" value="{{s.philhealth}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">SSS Number:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="SSS Number" style="width: 100%;" name="sssnumber" value="{{s.sssnumber}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">GSIS Number: </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="GSIS Number" style="width: 100%; " name="gsis" value="{{s.gsis}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <!-- part 12 -->
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Tax Identification Number(TIN):</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="TIN" style="width: 100%;" name="tin" value="{{s.tin}}">
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">Driver’s License Number:  </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Driver's License" style="width: 100%; " name="driver" value="{{s.driver}}">
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-
-
-                            </div>
-                            <br>
-                            <br>
-                            <div class="save" style="width: 100%;">
-                                <button class="btn btn-success" href="{% url 'activities:education' %}" id="submit" type="submit"> Save &nbsp;
+                                <br>
+                                <br>
+                                <div class="save" style="width: 100%;">
+                                    <button class="btn btn-success" href="{% url 'activities:education' %}" id="submit" type="submit"> Save &nbsp;
                                 <img src="../../static/media/images/save-removebg-preview.png" alt="Icon" class="me-2" width="50">
                             </button>
+                                </div>
+
+
+
+
+                                <!-- <button type="submit" class="btn btn-success" id="submit">Next</button> -->
                             </div>
 
 
 
 
-                            <!-- <button type="submit" class="btn btn-success" id="submit">Next</button> -->
+
+
+
+
+
+                            <br> &nbsp;
+
+
+                            <hr>
+
+
+                            <hr>
+
+
+
+
                         </div>
-
-
-
-
-
-
-
-
-
-                        <br> &nbsp;
-
-
+                        <br>
+                        <br>
                         <hr>
 
 
-                        <hr>
-
-
-
-
-                    </div>
-                    <br>
-                    <br>
-                    <hr>
-
-
-                    <!-- <a class="btn btn-primary" href="{% url 'activities:education' %}" id="submit" type="submit"> Next Step &nbsp;
+                        <!-- <a class="btn btn-primary" href="{% url 'activities:education' %}" id="submit" type="submit"> Next Step &nbsp;
                                 <img src="../../static/media/images/arrow.png" alt="Icon" class="me-2" width="50">
                             </a> -->
 
@@ -614,137 +615,44 @@
 
 
 
-                </div>
+                    </div>
 
-            </form>
-            {% endfor %} {% else %}
+                </form>
+                {% endfor %} {% else %}
 
 
-            <!-- FOR INPUTS ONLY -->
-            <form action="{% url 'activities:dashboard_input' %}" method="POST">
-                {% csrf_token %}
-                <div class="profile" style="padding: 20px;">
+                <!-- FOR INPUTS ONLY -->
+                <form action="{% url 'activities:dashboard_input' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="profile" style="padding: 20px;">
 
-                    <div class="left">
-                        <div class="row g-3 ">
-                            <h5>A. NAME</h5>
-                            <div class="inside d-flex justify-content-between ">
-                                <div class="col">
-                                    <input type="text" class="form-control form-control-sm" style="width: 90%;" placeholder="Last name" name="lastname" value="{{s.lastname}}">
+                        <div class="left">
+                            <div class="row g-3 ">
+                                <h5>A. NAME</h5>
+                                <div class="inside d-flex justify-content-between ">
+                                    <div class="col">
+                                        <input type="text" class="form-control form-control-sm" style="width: 90%;" placeholder="Last name" name="lastname" value="{{s.lastname}}">
+                                    </div>
+
+                                    <div class="col">
+                                        <input type="text" class="form-control form-control-sm" style="width: 90%;" placeholder="First name" name="firstname" value="{{s.firstname}}">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control form-control-sm" style="width: 90%;" placeholder="Middle name" name="middlename" value="{{s.middlename}}">
+                                    </div>
                                 </div>
 
-                                <div class="col">
-                                    <input type="text" class="form-control form-control-sm" style="width: 90%;" placeholder="First name" name="firstname" value="{{s.firstname}}">
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control form-control-sm" style="width: 90%;" placeholder="Middle name" name="middlename" value="{{s.middlename}}">
-                                </div>
-                            </div>
-
-                            <br>
-                            <br>
-                            <h5>B. RANK and SERIAL NUMBER</h5>
-                            <div class="inside ">
                                 <br>
-                                <div class="inside2">
-                                    <div class="insideleft">
-                                        <div class="mb-3" id="mb3">
-                                            <label for="staticEmail" class="form-label">Rank:</label>
-                                            <div class="one" style=" width:50%;">
-                                                <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Rank" style="width: 100%;" name="rank" value="{{s.rank}}">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="insideright">
-                                        <div class="mb-3" id="mb3">
-                                            <label for="staticEmail" class="form-label">Serial Number:</label>
-                                            <div style=" width:50%;">
-                                                <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Serial Number" style="width: 100%;" name="civilstatus" value="{{s.serialnumber}}">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-
-
-
-                            <h5>C. BIRTH DATE AND PLACE</h5>
-                            <div class="inside ">
-                                <div class="mb-3 row">
-                                    <label for="staticEmail" class="col-sm-2 col-form-label">Birthdate:</label>
-                                    <div class="col-sm-10">
-                                        <input type="date" class="form-control form-control-sm" id="staticEmail" value="{{ s.birthday }}" name="birthdate">
-                                    </div>
-                                </div>
-                                <div class="mb-3 row">
-                                    <label for="inputPassword" class="col-sm-2 col-form-label">Birthplace:</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control form-control-sm" id="inputPassword" placeholder="Birth Place" name="birthplace" value="{{s.birthplace}}">
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <!-- part 1 -->
-
-                            <h5>D. PERSONAL INFORMATION</h5>
-                            <div class="inside ">
                                 <br>
-                                <div class="inside2">
-                                    <div class="insideleft">
-                                        <div class="mb-3" id="mb3">
-                                            <label for="staticEmail" class="form-label">Nickname:</label>
-                                            <div class="one" style=" width:50%;">
-                                                <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Nickname" style="width: 100%;" name="nickname" value="{{s.nickname}}">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="insideright">
-                                        <div class="mb-3" id="mb3">
-                                            <label for="staticEmail" class="form-label">Civil Status:</label>
-                                            <div style=" width:50%;">
-                                                <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Nickname" style="width: 100%;" name="civilstatus" value="{{s.civilstatus}}">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <!-- part 2 -->
-
-                            <div class="inside ">
-                                <div class="inside2">
-                                    <div class="insideleft">
-                                        <div class="mb-3" id="mb3">
-                                            <label for="staticEmail" class="form-label">Gender:</label> {% if s.gender %}
-                                            <div style=" width:50%;">
-                                                <select name="gender" class="form-select form-select-sm" id="staticEmail" required placeholder="Gender" style="width: 100%" value="{{s.gender}}">
-                                                        
-                                                        <option value="{{s.gender}}" selected>{{s.gender}}</option>
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                       
-                                                    </select> {% else %}
-
-                                                <div style=" width:50%;">
-                                                    <select name="gender" class="form-select form-select-sm" id="staticEmail" required placeholder="Gender" style="width: 100%" value="{{s.gender}}">
-                                                        
-                                                        <option  selected disabled>Gender</option>
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                       
-                                                    </select> {% endif %}
-                                                    <!-- <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Nickname" style="width: 100%;"> -->
+                                <h5>B. RANK and SERIAL NUMBER</h5>
+                                <div class="inside ">
+                                    <br>
+                                    <div class="inside2">
+                                        <div class="insideleft">
+                                            <div class="mb-3" id="mb3">
+                                                <label for="staticEmail" class="form-label">Rank:</label>
+                                                <div class="one" style=" width:50%;">
+                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Rank" style="width: 100%;" name="rank" value="{{s.rank}}">
                                                 </div>
                                             </div>
 
@@ -752,10 +660,59 @@
 
                                         <div class="insideright">
                                             <div class="mb-3" id="mb3">
-                                                <label for="stat" class="form-label">Citizenship:</label>
+                                                <label for="staticEmail" class="form-label">Serial Number:</label>
                                                 <div style=" width:50%;">
+                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Serial Number" style="width: 100%;" name="civilstatus" value="{{s.serialnumber}}">
+                                                </div>
+                                            </div>
 
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Citizenship" style="width: 100%;" name="citizenship" value="{{s.citizenship}}">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+
+
+
+                                <h5>C. BIRTH DATE AND PLACE</h5>
+                                <div class="inside ">
+                                    <div class="mb-3 row">
+                                        <label for="staticEmail" class="col-sm-2 col-form-label">Birthdate:</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" class="form-control form-control-sm" id="staticEmail" value="{{ s.birthday }}" name="birthdate">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="inputPassword" class="col-sm-2 col-form-label">Birthplace:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control form-control-sm" id="inputPassword" placeholder="Birth Place" name="birthplace" value="{{s.birthplace}}">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- part 1 -->
+
+                                <h5>D. PERSONAL INFORMATION</h5>
+                                <div class="inside ">
+                                    <br>
+                                    <div class="inside2">
+                                        <div class="insideleft">
+                                            <div class="mb-3" id="mb3">
+                                                <label for="staticEmail" class="form-label">Nickname:</label>
+                                                <div class="one" style=" width:50%;">
+                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Nickname" style="width: 100%;" name="nickname" value="{{s.nickname}}">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="insideright">
+                                            <div class="mb-3" id="mb3">
+                                                <label for="staticEmail" class="form-label">Civil Status:</label>
+                                                <div style=" width:50%;">
+                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Nickname" style="width: 100%;" name="civilstatus" value="{{s.civilstatus}}">
                                                 </div>
                                             </div>
 
@@ -764,15 +721,59 @@
                                     </div>
                                 </div>
 
-                                <!-- part 3 -->
+                                <!-- part 2 -->
 
                                 <div class="inside ">
                                     <div class="inside2">
                                         <div class="insideleft">
                                             <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Religion:</label>
+                                                <label for="staticEmail" class="form-label">Gender:</label> {% if s.gender %}
                                                 <div style=" width:50%;">
-                                                    <select name="religion" class="form-select form-select-sm" id="staticEmail" placeholder="Nickname" style="width: 100%;">
+                                                    <select name="gender" class="form-select form-select-sm" id="staticEmail" required placeholder="Gender" style="width: 100%" value="{{s.gender}}">
+                                                        
+                                                        <option value="{{s.gender}}" selected>{{s.gender}}</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                       
+                                                    </select> {% else %}
+
+                                                    <div style=" width:50%;">
+                                                        <select name="gender" class="form-select form-select-sm" id="staticEmail" required placeholder="Gender" style="width: 100%" value="{{s.gender}}">
+                                                        
+                                                        <option  selected disabled>Gender</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                       
+                                                    </select> {% endif %}
+                                                        <!-- <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Nickname" style="width: 100%;"> -->
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="stat" class="form-label">Citizenship:</label>
+                                                    <div style=" width:50%;">
+
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Citizenship" style="width: 100%;" name="citizenship" value="{{s.citizenship}}">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- part 3 -->
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Religion:</label>
+                                                    <div style=" width:50%;">
+                                                        <select name="religion" class="form-select form-select-sm" id="staticEmail" placeholder="Nickname" style="width: 100%;">
                                                         
                                                             <option value="" selected disabled>Select Relegion</option>
                                                             <option value="Roman Catholic">Roman Catholic</option>
@@ -789,17 +790,17 @@
                                                    
                                                     </select>
 
+                                                    </div>
                                                 </div>
+
                                             </div>
 
-                                        </div>
+                                            <div class="insideright">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="stat" class="form-label">Blood Type:</label>
+                                                    <div style=" width:50%;">
 
-                                        <div class="insideright">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="stat" class="form-label">Blood Type:</label>
-                                                <div style=" width:50%;">
-
-                                                    <select name="bloodtype" id="" class="form-select form-select-sm" style="width: 100%;">
+                                                        <select name="bloodtype" id="" class="form-select form-select-sm" style="width: 100%;">
                                                         
                                                         <option value="" disabled selected>Select Bloodtype</option>
                                                         <option value="A+">A+</option>
@@ -811,334 +812,334 @@
                                                         <option value="O+">O+</option>
                                                         <option value="O-">O-</option>
                                                     </select>
+                                                    </div>
                                                 </div>
+
                                             </div>
 
                                         </div>
+                                    </div>
+
+
+                                    <!-- part 4 -->
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Height:</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Height (cms)" style="width: 100%;" name="height" value="{{s.height}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">Weight:</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Weight (kgs) " style="width: 100%; " name="weight" value="{{s.weight}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <!-- part 5 -->
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Head Size (cms):</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Head Size (cms): " style="width: 100%;" name="headsize" value="{{s.headsize}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">Foot Size (cms): </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Foot Size (cms): " style="width: 100%; " name="footsize" value="{{s.footsize}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- part 6 -->
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Waist Size (cms):</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Waist Size (cms): " style="width: 100%;" name="waistsize" value="{{s.waistsize}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">Body Build: </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Body Build: " style="width: 100%; " name="bodybuild" value="{{s.bodybuild}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- part 7 -->
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Skin Color:</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Skin Color " style="width: 100%;" name="skincolor" value="{{s.skincolor}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">Eye Color: </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Eye Color " style="width: 100%; " name="eyecolor" value="{{s.eyecolor}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- part 8 -->
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Distinct Feature:</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Distinct Feature " style="width: 100%;" name="distinct" value="{{s.distinct}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">Hair Color: </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Hair Color " style="width: 100%; " name="haircolor" value="{{s.haircolor}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- part 9 -->
+
+                                    <div class="inside" style=" display:block;">
+                                        <div class="mb-3 row">
+                                            <label for="staticEmail" class="col-sm-2 col-form-label">Home Address:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Home Address" name="homeaddress" value="{{s.homeaddress}}">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="inputPassword" class="col-sm-2 col-form-label">Permanent Address:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control form-control-sm" id="inputPassword" placeholder="Permanent Address" name="permanentaddress" value="{{s.permanentaddress}}">
+                                            </div>
+                                        </div>
 
                                     </div>
+
+                                    <!-- part 10 -->
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Email Address:</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="email" class="form-control form-control-sm" id="staticEmail" placeholder="Email Address" style="width: 100%;" name="email" value="{{s.email}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">Contact Number(s): </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Contact Number(s)" style="width: 100%; " name="contactnumber" value="{{s.contactnumber}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <!-- part 11 -->
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Pag-Ibig Number:</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Pag-Ibig Number" style="width: 100%;" name="pagibig" value="{{s.pagibig}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">PhilHealth Number: </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="PhilHealth Number" style="width: 100%; " name="philhealth" value="{{s.philhealth}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">SSS Number:</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="SSS Number" style="width: 100%;" name="sssnumber" value="{{s.sssnumber}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">GSIS Number: </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="GSIS Number" style="width: 100%; " name="gsis" value="{{s.gsis}}">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- part 12 -->
+                                    <div class="inside ">
+                                        <div class="inside2">
+                                            <div class="insideleft">
+                                                <div class="mb-3" id="mb3">
+                                                    <label for="staticEmail" class="form-label">Tax Identification Number(TIN):</label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="TIN" style="width: 100%;" name="tin" value="{{s.tin}}">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="insideright ">
+                                                <div class="mb-3 " id="mb3 ">
+                                                    <label for="stat " class="form-label ">Driver’s License Number:  </label>
+                                                    <div style=" width:50%;">
+                                                        <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Driver's License" style="width: 100%; " name="driver" value="{{s.driver}}">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+
                                 </div>
-
-
-                                <!-- part 4 -->
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Height:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Height (cms)" style="width: 100%;" name="height" value="{{s.height}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">Weight:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Weight (kgs) " style="width: 100%; " name="weight" value="{{s.weight}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-                                <!-- part 5 -->
-
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Head Size (cms):</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Head Size (cms): " style="width: 100%;" name="headsize" value="{{s.headsize}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">Foot Size (cms): </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Foot Size (cms): " style="width: 100%; " name="footsize" value="{{s.footsize}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <!-- part 6 -->
-
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Waist Size (cms):</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Waist Size (cms): " style="width: 100%;" name="waistsize" value="{{s.waistsize}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">Body Build: </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Body Build: " style="width: 100%; " name="bodybuild" value="{{s.bodybuild}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <!-- part 7 -->
-
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Skin Color:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Skin Color " style="width: 100%;" name="skincolor" value="{{s.skincolor}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">Eye Color: </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Eye Color " style="width: 100%; " name="eyecolor" value="{{s.eyecolor}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <!-- part 8 -->
-
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Distinct Feature:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Distinct Feature " style="width: 100%;" name="distinct" value="{{s.distinct}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">Hair Color: </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Hair Color " style="width: 100%; " name="haircolor" value="{{s.haircolor}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <!-- part 9 -->
-
-                                <div class="inside ">
-                                    <div class="mb-3 row">
-                                        <label for="staticEmail" class="col-sm-2 col-form-label">Home Address:</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Home Address" name="homeaddress" value="{{s.homeaddress}}">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row">
-                                        <label for="inputPassword" class="col-sm-2 col-form-label">Permanent Address:</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control form-control-sm" id="inputPassword" placeholder="Permanent Address" name="permanentaddress" value="{{s.permanentaddress}}">
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!-- part 10 -->
-
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Email Address:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="email" class="form-control form-control-sm" id="staticEmail" placeholder="Email Address" style="width: 100%;" name="email" value="{{s.email}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">Contact Number(s): </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Contact Number(s)" style="width: 100%; " name="contactnumber" value="{{s.contactnumber}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-                                <!-- part 11 -->
-
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Pag-Ibig Number:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Pag-Ibig Number" style="width: 100%;" name="pagibig" value="{{s.pagibig}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">PhilHealth Number: </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="PhilHealth Number" style="width: 100%; " name="philhealth" value="{{s.philhealth}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">SSS Number:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="SSS Number" style="width: 100%;" name="sssnumber" value="{{s.sssnumber}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">GSIS Number: </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="GSIS Number" style="width: 100%; " name="gsis" value="{{s.gsis}}">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <!-- part 12 -->
-                                <div class="inside ">
-                                    <div class="inside2">
-                                        <div class="insideleft">
-                                            <div class="mb-3" id="mb3">
-                                                <label for="staticEmail" class="form-label">Tax Identification Number(TIN):</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="TIN" style="width: 100%;" name="tin" value="{{s.tin}}">
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="insideright ">
-                                            <div class="mb-3 " id="mb3 ">
-                                                <label for="stat " class="form-label ">Driver’s License Number:  </label>
-                                                <div style=" width:50%;">
-                                                    <input type="text " class="form-control form-control-sm " id="staticEmail " placeholder="Driver's License" style="width: 100%; " name="driver" value="{{s.driver}}">
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-
-
-                            </div>
-                            <br>
-                            <br>
-                            <div class="save" style="width: 100%;">
-                                <button class="btn btn-success" href="{% url 'activities:education' %}" id="submit" type="submit"> Save &nbsp;
+                                <br>
+                                <br>
+                                <div class="save" style="width: 100%;">
+                                    <button class="btn btn-success" href="{% url 'activities:education' %}" id="submit" type="submit"> Save &nbsp;
                                 <img src="../../static/media/images/save-removebg-preview.png" alt="Icon" class="me-2" width="50">
                             </button>
+                                </div>
+
+
+
+
+                                <!-- <button type="submit" class="btn btn-success" id="submit">Next</button> -->
                             </div>
 
 
 
 
-                            <!-- <button type="submit" class="btn btn-success" id="submit">Next</button> -->
+
+
+
+
+
+                            <br> &nbsp;
+
+
+                            <hr>
+
+
+                            <hr>
+
+
+
+
                         </div>
-
-
-
-
-
-
-
-
-
-                        <br> &nbsp;
-
-
+                        <br>
+                        <br>
                         <hr>
 
 
-                        <hr>
-
-
-
-
-                    </div>
-                    <br>
-                    <br>
-                    <hr>
-
-
-                    <!-- <a class="btn btn-primary" href="{% url 'activities:education' %}" id="submit" type="submit"> Next Step &nbsp;
+                        <!-- <a class="btn btn-primary" href="{% url 'activities:education' %}" id="submit" type="submit"> Next Step &nbsp;
                                 <img src="../../static/media/images/arrow.png" alt="Icon" class="me-2" width="50">
                             </a> -->
 
@@ -1147,72 +1148,72 @@
 
 
 
-                </div>
+                    </div>
 
-            </form>
-            {% endif %}
+                </form>
+                {% endif %}
 
-            <br>
-            <br>
-            <div class="profil23" style="padding: 20px;">
-                <div class="left2">
-                    <div class="row g-10">
-                        <h5>Dependents
-                            <p style="font-weight: 200;">Entry will include (1) Name; (2) Relationship; (3) Birth date occasional</p>
-                        </h5><br><br><br>
-                        <div class="inside23">
-                            <table id="dynamicTable" class="table table-bordered table-hover">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Relationship</th>
-                                        <th>Birthday</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% if depend %} {% for s in depend %}
-                                    <tr>
-                                        <td>{{s.name}}</td>
-                                        <td>{{s.relationship}}</td>
-                                        <td>{{s.birthday}}</td>
-                                    </tr>
-                                    {% endfor %} {% else %}
-                                    <tr>
-                                        <td></td>
-                                        <td style="text-align: center;">No Data Available</td>
-                                        <td></td>
-                                    </tr>
-                                    {% endif %}
-                                </tbody>
-                            </table>
-                            <button data-bs-target="#modal1" data-bs-toggle="modal" class="btn btn-primary" id="add">Add your Dependents +</button>
+                <br>
+                <br>
+                <div class="profil23" style="padding: 20px;">
+                    <div class="left2">
+                        <div class="row g-10">
+                            <h5>Dependents
+                                <p style="font-weight: 200;">Entry will include (1) Name; (2) Relationship; (3) Birth date occasional</p>
+                            </h5><br><br><br>
+                            <div class="inside23">
+                                <table id="dynamicTable" class="table table-bordered table-hover">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Relationship</th>
+                                            <th>Birthday</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if depend %} {% for s in depend %}
+                                        <tr>
+                                            <td>{{s.name}}</td>
+                                            <td>{{s.relationship}}</td>
+                                            <td>{{s.birthday}}</td>
+                                        </tr>
+                                        {% endfor %} {% else %}
+                                        <tr>
+                                            <td></td>
+                                            <td style="text-align: center;">No Data Available</td>
+                                            <td></td>
+                                        </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                                <button data-bs-target="#modal1" data-bs-toggle="modal" class="btn btn-primary" id="add">Add your Dependents +</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <br>
-                <br>
-                <hr>
+                    <br>
+                    <br>
+                    <hr>
 
-                <hr style="height: 3px; background-color: rgb(0, 0, 0); border: none; color:black;">
+                    <hr style="height: 3px; background-color: rgb(0, 0, 0); border: none; color:black;">
 
-                <div class="save1" style="width: 100%;">
+                    <div class="save1" style="width: 100%;">
 
-                    <a class="next" href="{% url 'activities:education' %}"> Next Step &nbsp;
+                        <a class="next" href="{% url 'activities:education' %}"> Next Step &nbsp;
                                 <img src="../../static/media/images/arrow.png" alt="Icon" class="me-2" width="50">
                             </a>
+                    </div>
+
                 </div>
+
+
+
+
 
             </div>
 
-
-
-
-
         </div>
-
     </div>
-
 
     <!-- <h1>I love you</h1> -->
 
@@ -1220,7 +1221,7 @@
     <script>
         const toggler = document.querySelector(".toggler-btn");
         toggler.addEventListener("click ", function() {
-            document.querySelector("#s idebar ").classList.toggle("collapsed ");
+            document.querySelector("#sidebar ").classList.toggle("collapsed ");
         });
     </script>
     <script src="script.js "></script>
@@ -1230,6 +1231,17 @@
     table js -->
 
 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const closeBtn = document.getElementById("close-sidebar");
+            const wrapper = document.querySelector(".wrapper");
+
+            closeBtn.addEventListener("click", function() {
+                wrapper.classList.toggle("sidebar-closed");
+            });
+        });
+    </script>
 </body>
 
 </html>

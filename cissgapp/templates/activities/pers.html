@@ -91,10 +91,13 @@
 
             </div>
             <div class="right">
-
-
-                <h2 class="mb-4">Monitoring</h2>
-                <p>Personeel Monitporing SYtem</p>
+                <div class="progress-box">
+                    <div class="circular-progress" style="--progress: {{ percent_duty }};">
+                        <span class="value">{{ percent_duty }}%</span>
+                    </div>
+                    <p class="label">On Duty</p>
+                    <p class="bottom-label">On Leave: {{ on_leave }}</p>
+                </div>
 
             </div>
         </div>
@@ -107,7 +110,23 @@
 
     </section>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const circle = document.querySelector('.circular-progress');
+            const value = parseInt(circle.style.getPropertyValue('--progress'));
 
+            let current = 0;
+            const interval = setInterval(() => {
+                if (current >= value) {
+                    clearInterval(interval);
+                } else {
+                    current++;
+                    circle.style.setProperty('--progress', current);
+                    circle.querySelector('.value').textContent = `${current}%`;
+                }
+            }, 10);
+        });
+    </script>
 
 
     <script>

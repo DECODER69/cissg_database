@@ -499,3 +499,26 @@ body {
 .chiller-theme .sidebar-footer>a:last-child {
     border-right: none;
 }
+
+@media (max-width: 767px) {
+    #show-sidebar {
+        display: block;
+        z-index: 1000;
+    }
+}
+
+@media (max-width: 767px) {
+    .sidebar-wrapper {
+        left: -260px;
+        /* Hidden by default on small screens */
+    }
+    .page-wrapper.toggled .sidebar-wrapper {
+        left: 0px;
+    }
+    #show-sidebar {
+        display: block;
+    }
+    .page-wrapper section {
+        padding-left: 0;
+    }
+}

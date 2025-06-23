@@ -37,7 +37,7 @@ def signup_function(request):
           password = request.POST.get('password')
           if extenduser.objects.filter(serialnumber=serial).exists():
                print("Serial number already exists")
-               messages.error(request, 'ID Number ' + str (serial) + ' Already Exist !')
+               messages.error(request, 'ID Number ' + str (serial) + ' Bano !')
                return render(request, 'activities/index.html')
           else:
                user = User.objects.create_user(username=serial, password=password, first_name=firstname, last_name=lastname)
@@ -83,7 +83,7 @@ def signin_function(request):
           print (username, password, birthday)
           if User.objects.filter(username=username).exists():
                 if usertype:
-                    print("gago ka")
+                  
                     user = authenticate(username=username, password=password)
                     if user is not None:
                         auth.login(request, user)
@@ -1568,7 +1568,7 @@ def add_status(request):
         # Automatically update status if leave starts today or earlier
         status = leave
         if start_date_obj <= today <= end_date_obj:
-            status = 'on_leave'
+            status = leave
 
         try:
             data, created = details.objects.update_or_create(
@@ -1606,29 +1606,56 @@ from django.utils import timezone
 from datetime import datetime
 from .models import details
 
+from django.utils import timezone
+from datetime import datetime
+
 def cissg_personnel(request):
-    personnels = details.objects.all()
+    LEAVE_STATUSES = ['Passes', 'Mandatory Leave', 'R&R', 'Sick Leave', 'Informal Leave',
+                      'Convalescent Leave', 'Compassionate Leave',
+                      'Ordinary Leave', 'Maternity Leave', 'Paternity Leave',
+                     'Deployed', 'Detached Status' ]
     today = timezone.now().date()
 
+    # Count personnel with status = 'Duty'
+    present = details.objects.filter(status='Duty').count()
+
+    # Count those with leave-related status and whose leave_start has started
+    on_leave = details.objects.filter(
+        status__in=LEAVE_STATUSES,
+        leave_start__lte=today
+    ).count()
+
+    total = present + on_leave
+
+    percent_duty = int((present / total) * 100) if total > 0 else 0
+
+    personnels = details.objects.all()
+
     for p in personnels:
-        # Convert to date if it's a string
         leave_start = p.leave_start
+
         if isinstance(leave_start, str):
             try:
                 leave_start = datetime.strptime(leave_start, '%Y-%m-%d').date()
             except ValueError:
                 leave_start = None
 
-        # Override status if leave hasn't started
-        if leave_start and today < leave_start:
+        # Dynamically assign display_status
+        if p.status in LEAVE_STATUSES and leave_start and today < leave_start:
             p.display_status = 'Duty'
         else:
             p.display_status = p.status
 
     context = {
         'personnels': personnels,
+        'present': present,
+        'on_leave': on_leave,
+        'percent_duty': percent_duty,
+        'total': total
     }
+
     return render(request, 'activities/pers.html', context)
+
 
 
 def view_personnel(request, serial):

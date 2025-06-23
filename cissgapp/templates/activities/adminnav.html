@@ -26,6 +26,10 @@
                         <i class="fa-solid fa-user"></i> {% if user.is_authenticated %}
                         <span>{{user.first_name}} {{user.last_name}}</span> {% endif %}
                     </a>
+                    <div id="close-sidebar">
+                        <i class="fas fa-times"></i>
+
+                    </div>
 
                 </div>
                 <div class="sidebar-header">
@@ -181,6 +185,8 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/esm/popper.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js'></script>
+
+
     <script>
         $(".sidebar-dropdown > a").click(function() {
             $(".sidebar-submenu").slideUp(200);

@@ -13,513 +13,524 @@
 </head>
 
 <body>
-    {% include 'activities/adminnav.html' %}
-    <div class="d-flex">
+    <div class="wrapper">
+        {% include 'activities/adminnav.html' %}
+        <div class="d-flex">
 
-        <!-- bodyyy -->
+            <!-- bodyyy -->
 
 
 
-        <!-- MODAL -->
-        <!-- TABLE 1 MODAL -->
-        <div class="modal fade" id="modal1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel">Educational Attainment (Civilian: Academic)</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{% url 'activities:academic_input' %} " method="POST">
-                            {% csrf_token %}
+            <!-- MODAL -->
+            <!-- TABLE 1 MODAL -->
+            <div class="modal fade" id="modal1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-3" id="exampleModalToggleLabel">Educational Attainment (Civilian: Academic)</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{% url 'activities:academic_input' %} " method="POST">
+                                {% csrf_token %}
 
-                            <div class="row g-3 ">
+                                <div class="row g-3 ">
 
-                                <div class="inside ">
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">Course</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Course" name="course" required>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">School / Institution</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="School / Institution" name="school" required>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">Period of Attendance (From - To)</label>
-
-                                        <div style="display: flex;">
-                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="start_date">
-                                            <br> &nbsp;
-                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="end_date">
+                                    <div class="inside ">
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">Course</label>
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Course" name="course" required>
                                         </div>
+                                        <br>
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">School / Institution</label>
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="School / Institution" name="school" required>
+                                        </div>
+                                        <br>
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">Period of Attendance (From - To)</label>
+
+                                            <div style="display: flex;">
+                                                <input type="date" class="form-control form-control-lg" style="width: 100%;" name="start_date">
+                                                <br> &nbsp;
+                                                <input type="date" class="form-control form-control-lg" style="width: 100%;" name="end_date">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="col">
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Standing / Honors / Remarks" name="standing" required>
+                                        </div>
+                                        <br>
+                                        <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
                                     </div>
-                                    <br>
-                                    <div class="col">
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Standing / Honors / Remarks" name="standing" required>
-                                    </div>
-                                    <br>
-                                    <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
                                 </div>
-                            </div>
 
 
-                        </form>
+                            </form>
+                        </div>
+
                     </div>
-
                 </div>
             </div>
-        </div>
 
 
-        <!-- END OF MODAL -->
-        <!-- 
+            <!-- END OF MODAL -->
+            <!-- 
         OTHER TRAININGS MODAL -->
 
 
 
-        <div class="modal fade" id="modal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel">Educational Attainment (Civilian: Other Trainings / Workshops)</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{% url 'activities:other_input' %} " method="POST">
-                            {% csrf_token %}
+            <div class="modal fade" id="modal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-3" id="exampleModalToggleLabel">Educational Attainment (Civilian: Other Trainings / Workshops)</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{% url 'activities:other_input' %} " method="POST">
+                                {% csrf_token %}
 
-                            <div class="row g-3 ">
+                                <div class="row g-3 ">
 
-                                <div class="inside ">
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">Course</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Course" name="course" required>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">School / Institution</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="School / Institution" name="school" required>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">Period of Attendance (From - To)</label>
-
-                                        <div style="display: flex;">
-                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="start_date">
-                                            <br> &nbsp;
-                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="end_date">
+                                    <div class="inside ">
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">Course</label>
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Course" name="course" required>
                                         </div>
+                                        <br>
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">School / Institution</label>
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="School / Institution" name="school" required>
+                                        </div>
+                                        <br>
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">Period of Attendance (From - To)</label>
+
+                                            <div style="display: flex;">
+                                                <input type="date" class="form-control form-control-lg" style="width: 100%;" name="start_date">
+                                                <br> &nbsp;
+                                                <input type="date" class="form-control form-control-lg" style="width: 100%;" name="end_date">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="col">
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Standing / Honors / Remarks" name="standing" required>
+                                        </div>
+                                        <br>
+                                        <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
                                     </div>
-                                    <br>
-                                    <div class="col">
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Standing / Honors / Remarks" name="standing" required>
-                                    </div>
-                                    <br>
-                                    <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
                                 </div>
-                            </div>
 
 
-                        </form>
+                            </form>
+                        </div>
+
                     </div>
-
                 </div>
             </div>
-        </div>
 
-        <!-- END OF OTHER TRAINING SMODAL -->
-
-
-        <!-- vocational modal -->
+            <!-- END OF OTHER TRAINING SMODAL -->
 
 
+            <!-- vocational modal -->
 
-        <div class="modal fade" id="modal3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel">Educational Attainment (Civilian: Vocational)</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{% url 'activities:vocational_input' %} " method="POST">
-                            {% csrf_token %}
 
-                            <div class="row g-3 ">
 
-                                <div class="inside ">
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">Course</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Course" name="course" required>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">School / Institution</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="School / Institution" name="school" required>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">Period of Attendance (From - To)</label>
+            <div class="modal fade" id="modal3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-3" id="exampleModalToggleLabel">Educational Attainment (Civilian: Vocational)</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{% url 'activities:vocational_input' %} " method="POST">
+                                {% csrf_token %}
 
-                                        <div style="display: flex;">
-                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="start_date">
-                                            <br> &nbsp;
-                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="end_date">
+                                <div class="row g-3 ">
+
+                                    <div class="inside ">
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">Course</label>
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Course" name="course" required>
                                         </div>
+                                        <br>
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">School / Institution</label>
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="School / Institution" name="school" required>
+                                        </div>
+                                        <br>
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">Period of Attendance (From - To)</label>
+
+                                            <div style="display: flex;">
+                                                <input type="date" class="form-control form-control-lg" style="width: 100%;" name="start_date">
+                                                <br> &nbsp;
+                                                <input type="date" class="form-control form-control-lg" style="width: 100%;" name="end_date">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="col">
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Standing / Honors / Remarks" name="standing" required>
+                                        </div>
+                                        <br>
+                                        <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
                                     </div>
-                                    <br>
-                                    <div class="col">
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Standing / Honors / Remarks" name="standing" required>
-                                    </div>
-                                    <br>
-                                    <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
                                 </div>
-                            </div>
 
 
-                        </form>
+                            </form>
+                        </div>
+
                     </div>
-
                 </div>
             </div>
-        </div>
 
-        <!-- 
+            <!-- 
         end of vocational modal -->
 
-        <div class="main">
-
-            <div class="filing">
-                <a href="{% url 'activities:dashboard' %}">Dashboard</a>
-                <p>&nbsp;/&nbsp;</p>
-                <a href="{% url 'activities:education' %}" style="color: #0556cf!important;">Education (Civilian)</a>
-                <p>&nbsp;/&nbsp;</p>
-
-            </div>
-            <hr style="height: 5px; background-color: rgb(0, 0, 0); border: none; color:black;">
-
-
-
-            <!-- main body -->
-
-            <main class="p-3">
-                <div class="container-fluid">
-                    <div class="mb-3 text-left">
-                        <h1><i class="lni lni-user"></i>
-                            <span>Profile</span></h1>
-                    </div>
-
-                    <div class="profile" style="padding: 20px;">
-
-                        <div class="left">
-                            <div class="row g-3">
-                                <h5>E. EDUCATIONAL ATTAINMENT <br>
-                                    <p style="font-weight: 200;">&nbsp;&nbsp; 1. Civilian: Entry shall be from Present to Past</p>
-
-                                </h5>
-
-                                <h5>
-                                    <p style="font-weight: 200; margin-left:50px;">A. Academic</p>
-                                </h5>
-                                <br>
-                                <br>
-                                <div class="inside">
-                                    {% if acad %}
-
-
-                                    <table id="dynamicTable1" class="table table-bordered table-hover">
-                                        <thead class="table-primary thead1">
-                                            <tr style="text-align: center !important;">
-                                                <th>COURSE</th>
-                                                <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
-                                                <th>PERIOD OF ATTENDANCE (From – To)
-                                                </th>
-                                                <th>STANDING / HONORS / REMARKS</th>
-                                                <th>Edit</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            {% for s in acad %}
-                                            <form action="{% url 'activities:update_table1' s.id %} " method="POST">
-                                                {% csrf_token %}
-                                                <tr>
-                                                    <td> <input type="text" name="course" class="form-control" style="border: none; outline:none;" value="{{s.course}}">
-
-                                                        <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
-                                                    </td>
-                                                    <td> <input type="text" name="school" class="form-control" style="border: none; outline:none;" value="{{s.school}}">
-                                                    </td>
-                                                    <td style="vertical-align: top;">
-                                                        <div style="display: flex; ">
-                                                            <input type="date" name="start_date" value="{{ s.start_date }}" class="form-control"> <br> &nbsp;
-                                                            <input type="date" name="end_date" value="{{ s.end_date }}" class="form-control">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text " name="standing" value="{{ s.standing }}" class="form-control" style="border: none; outline:none; ">
-                                                    </td>
-                                                    <td style="display: flex; justify-content: center; align-items: flex-start; ">
-                                                        <button type="submit" class="btn btn-success tbtn">Update</button>
-                                                    </td>
-
-                                                </tr>
-
-
-
-                                            </form>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                    {% else %}
-
-                                    <table id="dynamicTable1" class="table table-bordered table-hover ">
-                                        <thead class="table-dark">
-                                            <tr>
-                                                <th>COURSE</th>
-                                                <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
-                                                <th>PERIOD OF ATTENDANCE (From – To)
-                                                </th>
-                                                <th>STANDING / HONORS / REMARKS</th>
-                                                <th>ACTION</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr>
-                                                <td>
-                                                    <td colspan="3" align="center ">No data available</td>
-                                                </td>
-
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    {% endif %}
-                                    <button data-bs-target="#modal1" data-bs-toggle="modal" class="btn btn-primary" id="add">Add Academic Record +</button>
-
-                                </div>
-
-                                <br> &nbsp;
-                                <br>
-                                <!-- END OF ACADEMIIIIIIIIIIIIIIIIIIIIIIIIIC -->
-                                <hr>
-                                <!-- START OF VOCATIONALLLLLLLLLLLLL -->
-                                <h5>
-                                    <p style="font-weight: 200; margin-left:50px;">B. Vocational</p>
-                                </h5>
-                                <br>
-                                <br>
-                                <div class="inside ">
-                                    {% if vocation %}
-
-
-                                    <table id="dynamicTable1" class="table table-bordered table-hover">
-                                        <thead class="table-primary">
-                                            <tr style="text-align: center !important;">
-                                                <th>COURSE</th>
-                                                <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
-                                                <th>PERIOD OF ATTENDANCE (From – To)
-                                                </th>
-                                                <th>STANDING / HONORS / REMARKS</th>
-                                                <th>Edit</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for s in vocation %}
-                                            <form action="{% url 'activities:update_vocational' s.id %}" method="POST">
-                                                {% csrf_token %}
-                                                <tr>
-                                                    <td> <input type="text" name="course" class="form-control" style="border: none; outline:none;" value="{{s.course}}">
-
-                                                        <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
-                                                    </td>
-                                                    <td> <input type="text" name="school" class="form-control" style="border: none; outline:none;" value="{{s.school}}">
-                                                    </td>
-                                                    <td style="display: flex;">
-                                                        <input type="date" name="start_date" value="{{ s.start_date }}" class="form-control"><br> &nbsp;
-
-                                                        <input type="date" name="end_date" value="{{ s.end_date }}" class="form-control ">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text " name="standing" value="{{ s.standing }}" class="form-control" style="border: none; outline:none; ">
-                                                    </td>
-                                                    <td style="display: flex; justify-content: center; align-items: flex-start; ">
-
-                                                        <button type="submit " class="btn btn-success tbtn ">Update</button>
-                                                    </td>
-
-                                                </tr>
-
-
-
-                                            </form>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                    {% else %}
-
-                                    <table id="dynamicTable1" class="table table-bordered table-hover ">
-                                        <thead class="table-dark">
-                                            <tr>
-                                                <th>COURSE</th>
-                                                <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
-                                                <th>PERIOD OF ATTENDANCE (From – To)
-                                                </th>
-                                                <th>STANDING / HONORS / REMARKS</th>
-                                                <th>ACTION</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr>
-                                                <td>
-                                                    <td colspan="3" align="center ">No data available</td>
-                                                </td>
-
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    {% endif %}
-                                    <button data-bs-target="#modal3" data-bs-toggle="modal" class="btn btn-primary" id="add">Add Vocational Record +</button>
-
-                                </div>
-
-                                <br> &nbsp;
-                                <br>
-
-                                <hr>
-                                <!-- start of  other traininghs -->
-
-                                <h5>
-                                    <p style="font-weight: 200; margin-left:50px;">C. Other Trainings (Seminars/Workshops)</p>
-                                </h5>
-                                <br>
-                                <br>
-                                <div class="inside ">
-                                    {% if vocation %}
-
-
-                                    <table id="dynamicTable1" class="table table-bordered table-hover">
-                                        <thead class="table-primary">
-                                            <tr style="text-align: center !important;">
-                                                <th>COURSE</th>
-                                                <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
-                                                <th>PERIOD OF ATTENDANCE (From – To)
-                                                </th>
-                                                <th>STANDING / HONORS / REMARKS</th>
-                                                <th>Edit</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for s in other %}
-                                            <form action="{% url 'activities:update_other' s.id %}" method="POST">
-                                                {% csrf_token %}
-                                                <tr>
-                                                    <td> <input type="text" name="course" class="form-control" style="border: none; outline:none;" value="{{s.course}}">
-
-                                                        <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
-                                                    </td>
-                                                    <td> <input type="text" name="school" class="form-control" style="border: none; outline:none;" value="{{s.school}}">
-                                                    </td>
-                                                    <td style="display: flex;">
-                                                        <input type="date" name="start_date" value="{{ s.start_date }}" class="form-control"><br> &nbsp;
-
-                                                        <input type="date" name="end_date" value="{{ s.end_date }}" class="form-control ">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text " name="standing" value="{{ s.standing }}" class="form-control" style="border: none; outline:none; ">
-                                                    </td>
-                                                    <td style="display: flex; justify-content: center; align-items: flex-start; ">
-
-                                                        <button type="submit " class="btn btn-success tbtn ">Update</button>
-                                                    </td>
-
-                                                </tr>
-
-
-
-                                            </form>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                    {% else %}
-
-                                    <table id="dynamicTable1" class="table table-bordered table-hover ">
-                                        <thead class="table-dark">
-                                            <tr>
-                                                <th>COURSE</th>
-                                                <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
-                                                <th>PERIOD OF ATTENDANCE (From – To)
-                                                </th>
-                                                <th>STANDING / HONORS / REMARKS</th>
-                                                <th>ACTION</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr>
-                                                <td>
-                                                    <td colspan="3" align="center ">No data available</td>
-                                                </td>
-
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    {% endif %}
-                                    <button data-bs-target="#modal2" data-bs-toggle="modal" class="btn btn-primary" id="add">Add Other Training Record +</button>
-
-                                </div>
-
-
-                                <!-- end of other trainings -->
-                            </div>
-                        </div>
-
-
-                        <!-- END OF VOCATIONALLLLLLLLLLLLL -->
-
-
-
-
-
-
-                        <!-- START OF OTHER TRAININGS -->
-                        <br>
-                        <br>
-
-                        <hr style="height: 3px; background-color: rgb(0, 0, 0); border: none; color:black;">
-
-                        <div class="save1" style="width: 100%;">
-
-                            <a class="next btn-primary" href="{% url 'activities:education2' %}"> Next Step &nbsp;
-                                <img src="../../static/media/images/arrow.png" alt="Icon" class="me-2" width="50">
-                            </a>
-                        </div>
-
-                    </div>
-
-
+            <div class="main">
+
+                <div class="filing">
+                    <a href="{% url 'activities:dashboard' %}">Dashboard</a>
+                    <p>&nbsp;/&nbsp;</p>
+                    <a href="{% url 'activities:education' %}" style="color: #0556cf!important;">Education (Civilian)</a>
+                    <p>&nbsp;/&nbsp;</p>
 
                 </div>
+                <hr style="height: 5px; background-color: rgb(0, 0, 0); border: none; color:black;">
 
 
-            </main>
+
+                <!-- main body -->
+
+                <main class="p-3">
+                    <div class="container-fluid">
+                        <div class="mb-3 text-left">
+                            <h1><i class="lni lni-user"></i>
+                                <span>Profile</span></h1>
+                        </div>
+
+                        <div class="profile" style="padding: 20px;">
+
+                            <div class="left">
+                                <div class="row g-3">
+                                    <h5>E. EDUCATIONAL ATTAINMENT <br>
+                                        <p style="font-weight: 200;">&nbsp;&nbsp; 1. Civilian: Entry shall be from Present to Past</p>
+
+                                    </h5>
+
+                                    <h5>
+                                        <p style="font-weight: 200; margin-left:50px;">A. Academic</p>
+                                    </h5>
+                                    <br>
+                                    <br>
+                                    <div class="inside">
+                                        {% if acad %}
 
 
+                                        <table id="dynamicTable1" class="table table-bordered table-hover">
+                                            <thead class="table-primary thead1">
+                                                <tr style="text-align: center !important;">
+                                                    <th>COURSE</th>
+                                                    <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
+                                                    <th>PERIOD OF ATTENDANCE (From – To)
+                                                    </th>
+                                                    <th>STANDING / HONORS / REMARKS</th>
+                                                    <th>Edit</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                {% for s in acad %}
+                                                <form action="{% url 'activities:update_table1' s.id %} " method="POST">
+                                                    {% csrf_token %}
+                                                    <tr>
+                                                        <td> <input type="text" name="course" class="form-control" style="border: none; outline:none;" value="{{s.course}}">
+
+                                                            <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
+                                                        </td>
+                                                        <td> <input type="text" name="school" class="form-control" style="border: none; outline:none;" value="{{s.school}}">
+                                                        </td>
+                                                        <td style="vertical-align: top;">
+                                                            <div style="display: flex; ">
+                                                                <input type="date" name="start_date" value="{{ s.start_date }}" class="form-control"> <br> &nbsp;
+                                                                <input type="date" name="end_date" value="{{ s.end_date }}" class="form-control">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text " name="standing" value="{{ s.standing }}" class="form-control" style="border: none; outline:none; ">
+                                                        </td>
+                                                        <td style="display: flex; justify-content: center; align-items: flex-start; ">
+                                                            <button type="submit" class="btn btn-success tbtn">Update</button>
+                                                        </td>
+
+                                                    </tr>
+
+
+
+                                                </form>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        {% else %}
+
+                                        <table id="dynamicTable1" class="table table-bordered table-hover ">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th>COURSE</th>
+                                                    <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
+                                                    <th>PERIOD OF ATTENDANCE (From – To)
+                                                    </th>
+                                                    <th>STANDING / HONORS / REMARKS</th>
+                                                    <th>ACTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>
+                                                        <td colspan="3" align="center ">No data available</td>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        {% endif %}
+                                        <button data-bs-target="#modal1" data-bs-toggle="modal" class="btn btn-primary" id="add">Add Academic Record +</button>
+
+                                    </div>
+
+                                    <br> &nbsp;
+                                    <br>
+                                    <!-- END OF ACADEMIIIIIIIIIIIIIIIIIIIIIIIIIC -->
+                                    <hr>
+                                    <!-- START OF VOCATIONALLLLLLLLLLLLL -->
+                                    <h5>
+                                        <p style="font-weight: 200; margin-left:50px;">B. Vocational</p>
+                                    </h5>
+                                    <br>
+                                    <br>
+                                    <div class="inside ">
+                                        {% if vocation %}
+
+
+                                        <table id="dynamicTable1" class="table table-bordered table-hover">
+                                            <thead class="table-primary">
+                                                <tr style="text-align: center !important;">
+                                                    <th>COURSE</th>
+                                                    <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
+                                                    <th>PERIOD OF ATTENDANCE (From – To)
+                                                    </th>
+                                                    <th>STANDING / HONORS / REMARKS</th>
+                                                    <th>Edit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for s in vocation %}
+                                                <form action="{% url 'activities:update_vocational' s.id %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <tr>
+                                                        <td> <input type="text" name="course" class="form-control" style="border: none; outline:none;" value="{{s.course}}">
+
+                                                            <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
+                                                        </td>
+                                                        <td> <input type="text" name="school" class="form-control" style="border: none; outline:none;" value="{{s.school}}">
+                                                        </td>
+                                                        <td style="display: flex;">
+                                                            <input type="date" name="start_date" value="{{ s.start_date }}" class="form-control"><br> &nbsp;
+
+                                                            <input type="date" name="end_date" value="{{ s.end_date }}" class="form-control ">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text " name="standing" value="{{ s.standing }}" class="form-control" style="border: none; outline:none; ">
+                                                        </td>
+                                                        <td style="display: flex; justify-content: center; align-items: flex-start; ">
+
+                                                            <button type="submit " class="btn btn-success tbtn ">Update</button>
+                                                        </td>
+
+                                                    </tr>
+
+
+
+                                                </form>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        {% else %}
+
+                                        <table id="dynamicTable1" class="table table-bordered table-hover ">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th>COURSE</th>
+                                                    <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
+                                                    <th>PERIOD OF ATTENDANCE (From – To)
+                                                    </th>
+                                                    <th>STANDING / HONORS / REMARKS</th>
+                                                    <th>ACTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>
+                                                        <td colspan="3" align="center ">No data available</td>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        {% endif %}
+                                        <button data-bs-target="#modal3" data-bs-toggle="modal" class="btn btn-primary" id="add">Add Vocational Record +</button>
+
+                                    </div>
+
+                                    <br> &nbsp;
+                                    <br>
+
+                                    <hr>
+                                    <!-- start of  other traininghs -->
+
+                                    <h5>
+                                        <p style="font-weight: 200; margin-left:50px;">C. Other Trainings (Seminars/Workshops)</p>
+                                    </h5>
+                                    <br>
+                                    <br>
+                                    <div class="inside ">
+                                        {% if vocation %}
+
+
+                                        <table id="dynamicTable1" class="table table-bordered table-hover">
+                                            <thead class="table-primary">
+                                                <tr style="text-align: center !important;">
+                                                    <th>COURSE</th>
+                                                    <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
+                                                    <th>PERIOD OF ATTENDANCE (From – To)
+                                                    </th>
+                                                    <th>STANDING / HONORS / REMARKS</th>
+                                                    <th>Edit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for s in other %}
+                                                <form action="{% url 'activities:update_other' s.id %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <tr>
+                                                        <td> <input type="text" name="course" class="form-control" style="border: none; outline:none;" value="{{s.course}}">
+
+                                                            <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
+                                                        </td>
+                                                        <td> <input type="text" name="school" class="form-control" style="border: none; outline:none;" value="{{s.school}}">
+                                                        </td>
+                                                        <td style="display: flex;">
+                                                            <input type="date" name="start_date" value="{{ s.start_date }}" class="form-control"><br> &nbsp;
+
+                                                            <input type="date" name="end_date" value="{{ s.end_date }}" class="form-control ">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text " name="standing" value="{{ s.standing }}" class="form-control" style="border: none; outline:none; ">
+                                                        </td>
+                                                        <td style="display: flex; justify-content: center; align-items: flex-start; ">
+
+                                                            <button type="submit " class="btn btn-success tbtn ">Update</button>
+                                                        </td>
+
+                                                    </tr>
+
+
+
+                                                </form>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        {% else %}
+
+                                        <table id="dynamicTable1" class="table table-bordered table-hover ">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th>COURSE</th>
+                                                    <th>NAME OF SCHOOL/INSTITUTION AND LOCATION</th>
+                                                    <th>PERIOD OF ATTENDANCE (From – To)
+                                                    </th>
+                                                    <th>STANDING / HONORS / REMARKS</th>
+                                                    <th>ACTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>
+                                                        <td colspan="3" align="center ">No data available</td>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        {% endif %}
+                                        <button data-bs-target="#modal2" data-bs-toggle="modal" class="btn btn-primary" id="add">Add Other Training Record +</button>
+
+                                    </div>
+
+
+                                    <!-- end of other trainings -->
+                                </div>
+                            </div>
+
+
+                            <!-- END OF VOCATIONALLLLLLLLLLLLL -->
+
+
+
+
+
+
+                            <!-- START OF OTHER TRAININGS -->
+                            <br>
+                            <br>
+
+                            <hr style="height: 3px; background-color: rgb(0, 0, 0); border: none; color:black;">
+
+                            <div class="save1" style="width: 100%;">
+
+                                <a class="next btn-primary" href="{% url 'activities:education2' %}"> Next Step &nbsp;
+                                <img src="../../static/media/images/arrow.png" alt="Icon" class="me-2" width="50">
+                            </a>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </main>
+
+
+
+            </div>
 
         </div>
 
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const closeBtn = document.getElementById("close-sidebar");
+            const wrapper = document.querySelector(".wrapper");
 
-
+            closeBtn.addEventListener("click", function() {
+                wrapper.classList.toggle("sidebar-closed");
+            });
+        });
+    </script>
 
     <!-- break -->
     <script>
         const toggler = document.querySelector(".toggler-btn ");
         toggler.addEventListener("click ", function() {
-            document.querySelector("#s idebar ").classList.toggle("collapsed ");
+            document.querySelector("#sidebar ").classList.toggle("collapsed ");
         });
     </script>
     <!-- 
