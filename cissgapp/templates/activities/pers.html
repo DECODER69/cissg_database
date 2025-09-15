@@ -27,7 +27,7 @@
 
             <h5 style="margin-left: 15px; color:rgb(0, 0, 0); font-size: 20px !important;">
                 <i class="fa-solid fa-users"></i>
-                <span>CISSG Personnel</span>
+                <span>Active CISSG Personnel</span>
             </h5>
             <br>
         </div>
@@ -54,11 +54,12 @@
                     </thead>
                     <tbody id="tableBody">
                         {% for p in personnels %}
-                        <tr>
+
+                        <tr class="{% if p.display_status != 'Duty' %}table-danger{% endif %}">
                             <td>
                                 {% if p.profile and p.profile.url %}
-                                <img src="{{ p.profile.url }}" alt="Profile Picture" width="50" height="auto"> {% else %}
-                                <span>No Image</span> {% endif %}
+                                <img src="{{ p.profile.url }}" alt="Profile Picture" width="50" height="50"> {% else %}
+                                <img src="../../static/media/images/icon.jpg" alt="Profile Picture" width="50" height="auto">{% endif %}
                             </td>
                             <td>
                                 <a href="{% url 'activities:view_personnel' p.serialnumber %}">{{p.rank}} {{ p.firstname }} {{p.middlename}} {{p.lastname}} {{p.serialnumber}}</a>
@@ -90,16 +91,7 @@
                 </nav>
 
             </div>
-            <div class="right">
-                <div class="progress-box">
-                    <div class="circular-progress" style="--progress: {{ percent_duty }};">
-                        <span class="value">{{ percent_duty }}%</span>
-                    </div>
-                    <p class="label">On Duty</p>
-                    <p class="bottom-label">On Leave: {{ on_leave }}</p>
-                </div>
 
-            </div>
         </div>
 
 
@@ -110,23 +102,6 @@
 
     </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const circle = document.querySelector('.circular-progress');
-            const value = parseInt(circle.style.getPropertyValue('--progress'));
-
-            let current = 0;
-            const interval = setInterval(() => {
-                if (current >= value) {
-                    clearInterval(interval);
-                } else {
-                    current++;
-                    circle.style.setProperty('--progress', current);
-                    circle.querySelector('.value').textContent = `${current}%`;
-                }
-            }, 10);
-        });
-    </script>
 
 
     <script>

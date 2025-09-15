@@ -14,10 +14,11 @@
 
 <body>
     {% if messages %}
-    <div id="popup-message" class="popup">
+    <div>
         {% for message in messages %}
-        <div class="alert {{ message.tags }}">
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
             {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% endfor %}
     </div>
@@ -43,35 +44,36 @@
                 <hr>
                 <div class="mb-3">
                     <label for="lastname" class="form-label">Last Name:</label>
-                    <input type="text" class="form-control" id="lastname" name="lastname" required>
+                    <input type="text" class="form-control" id="lastname" name="lastname" required value="{{ form_data.lastname|default:'' }}">
 
                 </div>
                 <div class="mb-3">
                     <label for="firstname" class="form-label">First Name:</label>
-                    <input type="text" class="form-control" id="firstname" name="firstname" required>
+                    <input type="text" class="form-control" id="firstname" name="firstname" required value="{{ form_data.firstname|default:'' }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="middle" class="form-label">Middle Name:</label>
-                    <input type="text" class="form-control" id="middle" name="middlename">
+                    <input type="text" class="form-control" id="middle" name="middlename" value="{{ form_data.middlename|default:'' }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="serial" class="form-label">Serial Number:</label>
-                    <input type="text" class="form-control" id="serial" name="serialnumber" required>
+                    <input type="text" class="form-control" id="serial" name="serialnumber" required value="{{ form_data.serialnumber|default:'' }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="birthdate" class="form-label">Birthday</label>
-                    <input type="date" class="form-control" id="birthdate" name="birthday" required>
+                    <input type="date" class="form-control" id="birthdate" name="birthday" required value="{{ form_data.birthday|default:'' }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="division" class="form-label">Division</label>
-                    <select class="form-select" aria-label="Default select example" name="division">
-                        <option selected>--Select Division--</option>
+                    <select class="form-select" aria-label="Default select example" name="division" value="{{ form_data.division|default:'' }}" required>
+                        <option selected disabled>--Select Division--</option>
                         <option value="Commanding Officer, CISSG">Commanding Officer, CISSG</option>
                         <option value="Executive Officer, CISSG">Executive Officer, CISSG</option>
+                        <option value="Chief of Staff, CISSG">Chief of Staff, CISSG</option>
                         <option value="Office of the Commanding Officer, CISSG">Office of the Commanding Officer, CISSG</option>
                         <option value="Office of the Executive Officer, CISSG">Office of the Executive Officer, CISSG</option>
                         <option value="Administrative Division">Administrative Division</option>
@@ -93,7 +95,7 @@
 
                 <div class="mb-3">
                     <label for="password" class="form-label">New Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <input type="password" class="form-control" id="password" name="password" required value="{{ form_data.password|default:'' }}">
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Create Account</button>

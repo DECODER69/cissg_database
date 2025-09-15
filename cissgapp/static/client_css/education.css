@@ -128,7 +128,6 @@ a {
 }
 
 .thead1 {
-    background-color: rgb(8, 78, 2) !important;
     color: white !important;
 }
 
@@ -136,7 +135,6 @@ a {
 /* modal css */
 
 #add {
-    background-color: rgb(8, 78, 2) !important;
     border-radius: 10px;
 }
 
@@ -313,5 +311,148 @@ a {
     flex: 1 1 100%;
 }
 
+#dynamicTable1 {
+    width: 100%;
+    table-layout: fixed;
+}
+
+#dynamicTable1 td {
+    word-wrap: break-word;
+    text-align: center;
+    vertical-align: top;
+}
+
 
 /* end */
+
+@media (max-width: 720px) {
+    .p-3 {
+        padding: 0px !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    .main .p-3 .container-fluid {
+        padding: 2px !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    .p-3 .container-fluid .profile {
+        padding: 10px !important;
+        background-color: rgb(255, 255, 255) !important;
+        width: 100% !important;
+    }
+    .filing {
+        width: auto;
+        justify-content: center;
+    }
+    .filing #hello {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 15px !important;
+        font-weight: bolder;
+        justify-content: center;
+        margin-right: 20px;
+    }
+    .main .container-fluid .text-left h1 {
+        font-weight: bolder;
+        font-size: 20px;
+    }
+    .profil23 {
+        width: 95% !important;
+        padding: 5 !important;
+    }
+    .profil23 .left2 {
+        display: flex;
+        width: 100%;
+        padding-right: 0px !important;
+        padding-right: 0px !important;
+        /* background-color: orange; */
+        margin: 0 !important;
+        align-content: center !important;
+        justify-content: center !important;
+    }
+    .profile .left .row h5 {
+        font-size: 15px !important;
+        font-weight: bolder;
+    }
+    .profil23 .left2 .row {
+        width: 100% !important;
+        /* background-color: red; */
+        margin-right: 0px !important;
+    }
+    .profil23 .left2 .row .inside23 {
+        /* background-color: blue !important; */
+        width: 100% !important;
+    }
+    /* 
+    dependentts table  */
+    #dynamicTable1 {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+    #dynamicTable1 th,
+    #dynamicTable1 td {
+        width: 20% !important;
+        /* 5 columns */
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal;
+        text-align: center;
+        vertical-align: bottom;
+        font-size: 9px;
+        padding: 2px;
+        margin: 0;
+        overflow: hidden;
+    }
+    #dynamicTable1 .form-control {
+        font-size: 9px;
+        width: 100%;
+        min-width: 0;
+    }
+    /* Optional: Make table scrollable if overflow */
+    .inside #add {
+        width: 100%;
+        /* Make it full width */
+        font-size: 10px;
+        /* Reduce text size */
+        padding: 10px;
+        /* Adjust padding */
+        margin-bottom: 10px;
+        /* Optional spacing */
+        border-radius: 5px;
+        /* Softer edges */
+        text-align: center;
+        white-space: normal !important;
+        /* Allows text wrapping */
+        word-wrap: break-word;
+    }
+    /* vocational modal */
+    .modal-header .modal-title {
+        font-size: 15px !important;
+        font-weight: bolder;
+        text-align: center;
+    }
+    .col label {
+        font-size: 12px !important;
+        font-weight: bolder;
+        color: #000000;
+    }
+    .modal .form-control {
+        font-size: 12px !important;
+        padding: 4px 8px !important;
+        height: auto !important;
+        line-height: 1.5 !important;
+    }
+    .modal .btn {
+        font-size: 12px !important;
+        padding: 4px 8px !important;
+    }
+    .modal .modal-dialog {
+        max-width: 95% !important;
+        margin: 10px auto;
+    }
+    .modal .modal-title {
+        font-size: 16px !important;
+    }
+}

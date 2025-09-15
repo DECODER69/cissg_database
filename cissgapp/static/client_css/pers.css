@@ -1,5 +1,5 @@
 .left {
-    width: 70%;
+    width: 100%;
     background-color: rgb(209, 209, 209);
     padding: 10px;
     border-radius: 5px;
@@ -70,3 +70,8 @@
 
 
 /* end of circular */
+
+.table-danger {
+    background-color: red;
+    color: white;
+}

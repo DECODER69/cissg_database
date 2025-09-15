@@ -27,9 +27,11 @@ SECRET_KEY = 'django-insecure-sv#e@e9)3$r@yeh-%ai4_s=s9z*+sgb9p(6c4*9k#$-t6^0fy@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['*']  # for testing only
 
-# ALLOWED_HOSTS = ['192.168.1.168']
+ALLOWED_HOSTS = ['*']
+
+# ALLOWED_HOSTS = ['192.168.1.164']
 
 
 # Application definition
@@ -61,6 +63,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 ]
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.DEBUG: 'secondary',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'danger',
+}
 
 ROOT_URLCONF = 'mysite.urls'
 
@@ -93,7 +103,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
-    
+        'PORT': '3306',
 
     }
 }

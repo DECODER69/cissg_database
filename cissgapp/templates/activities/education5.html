@@ -10,381 +10,461 @@
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../../static/client_css/education.css">
+
+    <!-- bootstrap icon -->
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
 <body>
-    {% include 'activities/adminnav.html' %}
-    <div class="d-flex">
-        <!-- Sidebar -->
+    <div class="wrapper">
+        {% include 'activities/adminnav.html' %}
+        <div class="d-flex">
+            <!-- Sidebar -->
 
 
-        <!-- bodyyy -->
+            <!-- bodyyy -->
 
 
 
-        <!-- MODAL -->
-        <!-- TABLE 1 MODAL -->
-        <div class="modal fade" id="modal1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel">DUTY ASSIGNMENTS AND ADDITIONAL DUTIES:</h1>
+            <!-- MODAL -->
+            <!-- TABLE 1 MODAL -->
+            <div class="modal fade" id="modal1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-3" id="exampleModalToggleLabel">DUTY ASSIGNMENTS AND ADDITIONAL DUTIES:</h1>
 
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <h3>&nbsp;&nbsp;1. SHIPBOARD</h3>
-                    <div class="modal-body">
-                        <form action="{% url 'activities:shipboard_input' %} " method="POST">
-                            {% csrf_token %}
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <!-- <h3>&nbsp;&nbsp;1. SHIPBOARD</h3> -->
+                        <div class="modal-body">
+                            <form action="{% url 'activities:shipboard_input' %} " method="POST">
+                                {% csrf_token %}
 
-                            <div class="row g-3 ">
+                                <div class="row g-3 ">
 
-                                <div class="inside ">
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">Unit</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Unit" name="unit" required>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">DUTY/POSITION</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="DUTY/POSITION" name="position" required>
-                                    </div>
-                                    <br>
-
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">INCLUSIVE PERIOD (From-To)</label>
-
-                                        <div style="display: flex;">
-                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="start_date">
-                                            <br> &nbsp;
-                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="end_date">
+                                    <div class="inside ">
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">Unit</label>
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Unit" name="unit" required>
                                         </div>
+                                        <br>
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">DUTY/POSITION</label>
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="DUTY/POSITION" name="position" required>
+                                        </div>
+                                        <br>
+
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">INCLUSIVE PERIOD (From-To)</label>
+
+                                            <div style="display: flex;">
+                                                <input type="date" class="form-control form-control-lg" style="width: 100%;" name="start_date">
+                                                <br> &nbsp;
+                                                <input type="date" class="form-control form-control-lg" style="width: 100%;" name="end_date">
+                                            </div>
+                                        </div>
+                                        <br>
+
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">AUTHORITY</label>
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Authority" name="authority" required>
+                                        </div>
+
+
+
+                                        <br>
+                                        <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
                                     </div>
-                                    <br>
-
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">AUTHORITY</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Authority" name="authority" required>
-                                    </div>
-
-
-
-                                    <br>
-                                    <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
                                 </div>
-                            </div>
 
 
-                        </form>
+                            </form>
+                        </div>
+
                     </div>
-
                 </div>
             </div>
-        </div>
 
-        <!-- END OF TABLE 1 MODAL -->
+            <!-- END OF TABLE 1 MODAL -->
 
 
-        <!-- MODAL 2 -->
+            <!-- MODAL 2 -->
 
-        <div class="modal fade" id="modal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel">DUTY ASSIGNMENTS AND ADDITIONAL DUTIES:</h1>
+            <div class="modal fade" id="modal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-3" id="exampleModalToggleLabel">DUTY ASSIGNMENTS AND ADDITIONAL DUTIES:</h1>
 
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <h3>&nbsp;&nbsp;1.A. COLLATERAL DUTIES</h3>
-                    <div class="modal-body">
-                        <form action="{% url 'activities:collateral_input' %} " method="POST">
-                            {% csrf_token %}
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <!-- <h3>&nbsp;&nbsp;1.A. COLLATERAL DUTIES</h3> -->
+                        <div class="modal-body">
+                            <form action="{% url 'activities:collateral_input' %} " method="POST">
+                                {% csrf_token %}
 
-                            <div class="row g-3 ">
+                                <div class="row g-3 ">
 
-                                <div class="inside ">
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">Unit</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Unit" name="unit" required>
-                                    </div>
-                                    <br>
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">DUTY/POSITION</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="DUTY/POSITION" name="position" required>
-                                    </div>
-                                    <br>
-
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">INCLUSIVE PERIOD (From-To)</label>
-
-                                        <div style="display: flex;">
-                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="start_date">
-                                            <br> &nbsp;
-                                            <input type="date" class="form-control form-control-lg" style="width: 100%;" name="end_date">
+                                    <div class="inside ">
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">Unit</label>
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Unit" name="unit" required>
                                         </div>
+                                        <br>
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">DUTY/POSITION</label>
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="DUTY/POSITION" name="position" required>
+                                        </div>
+                                        <br>
+
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">INCLUSIVE PERIOD (From-To)</label>
+
+                                            <div style="display: flex;">
+                                                <input type="date" class="form-control form-control-lg" style="width: 100%;" name="start_date">
+                                                <br> &nbsp;
+                                                <input type="date" class="form-control form-control-lg" style="width: 100%;" name="end_date">
+                                            </div>
+                                        </div>
+                                        <br>
+
+                                        <div class="col">
+                                            <label for="" style="font-weight: bolder;">AUTHORITY</label>
+                                            <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Authority" name="authority" required>
+                                        </div>
+
+
+
+                                        <br>
+                                        <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
                                     </div>
-                                    <br>
-
-                                    <div class="col">
-                                        <label for="" style="font-weight: bolder;">AUTHORITY</label>
-                                        <input type="text" class="form-control form-control-lg" style="width: 100%;" placeholder="Authority" name="authority" required>
-                                    </div>
-
-
-
-                                    <br>
-                                    <button type="submit" style="float: right;" class="btn btn-success btn-lg">Save</button>
                                 </div>
-                            </div>
 
 
-                        </form>
+                            </form>
+                        </div>
+
                     </div>
-
                 </div>
             </div>
-        </div>
 
-        <!-- END OF MODAL -->
+            <!-- END OF MODAL -->
 
-
-        <!-- main funtions -->
-
-        <div class="main">
-            <div class="filing">
-                <a href="{% url 'activities:dashboard' %}">Dashboard</a>
-                <p>&nbsp;/&nbsp;</p>
-                <a href="{% url 'activities:education' %}">Education (Civilian)</a>
-                <p>&nbsp;/&nbsp;</p>
-                <a href="{% url 'activities:education2' %}">Education (PCG)</a>
-                <p>&nbsp;/&nbsp;</p>
-                <a href="{% url 'activities:education3' %}">Education (AFP)</a>
-                <p>&nbsp;/&nbsp;</p>
-                <a href="{% url 'activities:education4' %}">Appointments</a>
-                <p>&nbsp;/&nbsp;</p>
-                <a href="{% url 'activities:education5' %}" style="color: #0556cf!important;">Duties (Shipboard)</a>
-                <p>&nbsp;/&nbsp;</p>
-
-            </div>
-            <hr style="height: 5px; background-color: rgb(0, 0, 0); border: none; color:black;">
-            <main class="p-3">
-                <div class="container-fluid">
-                    <div class="mb-3 text-left">
-                        <h1><i class="lni lni-user"></i>
-                            <span>Profile</span></h1>
-                    </div>
-
-                    <div class="profile" style="padding: 20px;">
-
-                        <div class="left">
-                            <div class="row g-3">
-                                <h5>G. DUTY ASSIGNMENTS AND ADDITIONAL DUTIES: <br><br>
-                                    <p style="font-weight: 200;">&nbsp;&nbsp;&nbsp;Entry shall be from Present to Past</p>
-
-                                </h5>
-
-                                <h5>
-                                    <p style="font-weight: 200; margin-left:50px;">1. SHIPBOARD</p>
-                                </h5>
-                                <br>
-                                <br>
-                                <div class="inside">
-                                    {% if shipboard %}
-
-
-                                    <table id="dynamicTable1" class="table table-bordered table-hover">
-                                        <thead class="table-primary thead1">
-                                            <tr style="text-align: center !important;">
-                                                <th>UNIT</th>
-                                                <th>DUTY/POSITION</th>
-                                                <th>INCLUSIVE PERIOD (From-To)
-                                                </th>
-                                                <th>AUTHORITY</th>
-                                                <th>Edit</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for s in shipboard %}
-                                            <form action="{% url 'activities:update_shipboard' s.id %} " method="POST">
-                                                {% csrf_token %}
-                                                <tr>
-                                                    <td> <textarea type="text" name="unit" class="form-control" style="border: none; outline:none;">{{s.unit}}</textarea> </td>
-
-                                                    <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
-
-                                                    <td>
-                                                        <textarea type="text" name="duty" class="form-control" style="border: none; outline:none;">{{s.duty}}</textarea>
-                                                    </td>
-
-                                                    <td style="display: flex;">
-                                                        <input type="date" name="start_date" value="{{ s.start_date }}" class="form-control"> <br> &nbsp;
-
-                                                        <input type="date" name="end_date" value="{{ s.end_date }}" class="form-control ">
-                                                    </td>
-
-                                                    <td> <textarea type="text" name="authority" class="form-control" style="border: none; outline:none;">{{s.authority}}</textarea>
-                                                    </td>
-
-
-                                                    <td style="display: flex; justify-content: center; align-items: center; height: 100px">
-
-                                                        <button type="submit " class="btn btn-success tbtn ">Update</button>
-                                                    </td>
-
-                                                </tr>
-
-
-
-                                            </form>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                    {% else %}
-
-                                    <table id="dynamicTable1" class="table table-bordered table-hover ">
-                                        <thead class="table-primary">
-                                            <tr>
-                                                <th>UNIT</th>
-                                                <th>DUTY/POSITION</th>
-                                                <th>INCLUSIVE PERIOD (From-To)
-                                                </th>
-                                                <th>AUTHORITY</th>
-                                                <th>Edit</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr>
-                                                <td colspan="3" align="center">No Shipboard data available</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    {% endif %}
-                                    <button data-bs-target="#modal1" data-bs-toggle="modal" class="btn btn-primary" id="add">Add your Shipboard data +</button>
-
+            <!-- MODAL FOR EDITS -->
+            <!-- TABLE 1 -->
+            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form method="POST" id="editForm">
+                        {% csrf_token %}
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Shipboard Record</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="id" id="edit-id">
+                                <div class="mb-3">
+                                    <label for="edit-course" class="form-label">Unit</label>
+                                    <input type="text" class="form-control" name="unit" id="edit-unit">
                                 </div>
-
-                                <br> &nbsp;
-                                <br>
-                                <!-- END OF COAST GUARD -->
-                                <hr>
-                                <!-- START OF ColateralL -->
-
-
-                                <h5>
-                                    <p style="font-weight: 200; margin-left:50px;">1.A. Collateral Duties</p>
-                                </h5>
-                                <br>
-                                <br>
-                                <div class="inside">
-                                    {% if collateral %}
-
-
-                                    <table id="dynamicTable1" class="table table-bordered table-hover">
-                                        <thead class="table-primary thead1">
-                                            <tr style="text-align: center !important;">
-                                                <th>UNIT</th>
-                                                <th>DUTY/POSITION</th>
-                                                <th>INCLUSIVE PERIOD (From-To)
-                                                </th>
-                                                <th>AUTHORITY</th>
-                                                <th>Edit</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for s in collateral %}
-                                            <form action="{% url 'activities:update_collateral' s.id %} " method="POST">
-                                                {% csrf_token %}
-                                                <tr>
-                                                    <td> <textarea type="text" name="unit" class="form-control" style="border: none; outline:none;">{{s.unit}}</textarea> </td>
-
-                                                    <!-- <input type="text" name="course" value="{{ s.course }}" class="form-control" style="border: none; outline:none;"> -->
-
-                                                    <td>
-                                                        <textarea type="text" name="duty" class="form-control" style="border: none; outline:none;">{{s.duty}}</textarea>
-                                                    </td>
-
-                                                    <td style="display: flex;">
-                                                        <input type="date" name="start_date" value="{{ s.start_date }}" class="form-control"> <br> &nbsp;
-
-                                                        <input type="date" name="end_date" value="{{ s.end_date }}" class="form-control ">
-                                                    </td>
-
-                                                    <td> <textarea type="text" name="authority" class="form-control" style="border: none; outline:none;">{{s.authority}}</textarea>
-                                                    </td>
-
-
-                                                    <td style="display: flex; justify-content: center; align-items: center; height: 100px">
-
-                                                        <button type="submit " class="btn btn-success tbtn ">Update</button>
-                                                    </td>
-
-                                                </tr>
-
-
-
-                                            </form>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                    {% else %}
-
-                                    <table id="dynamicTable1" class="table table-bordered table-hover ">
-                                        <thead class="table-primary">
-                                            <tr>
-                                                <th>UNIT</th>
-                                                <th>DUTY/POSITION</th>
-                                                <th>INCLUSIVE PERIOD (From-To)
-                                                </th>
-                                                <th>AUTHORITY</th>
-                                                <th>Edit</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr>
-                                                <td colspan="3" align="center">No Shipboard data available</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    {% endif %}
-                                    <button data-bs-target="#modal2" data-bs-toggle="modal" class="btn btn-primary" id="add">Add your Shipboard data +</button>
-
+                                <div class="mb-3">
+                                    <label for="edit-authority" class="form-label">Duty</label>
+                                    <input type="text" class="form-control" name="duty" id="edit-duty">
                                 </div>
-
-                                <br> &nbsp;
-                                <br>
-
-
-
-                                <!-- end of other trainings -->
+                                <div class="mb-3">
+                                    <label class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" name="start_date" id="edit-start">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">End Date</label>
+                                    <input type="date" class="form-control" name="end_date" id="edit-end">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Authority</label>
+                                    <input type="text" class="form-control" name="authority" id="edit-authority">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Save Changes</button>
                             </div>
                         </div>
-                        <br>
-                        <br>
+                    </form>
+                </div>
+            </div>
 
-                        <hr style="height: 3px; background-color: rgb(0, 0, 0); border: none; color:black;">
+            <!-- TABLE 1 -->
+            <div class="modal fade" id="editModal2" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form method="POST" id="editForm2">
+                        {% csrf_token %}
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Shipboard Record</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="id" id="edit-id2">
+                                <div class="mb-3">
+                                    <label for="edit-course" class="form-label">Unit</label>
+                                    <input type="text" class="form-control" name="unit" id="edit-unit2">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="edit-authority" class="form-label">Duty</label>
+                                    <input type="text" class="form-control" name="duty" id="edit-duty2">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" name="start_date" id="edit-start2">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">End Date</label>
+                                    <input type="date" class="form-control" name="end_date" id="edit-end2">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Authority</label>
+                                    <input type="text" class="form-control" name="authority" id="edit-authority2">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Save Changes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-                        <div class="save1" style="width: 100%;">
 
-                            <a class="next btn-primary" href="{% url 'activities:education6' %}"> Next Step &nbsp;
+            <!-- main funtions -->
+
+            <div class="main">
+                <div class="filing">
+                    <h1 id="hello">
+                        <img src="../../static/media/images/cissg logo png.png" alt="Logo" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;"> CGETDC Installations and Service Support Group
+                    </h1>
+
+                </div>
+                <hr style="height: 5px; background-color: rgb(0, 0, 0); border: none; color:black;">
+                <main class="p-3">
+                    <div class="container-fluid">
+                        <div class="mb-3 text-left">
+                            <h1><i class="lni lni-user"></i>
+                                <span>Profile</span></h1>
+                        </div>
+
+                        <div class="profile" style="padding: 20px;">
+
+                            <div class="left">
+                                <div class="row g-3">
+                                    <h5>G. DUTY ASSIGNMENTS AND ADDITIONAL DUTIES: <br><br>
+                                        <p style="font-weight: 200;">&nbsp;&nbsp;&nbsp;Entry shall be from Present to Past</p>
+
+                                    </h5>
+
+                                    <h5>
+                                        <p style="font-weight: 200; margin-left:50px;">1. SHIPBOARD</p>
+                                    </h5>
+                                    <br>
+                                    <br>
+                                    <div class="inside">
+                                        {% if shipboard %}
+
+
+                                        <div class="table-responsive-sm">
+
+                                            <table id="dynamicTable1" class="table table-bordered table-hover">
+                                                <thead class="table-dark thead1">
+                                                    <tr style="text-align: center !important;">
+                                                        <th>UNIT</th>
+                                                        <th>DUTY/POSITION</th>
+                                                        <th>INCLUSIVE PERIOD (From-To)
+                                                        </th>
+                                                        <th>AUTHORITY</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for s in shipboard %}
+
+                                                    <tr>
+
+                                                        <td>{{ s.unit }}</td>
+                                                        <td>{{ s.duty }}</td>
+                                                        <td>{{ s.start_date }} to {{ s.end_date }}</td>
+                                                        <td>{{ s.authority }}</td>
+                                                        <td style="text-align: center;">
+
+                                                            <button type="button" class="btn btn-sm btn-primary editBtn" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ s.id }}" data-unit="{{ s.unit }}" data-duty="{{ s.duty }}" data-start="{{ s.start_date }}" data-end="{{ s.end_date }}" data-authority="{{ s.authority }}">
+                                                                <i class="bi bi-pencil-square"></i>
+                                                            </button>
+
+
+                                                            <form action="{% url 'activities:delete_shipboard' s.id %}" method="POST" style="display: inline;">
+                                                                {% csrf_token %}
+                                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
+                                                                    <i class="bi bi-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+
+                                                    </tr>
+
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+
+                                            {% else %}
+                                            <div class="table-responsive-sm">
+
+                                                <table id="dynamicTable1" class="table table-bordered table-hover ">
+                                                    <thead class="table-dark">
+                                                        <tr>
+                                                            <th>UNIT</th>
+                                                            <th>DUTY/POSITION</th>
+                                                            <th>INCLUSIVE PERIOD (From-To)
+                                                            </th>
+                                                            <th>AUTHORITY</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="5" style="text-align: center;">No Data Available</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            {% endif %}
+                                            <button data-bs-target="#modal1" data-bs-toggle="modal" class="btn btn-primary" id="add">Add Shipboard Record +</button>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <br> &nbsp;
+                                    <br>
+                                    <!-- END OF COAST GUARD -->
+                                    <hr>
+                                    <!-- START OF ColateralL -->
+
+
+                                    <h5>
+                                        <p style="font-weight: 200; margin-left:50px;">1.A. Collateral Duties</p>
+                                    </h5>
+                                    <br>
+                                    <br>
+                                    <div class="inside">
+                                        {% if collateral %}
+
+
+                                        <div class="table-responsive-sm">
+
+                                            <table id="dynamicTable1" class="table table-bordered table-hover">
+                                                <thead class="table-dark thead1">
+                                                    <tr style="text-align: center !important;">
+                                                        <th>UNIT</th>
+                                                        <th>DUTY/POSITION</th>
+                                                        <th>INCLUSIVE PERIOD (From-To)
+                                                        </th>
+                                                        <th>AUTHORITY</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for s in collateral %}
+
+                                                    <tr>
+
+                                                        <td>{{ s.unit }}</td>
+                                                        <td>{{ s.duty }}</td>
+                                                        <td>{{ s.start_date }} to {{ s.end_date }}</td>
+                                                        <td>{{ s.authority }}</td>
+                                                        <td style="text-align: center;">
+                                                            <!-- Pencil icon button to open modal with data -->
+                                                            <button type="button" class="btn btn-sm btn-primary editBtn" data-bs-toggle="modal" data-bs-target="#editModal2" data-id="{{ s.id }}" data-unit="{{ s.unit }}" data-duty="{{ s.duty }}" data-start="{{ s.start_date }}" data-end="{{ s.end_date }}" data-authority="{{ s.authority }}">
+                                                                <i class="bi bi-pencil-square"></i>
+                                                            </button>
+
+                                                            <!-- Delete form -->
+                                                            <form action="{% url 'activities:delete_collateral' s.id %}" method="POST" style="display: inline;">
+                                                                {% csrf_token %}
+                                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
+                                                                    <i class="bi bi-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+
+                                                    </tr>
+
+
+
+
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                            {% else %}
+
+                                            <table id="dynamicTable1" class="table table-bordered table-hover ">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <th>UNIT</th>
+                                                        <th>DUTY/POSITION</th>
+                                                        <th>INCLUSIVE PERIOD (From-To)
+                                                        </th>
+                                                        <th>AUTHORITY</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td colspan="5" style="text-align: center;">No Data Available</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            {% endif %}
+                                            <button data-bs-target="#modal2" data-bs-toggle="modal" class="btn btn-primary" id="add">Add Shipboard Record +</button>
+
+                                        </div>
+
+                                    </div>
+
+                                    <br> &nbsp;
+                                    <br>
+
+
+
+                                    <!-- end of other trainings -->
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+
+                            <hr style="height: 3px; background-color: rgb(0, 0, 0); border: none; color:black;">
+
+                            <div class="save1" style="width: 100%;">
+
+                                <a class="next btn-primary" href="{% url 'activities:education6' %}"> Next Step &nbsp;
                                 <img src="../../static/media/images/arrow.png" alt="Icon" class="me-2" width="50">
                             </a>
+                            </div>
+
                         </div>
+
+
 
                     </div>
 
 
+                </main>
 
-                </div>
-
-
-            </main>
+            </div>
 
         </div>
 
     </div>
-
 
 
     <!-- break -->
@@ -399,7 +479,71 @@
 
 
     <!-- end of delete -->
-    <script src="script.js "></script>
+
+
+    <!-- TABLE 1 -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const editModal = document.getElementById('editModal');
+
+            editModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+
+                const id = button.getAttribute('data-id');
+                const unit = button.getAttribute('data-unit');
+                const duty = button.getAttribute('data-duty');
+                const start = button.getAttribute('data-start');
+                const end = button.getAttribute('data-end');
+                const authority = button.getAttribute('data-authority');
+
+                // Populate modal fields
+                document.getElementById('edit-id').value = id;
+                document.getElementById('edit-unit').value = unit;
+                document.getElementById('edit-duty').value = duty;
+                document.getElementById('edit-start').value = start;
+                document.getElementById('edit-end').value = end;
+                document.getElementById('edit-authority').value = authority;
+
+                // Set the form action dynamically
+                const form = document.getElementById('editForm');
+                form.action = "{% url 'activities:update_shipboard' 0 %}".replace('0', id);
+            });
+        });
+    </script>
+
+
+    <!-- TABLE 2 -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const editModal = document.getElementById('editModal2');
+
+            editModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+
+                const id = button.getAttribute('data-id');
+                const unit = button.getAttribute('data-unit');
+                const duty = button.getAttribute('data-duty');
+                const start = button.getAttribute('data-start');
+                const end = button.getAttribute('data-end');
+                const authority = button.getAttribute('data-authority');
+
+                // Populate modal fields
+                document.getElementById('edit-id2').value = id;
+                document.getElementById('edit-unit2').value = unit;
+                document.getElementById('edit-duty2').value = duty;
+                document.getElementById('edit-start2').value = start;
+                document.getElementById('edit-end2').value = end;
+                document.getElementById('edit-authority2').value = authority;
+
+                // Set the form action dynamically
+                const form = document.getElementById('editForm2');
+                form.action = "{% url 'activities:update_collateral' 0 %}".replace('0', id);
+            });
+        });
+    </script>
+    <!-- <script src="script.js "></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz " crossorigin="anonymous "></script>
 
 </body>

@@ -10,6 +10,14 @@
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../../static/client_css/dashboard.css">
+
+
+
+    <!-- bootstrap icon -->
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
 </head>
 
 <body>
@@ -70,19 +78,56 @@
                 </div>
             </div>
         </div>
+
+
+
+        <!-- TABLE 1 -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form method="POST" id="editForm">
+                    {% csrf_token %}
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Dependents Record</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="id" id="edit-id">
+                            <div class="mb-3">
+                                <label for="edit-course" class="form-label">Name</label>
+                                <input type="text" class="form-control" name="name" id="edit-name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-school" class="form-label">Relationship</label>
+                                <input type="text" class="form-control" name="relationship" id="edit-relationship">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Birthday</label>
+                                <input type="date" class="form-control" name="birthday" id="edit-birthday">
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Save Changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <!-- Main Component -->
         <div class="main">
 
             <div class="filing">
-                <a href="{% url 'activities:dashboard' %}">Dashboard</a>
-                <p>&nbsp;/&nbsp;</p>
+                <h1 id="hello">
+                    <img src="../../static/media/images/cissg logo png.png" alt="Logo" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 5px;"> CGETDC Installations and Service Support Group
+                </h1>
 
             </div>
 
             <hr style="height: 5px; background-color: rgb(0, 0, 0); border: none; color:black;">
             <div class="container-fluid">
                 <div class="mb-3 text-left">
-                    <h1><i class="lni lni-user"></i>
+                    <h1><i class="fa-solid fa-user"></i>
                         <span>Profile</span></h1>
                 </div>
 
@@ -115,24 +160,40 @@
                                 <br>
                                 <br>
                                 <h5>B. RANK and SERIAL NUMBER</h5>
-                                <div class="inside ">
+                                <div class="inside">
                                     <br>
                                     <div class="inside2">
                                         <div class="insideleft">
                                             <div class="mb-3" id="mb3">
                                                 <label for="staticEmail" class="form-label">Rank:</label>
                                                 <div class="one" style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Rank" style="width: 100%;" name="rank" value="{{s.rank}}">
+                                                    <select class="form-select form-select-sm" id="staticEmail" placeholder="Rank" style="width: 100%;" name="rank" value="{{s.rank}}">
+                                                        <option value="{{s.rank}}" selected>{{s.rank}}</option>
+                                                        <option value="CCGNO">CCGNO</option>
+                                                        <option value="ASN">ASN</option>
+                                                        <option value="ASW">ASW</option>
+                                                        <option value="SN2">SN2</option>
+                                                        <option value="SW2">SW2</option>
+                                                        <option value="SN1">SN1</option>
+                                                        <option value="SW1">SW1</option>
+                                                        <option value="PO3">PO3</option>
+                                                        <option value="PO2">PO2</option>
+                                                        <option value="PO1">PO1</option>
+                                                        <option value="CPO">CPO</option>
+                                                        <option value="SCPO">SCPO</option>
+                                                        <option value="MCPO">MCPO</option>
+                                                    </select>
+
                                                 </div>
                                             </div>
 
                                         </div>
 
                                         <div class="insideright">
-                                            <div class="mb-3" id="mb3">
+                                            <div class="mb-3" id="mb4">
                                                 <label for="staticEmail" class="form-label">Serial Number:</label>
-                                                <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Serial Number" style="width: 100%;" name="civilstatus" value="{{s.serialnumber}}">
+                                                <div style=" width:50%;" class="one">
+                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Serial Number" style="width: 100%;" name="civilstatus" value="{{s.serialnumber}}" disabled>
                                                 </div>
                                             </div>
 
@@ -147,19 +208,29 @@
 
                                 <h5>C. BIRTH DATE AND PLACE</h5>
                                 <div class="inside">
-                                    <div class="mb-3 row">
-                                        <label for="staticEmail" class="col-sm-2 col-form-label">Birthdate:</label>
-                                        <div class="col-sm-10">
-                                            <input type="date" class="form-control form-control-sm" id="staticEmail" value="{{ s.birthday }}" name="birthdate">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row">
-                                        <label for="inputPassword" class="col-sm-2 col-form-label">Birthplace:</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control form-control-sm" id="inputPassword" placeholder="Birth Place" name="birthplace" value="{{s.birthplace}}">
-                                        </div>
-                                    </div>
+                                    <br>
+                                    <div class="inside2">
+                                        <div class="insideleft">
+                                            <div class="mb-3" id="mb3">
+                                                <label for="staticEmail" class="form-label">Birthdate:</label>
+                                                <div style=" width:50%;" class="one">
+                                                    <input type="date" class="form-control form-control-sm" id="staticEmail" value="{{ s.birthday }}" name="birthdate">
+                                                </div>
+                                            </div>
 
+                                        </div>
+
+                                        <div class="insideright">
+                                            <div class="mb-3" id="mb4">
+                                                <label for="staticEmail" class="form-label">Birthplace:</label>
+                                                <div style=" width:50%;" class="one">
+                                                    <input type="text" class="form-control form-control-sm" id="inputPassword" placeholder="Birth Place" name="birthplace" value="{{s.birthplace}}">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
                                 </div>
 
                                 <!-- part 1 -->
@@ -182,7 +253,13 @@
                                             <div class="mb-3" id="mb3">
                                                 <label for="staticEmail" class="form-label">Civil Status:</label>
                                                 <div style=" width:50%;">
-                                                    <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="Civil Status" style="width: 100%;" name="civilstatus" value="{{s.civilstatus}}">
+                                                    <select class="form-select form-select-sm" id="staticEmail" placeholder="Civil Status" style="width: 100%;" name="civilstatus" value="{{s.civilstatus}}">
+                                                        <option value="Single">Single</option>
+                                                        <option value="Married">Married</option>
+                                                        <option value=""></option>
+
+                                                    </select>
+
                                                 </div>
                                             </div>
 
@@ -544,7 +621,7 @@
                                         <div class="inside2">
                                             <div class="insideleft">
                                                 <div class="mb-3" id="mb3">
-                                                    <label for="staticEmail" class="form-label">Tax Identification Number(TIN):</label>
+                                                    <label for="staticEmail" class="form-label">TIN:</label>
                                                     <div style=" width:50%;">
                                                         <input type="text" class="form-control form-control-sm" id="staticEmail" placeholder="TIN" style="width: 100%;" name="tin" value="{{s.tin}}">
                                                     </div>
@@ -678,20 +755,30 @@
 
 
                                 <h5>C. BIRTH DATE AND PLACE</h5>
-                                <div class="inside ">
-                                    <div class="mb-3 row">
-                                        <label for="staticEmail" class="col-sm-2 col-form-label">Birthdate:</label>
-                                        <div class="col-sm-10">
-                                            <input type="date" class="form-control form-control-sm" id="staticEmail" value="{{ s.birthday }}" name="birthdate">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row">
-                                        <label for="inputPassword" class="col-sm-2 col-form-label">Birthplace:</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control form-control-sm" id="inputPassword" placeholder="Birth Place" name="birthplace" value="{{s.birthplace}}">
-                                        </div>
-                                    </div>
+                                <div class="inside">
+                                    <br>
+                                    <div class="inside2">
+                                        <div class="insideleft">
+                                            <div class="mb-3" id="mb3">
+                                                <label for="staticEmail" class="col-sm-2 col-form-label">Birthdate:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="date" class="form-control form-control-sm" id="staticEmail" value="{{ s.birthday }}" name="birthdate">
+                                                </div>
+                                            </div>
 
+                                        </div>
+
+                                        <div class="insideright">
+                                            <div class="mb-3" id="mb3">
+                                                <label for="inputPassword" class="col-sm-2 col-form-label">Birthplace:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control form-control-sm" id="inputPassword" placeholder="Birth Place" name="birthplace" value="{{s.birthplace}}">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
                                 </div>
 
                                 <!-- part 1 -->
@@ -725,7 +812,7 @@
 
                                 <!-- part 2 -->
 
-                                <div class="inside ">
+                                <div class="inside">
                                     <div class="inside2">
                                         <div class="insideleft">
                                             <div class="mb-3" id="mb3">
@@ -1159,35 +1246,70 @@
                 <br>
                 <div class="profil23" style="padding: 20px;">
                     <div class="left2">
-                        <div class="row g-10">
+                        <div class="row">
                             <h5>Dependents
                                 <p style="font-weight: 200;">Entry will include (1) Name; (2) Relationship; (3) Birth date occasional</p>
                             </h5><br><br><br>
                             <div class="inside23">
+                                {% if depend %}
                                 <table id="dynamicTable" class="table table-bordered table-hover">
                                     <thead class="table-dark">
                                         <tr>
                                             <th>Name</th>
                                             <th>Relationship</th>
                                             <th>Birthday</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% if depend %} {% for s in depend %}
+                                        {% for s in depend %}
                                         <tr>
-                                            <td>{{s.name}}</td>
-                                            <td>{{s.relationship}}</td>
-                                            <td>{{s.birthday}}</td>
+                                            <td>{{ s.name }}</td>
+                                            <td>{{ s.relationship }}</td>
+                                            <td>{{ s.birthday }}</td>
+                                            <td style="text-align: center;">
+                                                <!-- Pencil icon button to open modal with data -->
+                                                <button type="button" class="btn btn-sm btn-primary editBtn" data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ s.id }}" data-name="{{ s.name }}" data-relationship="{{ s.relationship }}" data-birthday="{{ s.birthday }}">
+                                                                <i class="bi bi-pencil-square"></i>
+                                                            </button>
+
+                                                <!-- Delete form -->
+                                                <form action="{% url 'activities:delete_dependents' s.id %}" method="POST" style="display: inline;">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
+                                                                    <i class="bi bi-trash"></i>
+                                                                </button>
+                                                </form>
+                                            </td>
                                         </tr>
-                                        {% endfor %} {% else %}
-                                        <tr>
-                                            <td></td>
-                                            <td style="text-align: center;">No Data Available</td>
-                                            <td></td>
-                                        </tr>
-                                        {% endif %}
+                                        {% endfor %}
+
+
                                     </tbody>
                                 </table>
+
+                                {% else %}
+                                <table id="dynamicTable" class="table table-bordered table-hover">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Relationship</th>
+                                            <th>Birthday</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <tr>
+                                                <td colspan="5" style="text-align: center;">No Data Available</td>
+                                            </tr>
+
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                                {% endif %}
                                 <button data-bs-target="#modal1" data-bs-toggle="modal" class="btn btn-primary" id="add">Add your Dependents +</button>
                             </div>
                         </div>
@@ -1241,6 +1363,35 @@
 
             closeBtn.addEventListener("click", function() {
                 wrapper.classList.toggle("sidebar-closed");
+            });
+        });
+    </script>
+
+    <!-- edit for dependents -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const editModal = document.getElementById('editModal');
+
+            editModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+
+                const id = button.getAttribute('data-id');
+                const name = button.getAttribute('data-name');
+                const relationship = button.getAttribute('data-relationship');
+                const birthday = button.getAttribute('data-birthday');
+
+
+                // Populate modal fields
+                document.getElementById('edit-id').value = id;
+                document.getElementById('edit-name').value = name;
+                document.getElementById('edit-relationship').value = relationship;
+                document.getElementById('edit-birthday').value = birthday;
+
+
+                // Set the form action dynamically
+                const form = document.getElementById('editForm');
+                form.action = "{% url 'activities:update_dependents' 0 %}".replace('0', id);
             });
         });
     </script>

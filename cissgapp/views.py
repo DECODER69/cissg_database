@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import extenduser, academic, details, dependents, other_trainings,vocational, coastguard, coastguard_foreign, coastguard_local, military, military_local, military_foreign, appointments, shipboard, collateral, shorebased, collateral2, government, nongovernment, cgawards, cglcommendation, cgappreciation, cgplaque, mawards, mlcommendation, mappreciation, mplaque, clcommendation, cappreciation, cplaque, career, organization, eligibility, retirement, profile
+from .models import extenduser, academic, details, dependents, triple, other_trainings,vocational, coastguard, coastguard_foreign, coastguard_local, military, military_local, military_foreign, appointments, shipboard, collateral, shorebased, collateral2, government, nongovernment, cgawards, cglcommendation, cgappreciation, cgplaque, mawards, mlcommendation, mappreciation, mplaque, clcommendation, cappreciation, cplaque, career, organization, eligibility, retirement, profile
 from django.contrib.auth.models import User, auth
 from django.contrib import messages 
 from django.shortcuts import render, redirect
@@ -27,26 +27,47 @@ def signup (request):
      return render(request, 'activities/signup.html')
 
 def signup_function(request):
-     if request.method == 'POST':
-          firstname = request.POST.get('firstname')
-          middle = request.POST.get('middlename')
-          lastname = request.POST.get('lastname')
-          serial = request.POST.get('serialnumber')
-          birthday = request.POST.get('birthday')
-          division = request.POST.get('division')
-          password = request.POST.get('password')
-          if extenduser.objects.filter(serialnumber=serial).exists():
-               print("Serial number already exists")
-               messages.error(request, 'ID Number ' + str (serial) + ' Bano !')
-               return render(request, 'activities/index.html')
-          else:
-               user = User.objects.create_user(username=serial, password=password, first_name=firstname, last_name=lastname)
-               user.save()
-               data = extenduser(firstname=firstname, middlename=middle, lastname=lastname, serialnumber=serial, birthday=birthday, division=division, password=password)
-               data2 = details(serialnumber=serial, firstname=firstname, middlename=middle, lastname=lastname, birthday=birthday, division=division)
-               data2.save()
-               data.save()
-               return render(request, 'activities/index.html')
+    if request.method == 'POST':
+        firstname = request.POST.get('firstname')
+        middle = request.POST.get('middlename')
+        lastname = request.POST.get('lastname')
+        serial = request.POST.get('serialnumber')
+        birthday = request.POST.get('birthday')
+        division = request.POST.get('division')
+        password = request.POST.get('password')
+
+        # if ID exists
+        if extenduser.objects.filter(serialnumber=serial).exists():
+            messages.error(request, f'ID Number {serial} already exists!')
+            # Send back the data so form can refill
+            return render(request, 'activities/index.html', {
+                'form_data': request.POST
+            })
+
+        # else create
+        user = User.objects.create_user(
+            username=serial, password=password,
+            first_name=firstname, last_name=lastname
+        )
+        user.save()
+
+        data = extenduser(
+            firstname=firstname, middlename=middle, lastname=lastname,
+            serialnumber=serial, birthday=birthday,
+            division=division, password=password
+        )
+        data.save()
+
+        data2 = details(
+            serialnumber=serial, firstname=firstname, middlename=middle,
+            lastname=lastname, birthday=birthday, division=division
+        )
+        data2.save()
+
+        messages.success(request, 'Account created successfully! Please login.')
+        return render(request, 'activities/index.html')
+
+    return render(request, 'activities/index.html')
           
 def login(request):
      details = extenduser.objects.all()
@@ -184,6 +205,8 @@ def academic_input(request):
           data.save()
           
           return redirect('/education')
+     
+
      
      
      
@@ -1199,18 +1222,16 @@ def education11(request):
      careers = career.objects.filter(serialnumber = request.user)
      data = extenduser.objects.filter(serialnumber = request.user)
      dp = details.objects.filter(serialnumber = request.user)
-     org = organization.objects.filter(serialnumber = request.user)
-     retired = retirement.objects.filter(serialnumber = request.user)
-     elig = eligibility.objects.filter(serialnumber = request.user)
+     triples = triple.objects.filter(serialnumber = request.user)
+    
      
      
      context = {
           'careers': careers,
           'data': data,
           'dp':dp,
-          'org': org,
-          'retired': retired,
-          'elig': elig,
+          'triples': triples,
+          
           
      }
      return render(request, 'activities/education11.html', context)
@@ -1271,7 +1292,25 @@ def career_input(request):
           return redirect('/education11')
      
      
-     
+def triple_input(request):
+    
+     if request.method == 'POST':
+          org = request.POST.get('org')
+          license = request.POST.get('license')
+          date = request.POST.get('date')
+
+          # Try to get existing record
+          data, created = triple.objects.update_or_create(
+               serialnumber=request.user,
+               defaults={
+                    'org': org,
+                    'license': license,
+                    'date': date,
+                    
+               }
+          )
+
+          return redirect('/education11')
      
      
      
@@ -1433,6 +1472,18 @@ def dependents_input(request):
           return redirect('/dashboard')
      
      
+def update_dependents(request, id):
+     if request.method == 'POST':
+          name = request.POST.get('name')
+          relationship = request.POST.get('relationship')
+          birthday = request.POST.get('birthday')
+          dependents.objects.filter(id=id).update(name=name, relationship=relationship, birthday=birthday)
+
+          return redirect('/dashboard')
+     
+     return redirect('/dashboard')
+     
+     
      
      
      
@@ -1442,48 +1493,43 @@ def dependents_input(request):
 
 
 
-def triple(request):
-     # if request.method == 'POST':
-     #      org  = request.POST.get('organization')
-     #      elig= request.POST.get('eligibility')
-     #      retire = request.POST.get('compulsory')
-     #      data1 = organization(serialnumber = request.user, org = org)
-     #      data2 = eligibility(serialnumber = request.user, license = elig)
-     #      data3 = retirement(serialnumber = request.user, date = retire)
-     #      data1.save()
-     #      data2.save()
-     #      data3.save()
+# def triple(request):
+#      if request.method == 'POST':
+#           org  = request.POST.get('organization')
+#           elig= request.POST.get('eligibility')
+#           retire = request.POST.get('compulsory')
+         
           
-     #      return redirect('/education11')
+#           return redirect('/education11')
      
-     if request.method == 'POST':
-          org  = request.POST.get('organization')
-          elig= request.POST.get('eligibility')
-          retire = request.POST.get('compulsory')
+#      if request.method == 'POST':
+#           org  = request.POST.get('organization')
+#           elig= request.POST.get('eligibility')
+#           retire = request.POST.get('compulsory')
 
-               # Try to get existing record
-          data, created = organization.objects.update_or_create(
-                    serialnumber=request.user,
-                    defaults={
-                         'org': org,
-                    }
-               )
+#                # Try to get existing record
+#           data, created = organization.objects.update_or_create(
+#                     serialnumber=request.user,
+#                     defaults={
+#                          'org': org,
+#                     }
+#                )
           
-          data, created = eligibility.objects.update_or_create(
-                    serialnumber=request.user,
-                    defaults={
-                         'license': elig,
-                    }
-               )
+#           data, created = eligibility.objects.update_or_create(
+#                     serialnumber=request.user,
+#                     defaults={
+#                          'license': elig,
+#                     }
+#                )
           
-          data, created = retirement.objects.update_or_create(
-                    serialnumber=request.user,
-                    defaults={
-                         'date': retire,
-                    }
-               )
+#           data, created = retirement.objects.update_or_create(
+#                     serialnumber=request.user,
+#                     defaults={
+#                          'date': retire,
+#                     }
+#                )
 
-          return redirect('/education11')
+#           return redirect('/education11')
      
       
 from datetime import date
@@ -1496,6 +1542,9 @@ from django.core.paginator import Paginator
 def admin_dashboard(request):
     today = date.today()
     personnels = details.objects.filter(leave_start__lte=today).exclude(Q(status='Duty') | Q(status__isnull=True) | Q(status=''))
+    duty = details.objects.filter(
+        Q(status='Duty') | Q(leave_start__gt=today)
+    ).count()
     passes = details.objects.filter(leave_start__lte=today).filter(status='Passes').count()
     manda = details.objects.filter(leave_start__lte=today).filter(status='Mandatory Leave').count()
     rr = details.objects.filter(leave_start__lte=today).filter(status='R&R').count()
@@ -1517,6 +1566,7 @@ def admin_dashboard(request):
    
 
     context = {
+        'duty': duty,
         'personnels': personnels,
         'passes': passes,
         'rr': rr,
@@ -1643,7 +1693,7 @@ def cissg_personnel(request):
 
         # Dynamically assign display_status
         if p.status in LEAVE_STATUSES and leave_start and today < leave_start:
-            p.display_status = 'Duty'
+            p.display_status = "Duty"
         else:
             p.display_status = p.status
 
@@ -1672,3 +1722,160 @@ def view_personnel(request, serial):
 
 def personnel_profile(request):
      return render(request, 'activities/view.html')
+
+
+# derletes
+
+
+def delete_academic(request, id):
+    academic.objects.filter(id=id).delete()
+    print("Academic record deleted for:", id)
+    return redirect('/education')
+
+def delete_vocational(request, id):
+    vocational.objects.filter(id=id).delete()
+    print("Academic record deleted for:", id)
+    return redirect('/education')
+
+def delete_other(request, id):
+    other_trainings.objects.filter(id=id).delete()
+    print("Academic record deleted for:", id)
+    return redirect('/education')
+
+
+def delete_coastguard(request, id):
+    coastguard.objects.filter(id=id).delete()
+    print("Coast Guard record deleted for:", id)
+    return redirect('/education2')
+
+def delete_local(request, id):
+    coastguard_local.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education2')
+
+def delete_foreign(request, id):
+    coastguard_foreign.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education2')
+
+def delete_military(request, id):
+    military.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education3')
+
+
+def delete_mlocal(request, id):
+    military_local.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education3')
+
+def delete_mforeign(request, id):
+    military_foreign.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education3')
+
+
+def delete_appointment(request, id):
+    appointments.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education4')
+
+def delete_shipboard(request, id):
+    shipboard.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education5')
+
+def delete_collateral(request, id):
+    collateral.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education5')
+
+def delete_shorebased(request, id):
+    shorebased.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education6')
+
+def delete_collateral2(request, id):
+    collateral2.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education6')
+
+
+def delete_government(request, id):
+    government.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education7')
+
+def delete_nongovernment(request, id):
+    nongovernment.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education7')
+
+
+def delete_awards(request, id):
+    cgawards.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education8')
+
+
+def delete_commendation(request, id):
+    cglcommendation.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education8')
+
+def delete_appreciation(request, id):
+    cgappreciation.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education8')
+
+def delete_plaque(request, id):
+    cgplaque.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education8')
+
+
+
+
+def delete_mawards(request, id):
+    mawards.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education9')
+
+
+def delete_mcommendation(request, id):
+    mlcommendation.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education9')
+
+def delete_mappreciation(request, id):
+    mappreciation.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education9')
+
+def delete_mplaque(request, id):
+    mplaque.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education9')
+
+
+
+def delete_ccommendation(request, id):
+    clcommendation.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education10')
+
+def delete_cappreciation(request, id):
+    cappreciation.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education10')
+
+def delete_cplaque(request, id):
+    cplaque.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/education10')
+
+
+def delete_dependents(request, id):
+    dependents.objects.filter(id=id).delete()
+    print("Local record deleted for:", id)
+    return redirect('/dashboard')

@@ -57,7 +57,7 @@ class details(models.Model):
     profile = models.FileField(upload_to='profile_pics/', default='')
     
     
-    status = models.CharField(max_length=100, default='')
+    status = models.CharField(max_length=100, default='Duty')
     leave_start = models.CharField(max_length=20, default='')
     leave_end = models.CharField(max_length=20, default='')
     
@@ -399,6 +399,17 @@ class eligibility(models.Model):
 class retirement(models.Model):
     serialnumber = models.CharField(max_length=100, default='')
     date= models.CharField(max_length=100, default='')
+    license= models.CharField(max_length=100, default='')
+    org= models.CharField(max_length=100, default='')
+    def __str__(self):
+        return self.serialnumber
+    
+class triple(models.Model):
+    serialnumber = models.CharField(max_length=100, default='')
+    date= models.CharField(max_length=100, default='')
+    license= models.CharField(max_length=100, default='')
+    org= models.CharField(max_length=100, default='')
+    
     def __str__(self):
         return self.serialnumber
     

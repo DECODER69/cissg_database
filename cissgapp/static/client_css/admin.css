@@ -101,8 +101,8 @@ section {
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #c7c7c7;
-    background-color: #232323;
+    color: #000000;
+    background-color: #08202e;
     display: flex;
     align-items: center;
     height: auto;
@@ -125,7 +125,7 @@ section {
     /* Icon size */
     margin-right: 15px;
     /* Space between icon and text */
-    color: #fff;
+    color: #000000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -152,7 +152,7 @@ section {
 .card-text p {
     margin: 0;
     font-size: 1em;
-    color: #aaa;
+    color: #ffffff;
 }
 
 
