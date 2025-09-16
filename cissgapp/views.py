@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import extenduser, academic, details, dependents, triple, other_trainings,vocational, coastguard, coastguard_foreign, coastguard_local, military, military_local, military_foreign, appointments, shipboard, collateral, shorebased, collateral2, government, nongovernment, cgawards, cglcommendation, cgappreciation, cgplaque, mawards, mlcommendation, mappreciation, mplaque, clcommendation, cappreciation, cplaque, career, organization, eligibility, retirement, profile
+from .models import extenduser, record, leaves, academic, details, dependents, triple, other_trainings,vocational, coastguard, coastguard_foreign, coastguard_local, military, military_local, military_foreign, appointments, shipboard, collateral, shorebased, collateral2, government, nongovernment, cgawards, cglcommendation, cgappreciation, cgplaque, mawards, mlcommendation, mappreciation, mplaque, clcommendation, cappreciation, cplaque, career, organization, eligibility, retirement, profile
 from django.contrib.auth.models import User, auth
 from django.contrib import messages 
 from django.shortcuts import render, redirect
@@ -11,6 +11,10 @@ import os
 from django.contrib.auth.decorators import login_required
 from datetime import date
 from django.utils import timezone
+from django.template.loader import get_template
+from django.http import HttpResponse
+from xhtml2pdf import pisa
+
 
 # Create your views here.
 def index (request):
@@ -1539,60 +1543,72 @@ from datetime import date, datetime
 from datetime import date, datetime
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.db.models import Count, Q
+
 def admin_dashboard(request):
     today = date.today()
-    personnels = details.objects.filter(leave_start__lte=today).exclude(Q(status='Duty') | Q(status__isnull=True) | Q(status=''))
+    
+
+    # All defined leave types
+    leave = leaves.objects.all()
+
+    # Personnel currently on leave (exclude Duty/empty/null)
+    personnels = details.objects.filter(
+        leave_start__lte=today
+    ).exclude(
+        Q(status='Duty') | Q(status__isnull=True) | Q(status='')
+    )
+
+    # Personnel currently on duty
     duty = details.objects.filter(
         Q(status='Duty') | Q(leave_start__gt=today)
     ).count()
-    passes = details.objects.filter(leave_start__lte=today).filter(status='Passes').count()
-    manda = details.objects.filter(leave_start__lte=today).filter(status='Mandatory Leave').count()
-    rr = details.objects.filter(leave_start__lte=today).filter(status='R&R').count()
-    sick = details.objects.filter(leave_start__lte=today).filter(status='Sick Leave').count()
-    informal = details.objects.filter(leave_start__lte=today).filter(status='Informal Leave').count()
-    convalescent = details.objects.filter(leave_start__lte=today).filter(status='Convalescent Leave').count()
-    ordinary = details.objects.filter(leave_start__lte=today).filter(status='Ordinary Leave').count()
-    maternity = details.objects.filter(leave_start__lte=today).filter(status='Maternity Leave').count()
-    paternity = details.objects.filter(leave_start__lte=today).filter(status='Paternity Leave').count()
-    deployed = details.objects.filter(leave_start__lte=today).filter(status='Deployed').count()
-    ds = details.objects.filter(leave_start__lte=today).filter(status='Detached Status').count()
-    compa = details.objects.filter(leave_start__lte=today).filter(status='Compassionate Leave').count()
-    
-  
-    paginator = Paginator(personnels, 10)  # Show 10 records per page
 
+    # Get all defined leave type names (strings)
+    leave_types = leaves.objects.values_list('leave', flat=True)
+
+    # Count how many personnel per leave type
+    leave_counts = (
+        details.objects
+        .filter(status__in=leave_types, leave_start__lte=today)
+        .values('status')
+        .annotate(count=Count('id', distinct=True))
+    )
+    # Example: [{'status': 'Sick Leave', 'count': 5}, {'status': 'R&R', 'count': 3}]
+    leave_count_dict = {item['status']: item['count'] for item in leave_counts}
+
+    # Combine leave types with counts
+    leave_data = [
+        {
+            'leave': l.leave,
+            'count': leave_count_dict.get(l.leave, 0)
+        }
+        for l in leave
+    ]
+
+    # Paginate personnels
+    paginator = Paginator(personnels, 10)
     page_number = request.GET.get('page')
     personnels = paginator.get_page(page_number)
-   
-
+    today = date.today()
     context = {
         'duty': duty,
         'personnels': personnels,
-        'passes': passes,
-        'rr': rr,
-        'manda':manda,
-        'sick':sick,
-        'informal':informal,
-        'convalescent':convalescent,
-        'ordinary':ordinary,
-        'maternity':maternity,
-        'paternity':paternity,
-        'deployed':deployed,
-        'ds':ds,
-        'compa':compa,
+        'leave_data': leave_data, 
+        'leave':leave,
+        'today': today,
     }
-    print(today)
-
     return render(request, 'activities/admindashboard.html', context)
-
 
 
 
 def add_personnel(request):
      person = details.objects.all()
+     leave = leaves.objects.all()
      
      context = {
           'person': person,
+          'leave': leave,
      }
     
      
@@ -1603,8 +1619,19 @@ def add_status(request):
     if request.method == 'POST':
         serial = request.POST.get('serial')
         leave = request.POST.get('leave')
+        address = request.POST.get('address')
+        order = request.POST.get('order')
         startdate = request.POST.get('startdate')
         enddate = request.POST.get('enddate')
+        fullname = request.POST.get('fullname')
+        
+        print(fullname)
+        
+        data1 = record(serialnumber=serial,
+                       fullname=fullname, leave=leave,
+                       address=address, startdate=startdate,
+                       enddate=enddate, order=order)
+        data1.save()
 
         # Convert to date object
         try:
@@ -1635,21 +1662,41 @@ def add_status(request):
 
         return redirect('/admin_dashboard')
     
+from django.db import transaction
+from django.shortcuts import redirect
+from django.contrib import messages
+from .models import details, record
+
 def update_status(request):
     if request.method == 'POST':
         serialnumber = request.POST.get('serialnumber')
         status = request.POST.get('status')
-        
 
         try:
-            personnel = details.objects.get(serialnumber=serialnumber)
-            personnel.status = status
-            personnel.save()
-            messages.success(request, f"Status for {personnel.firstname} {personnel.lastname} updated successfully.")
-        except details.DoesNotExist:
-            pass  # handle not found if needed
+            with transaction.atomic():
+                # ✅ Update all matching details rows
+                details_updated = details.objects.filter(serialnumber=serialnumber)
+                if details_updated.exists():
+                    details_updated.update(status=status)
+                else:
+                    messages.error(request, "Personnel not found.")
+                    return redirect('/admin_dashboard')
 
-    return redirect('/admin_dashboard') 
+                # ✅ Update all matching record rows (if they exist)
+                record.objects.filter(serialnumber=serialnumber).update(status=status)
+
+                # Optional: If you want to display name of first personnel
+                first_person = details_updated.first()
+                messages.success(
+                    request,
+                    f"Status for {first_person.firstname} {first_person.lastname} updated successfully."
+                )
+
+        except Exception as e:
+            messages.error(request, f"Error updating status: {e}")
+
+    return redirect('/admin_dashboard')
+
 
 
 
@@ -1661,10 +1708,7 @@ from django.utils import timezone
 from datetime import datetime
 
 def cissg_personnel(request):
-    LEAVE_STATUSES = ['Passes', 'Mandatory Leave', 'R&R', 'Sick Leave', 'Informal Leave',
-                      'Convalescent Leave', 'Compassionate Leave',
-                      'Ordinary Leave', 'Maternity Leave', 'Paternity Leave',
-                     'Deployed', 'Detached Status' ]
+    LEAVE_STATUSES = leaves.objects.values_list('leave', flat=True)
     today = timezone.now().date()
 
     # Count personnel with status = 'Duty'
@@ -1879,3 +1923,131 @@ def delete_dependents(request, id):
     dependents.objects.filter(id=id).delete()
     print("Local record deleted for:", id)
     return redirect('/dashboard')
+
+
+
+
+
+# generate PDF
+
+
+
+from datetime import date
+from django.template.loader import get_template
+from django.http import HttpResponse
+from xhtml2pdf import pisa
+from django.db.models import Q
+from .models import details
+
+def generate_personnel_pdf(request):
+    today = date.today()
+    now = datetime.now()
+    timestamp = now.strftime("%d %b %Y %I:%M %p")
+
+    # ✅ Dynamic statuses from database + Duty
+    leave_statuses = list(
+        leaves.objects.values_list('leave', flat=True)
+    )
+    statuses = leave_statuses + ['Duty']
+
+    leave_data = []
+    total_strength = 0
+
+    for s in statuses:
+        if s == "Duty":
+            count = details.objects.filter(
+                Q(status='Duty') |
+                Q(leave_start__gt=today) |  
+                Q(leave_start__isnull=True)
+            ).count()
+        else:
+            count = details.objects.filter(
+                status=s, leave_start__lte=today
+            ).count()
+
+        leave_data.append({"kind": s, "count": count})
+        total_strength += count
+
+    template = get_template('activities/accounting.html')
+    html = template.render({
+        "logo_url": request.build_absolute_uri('../../static/media/images/cissg logo png.png'),
+        "report_date": today.strftime("%d %B %Y"),
+        "leave_data": leave_data,
+        "total_strength": total_strength,
+    })
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{timestamp}_Accounting_Personnel.pdf"'
+    pisa.CreatePDF(html, dest=response)
+
+    return response
+
+
+def add_leave(request):
+     if request.method == 'POST':
+          leave = request.POST.get('leave', '').strip()
+
+          if not leave:
+               messages.error(request, "Leave type cannot be empty.")
+               return redirect('/admin_dashboard')
+
+          # Check if this leave already exists
+          if leaves.objects.filter(leave__iexact=leave).exists():
+               messages.error(request, f"'{leave}' already exists.")
+               return redirect('/admin_dashboard')
+
+          # Save the new leave
+          try:
+               data = leaves(leave=leave)
+               data.save()
+               messages.success(request, f"'{leave}' Leave / Status has been added successfully.")
+          except Exception as e:
+               messages.error(request, f"Error adding leave: {str(e)}")
+
+          return redirect('/admin_dashboard')
+
+     # If GET request
+     return render(request, 'add_leave.html')
+
+def delete_leave(request, id):
+     if request.method == 'POST':
+          selected_ids = request.POST.getlist('selected_ids')
+          if selected_ids:
+               leaves.objects.filter(id__in=selected_ids).delete()
+               messages.success(request, "Selected leave type(s) have been deleted.")
+          else:
+               messages.error(request, "No leave types were selected for deletion.")
+          return redirect('/admin_dashboard')
+     return redirect('/admin_dashboard')
+
+
+def leave_record(request):
+     leave = record.objects.all()
+     today = date.today()
+     context = {
+          'leave': leave,
+          'today': today,
+     }
+     return render(request, 'activities/leaves.html', context)
+
+
+def edit_leave(request, id):
+     if request.method == 'POST':
+          
+          leave = request.POST.get('leave')
+          startdate = request.POST.get('startdate')
+          enddate = request.POST.get('enddate')
+          address = request.POST.get('address')
+          order = request.POST.get('order')
+          status = request.POST.get('status')
+          record.objects.filter(id=id).update(
+                                              leave = leave,
+                                              startdate=startdate,
+                                              enddate=enddate,
+                                              address=address,
+                                              order=order,
+                                              status=status)
+
+          return redirect('/leave_record')
+     
+     return redirect('/leave_record')

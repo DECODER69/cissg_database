@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../../static/client_css/pers.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>CISSG</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
 <body>
@@ -21,23 +23,31 @@
             <div id="datetime" class="text-end text-muted" style="font-size: 15px;"></div>
         </div>
         <hr class="bold-line">
+        <div class="bg2 d-flex justify-content-end">
+            <a href="{% url 'activities:generate_personnel_pdf' %}" class="btn btn-warning d-flex align-items-center">
+                <i class="bi bi-people-fill me-2"></i> Accounting of Personnel
+            </a>
+            <br> &nbsp; <br>
+            <button type="button" class="btn btn-info d-flex align-items-center">
+                <i class="bi bi-people-fill me-2"></i> Roster of Troops
+            </button>
 
 
-        <div class="bg" style="background-color: rgb(255, 255, 255);">
+            <br> &nbsp; <br>
+            <button type="button" class="btn btn-info d-flex align-items-center">
+                <i class="bi bi-people-fill me-2"></i> Attendance
+            </button>
 
-            <h5 style="margin-left: 15px; color:rgb(0, 0, 0); font-size: 20px !important;">
-                <i class="fa-solid fa-users"></i>
-                <span>Active CISSG Personnel</span>
-            </h5>
-            <br>
+
         </div>
+
 
         <div class="d-flex gap-3">
 
 
             <div class="left">
 
-                <h4 class="mb-4"><i class="fa-solid fa-list-ul"></i> <span>Personnel List</span></h4>
+                <h4 class="mb-4"><i class="fa-solid fa-users-between-lines"></i> <span>Personnel List</span></h4>
 
                 <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search">
 
@@ -47,7 +57,7 @@
                             <th>Profile</th>
                             <th>Fullname</th>
                             <th>Division</th>
-                            <th>Email</th>
+                            <th>Course</th>
                             <th>Contact Number</th>
                             <th>Status</th>
                         </tr>
@@ -58,8 +68,8 @@
                         <tr class="{% if p.display_status != 'Duty' %}table-danger{% endif %}">
                             <td>
                                 {% if p.profile and p.profile.url %}
-                                <img src="{{ p.profile.url }}" alt="Profile Picture" width="50" height="50"> {% else %}
-                                <img src="../../static/media/images/icon.jpg" alt="Profile Picture" width="50" height="auto">{% endif %}
+                                <img src="{{ p.profile.url }}" alt="Profile Picture" width="30" height="30"> {% else %}
+                                <img src="../../static/media/images/icon.jpg" alt="Profile Picture" width="30" height="30">{% endif %}
                             </td>
                             <td>
                                 <a href="{% url 'activities:view_personnel' p.serialnumber %}">{{p.rank}} {{ p.firstname }} {{p.middlename}} {{p.lastname}} {{p.serialnumber}}</a>
@@ -68,7 +78,7 @@
                                 {{p.division}}
                             </td>
                             <td>
-                                {{p.email}}
+                                {{p.course}}
                             </td>
                             <td>
                                 {{p.contactnumber}}
@@ -76,6 +86,10 @@
                             <td>
 
                                 {{p.display_status}}
+                            </td>
+
+                            <td style="display: none;">
+                                {{p.serialnumber}}
                             </td>
 
                         </tr>
@@ -106,7 +120,19 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const rows = Array.from(document.querySelectorAll('#tableBody tr'));
+            const tableBody = document.getElementById('tableBody');
+            const rows = Array.from(tableBody.querySelectorAll('tr'));
+
+            // 🔢 Sort rows by hidden serial number (last <td>)
+            rows.sort((a, b) => {
+                const serialA = parseInt(a.querySelector('td:last-child').textContent.trim(), 10);
+                const serialB = parseInt(b.querySelector('td:last-child').textContent.trim(), 10);
+                return serialA - serialB; // ascending
+            });
+
+            // 📝 Re-append sorted rows back to the table
+            rows.forEach(row => tableBody.appendChild(row));
+
             const rowsPerPage = 10;
             const searchInput = document.getElementById('searchInput');
             const pagination = document.getElementById('pagination');
@@ -144,9 +170,9 @@
             searchInput.addEventListener('input', function() {
                 const query = this.value.toLowerCase();
                 filteredRows = rows.filter(row => {
-                    const name = row.children[0].textContent.toLowerCase();
-                    const division = row.children[1].textContent.toLowerCase();
-                    return name.includes(query) || division.includes(query);
+                    const fullname = row.children[1].textContent.toLowerCase();
+                    const division = row.children[2].textContent.toLowerCase();
+                    return fullname.includes(query) || division.includes(query);
                 });
                 currentPage = 1;
                 renderTable(currentPage);
@@ -155,6 +181,8 @@
             renderTable(currentPage);
         });
     </script>
+
+
     <script src="../../static/js/color.js"></script>
 </body>
 

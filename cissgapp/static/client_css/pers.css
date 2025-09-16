@@ -1,8 +1,9 @@
 .left {
     width: 100%;
-    background-color: rgb(209, 209, 209);
+    background-color: rgb(255, 255, 255);
     padding: 10px;
     border-radius: 5px;
+    color: rgb(59, 59, 59);
 }
 
 .right {
@@ -70,8 +71,3 @@
 
 
 /* end of circular */
-
-.table-danger {
-    background-color: red;
-    color: white;
-}

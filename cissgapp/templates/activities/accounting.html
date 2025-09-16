@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Accounting of Personnel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .header img {
+            width: 80px;
+            height: 80px;
+        }
+        
+        .header h2,
+        .header h3,
+        .header h4 {
+            margin: 2px 0;
+        }
+        
+        .date {
+            text-align: right;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 6px;
+            text-align: center;
+        }
+        
+        th {
+            background: #f2f2f2;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            width: 100%;
+            font-size: 12px;
+        }
+        
+        .footer td {
+            border: none;
+            text-align: left;
+            vertical-align: top;
+            padding: 4px;
+        }
+        
+        tbody td,
+        tbody th {
+            height: auto !important;
+            padding: 1px;
+            /* optional: adds spacing */
+            vertical-align: bottom !important;
+            /* optional: aligns content vertically */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <img src="{{ logo_url }}" alt="Logo">
+        <h3 style="margin:0px !important;">Philippine Coast Guard</h3>
+        <h4 style="margin:0px !important;">Coast Guard Education, Training and Doctrine Command</h4>
+        <h4 style="margin:0 !important; font-weight:bolder;">CGETDC INSTALLATIONS AND SERVICE SUPPORT GROUP</h4>
+        <h4 style="margin:0 !important;">Coast Guard Base Farola, Muelle dela Industria,<br>Binondo, Manila</h4>
+    </div>
+
+    <div class="date">{{ report_date }}</div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Kind of Leaves</th>
+                <th>Accounting of Personnel</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in leave_data %}
+            <tr style="height: fit-content !important;">
+                <td style="text-align:left;">{{ item.kind }}</td>
+                <td>{{ item.count }}</td>
+            </tr>
+            {% endfor %}
+            <tr style="height: fit-content !important;">
+                <th style="text-align:left;">TOTAL Strength</th>
+                <th>{{ total_strength }}</th>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="footer">
+        <tr>
+            <td>
+                <strong>Prepared By:</strong><br><br>ASN Christian C Rapal PCG<br> Computer Programmer/Encoder, Administrative Division, CISSG
+            </td>
+            <br> &nbsp;
+            <br>
+            <td style="text-align:left; padding-left: 60px;">
+                <strong style="float:left !important;">Noted By:</strong><br><br> LT STEPHANIE M MANCERA PCG<br> OIC, Administrative Division, CISSG
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

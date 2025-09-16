@@ -77,11 +77,17 @@
                                 <div class="mb-3">
                                     <label for="division" class="form-label">Select Personnel</label>
                                     <select class="form-select" id="searchable-select" name="serial" style="width: 100%;">
-                                            
-                                            {% for s in person %}
-                                            <option value="{{ s.serialnumber }}">{{ s.firstname }} {{ s.lastname }}</option>
-                                            {% endfor %}
-                                        </select>
+                                        {% for s in person %}
+                                            <option 
+                                            value="{{ s.serialnumber }}" 
+                                            data-fullname=" {{s.rank}} {{ s.firstname }} {{ s.lastname }}">
+                                            {{s.rank}} {{ s.firstname }} {{ s.lastname }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    <input type="hidden" id="fullnameInput" name="fullname">
+
+
 
                                 </div>
 
@@ -90,19 +96,19 @@
                                     <label for="leaveType" class="form-label">Kind of Leave</label>
                                     <select class="form-select" id="leaveType" required name="leave">
                                             <option selected disabled >Select leave type</option>
-                                            <option value="Passes">Passes</option>
-                                            <option value="Mandatory Leave">Mandatory Leave</option>
-                                            <option value="R&R">R&R </option>
-                                            <option value="Sick Leave">Sick Leave</option>
-                                            <option value="Informal Leave">Informal Leave</option>
-                                            <option value="Convalescent Leave">Convalescent Leave</option>
-                                            <option value="Compassionate Leave">Compassionate Leave</option>
-                                            <option value="Ordinary Leave">Ordinary Leave</option>
-                                            <option value="Maternity Leave">Maternity Leave</option>
-                                            <option value="Paternity Leave">Paternity Leave</option>
-                                            <option value="Deployed">Deployed</option>
-                                            <option value="Detached Status">Detached Status</option>
-                                        </select>
+                                            {% for i in leave %}
+                                            <option value="{{i.leave}}">{{i.leave}}</option>
+                                            {% endfor %}
+                                            
+                                            
+                                    </select>
+
+
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="leaveType" class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="address" name="address" required placeholder="Enter address">
                                 </div>
 
                                 <div class="row">
@@ -114,6 +120,11 @@
                                         <label for="endDate" class="form-label">End Date</label>
                                         <input type="date" class="form-control" id="endDate" name="enddate" required>
                                     </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="leaveType" class="form-label">Special Order (SO)</label>
+                                    <input type="text" class="form-control" id="address" name="order" required placeholder="Special Order *Optional">
                                 </div>
 
                                 <br>
@@ -157,6 +168,22 @@
                 placeholder: "Select Personnel",
                 allowClear: true
             });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            function updateFullname() {
+                let fullname = $('#searchable-select option:selected').data('fullname');
+                $('#fullnameInput').val(fullname);
+                console.log('fullname set to:', fullname); // for debugging
+            }
+
+            // Update on change
+            $('#searchable-select').on('change', updateFullname);
+
+            // Set initial value on page load
+            updateFullname();
         });
     </script>
 

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/client_css/admin.css">
+    <link rel="stylesheet" href="../../static/client_css/pers.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>CISSG</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- bootstrap icon -->
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+
+</head>
+
+<body>
+
+    {% include 'activities/navadmin.html' %}
+
+    <div class="modal fade" id="editModal2" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="POST" id="editForm2">
+                {% csrf_token %}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Leave Record</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="edit-id">
+                        <div class="mb-3">
+                            <label for="edit-course" class="form-label">Fullname</label>
+                            <input type="text" class="form-control" name="fullname" id="edit-fullname" disabled>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="edit-authority" class="form-label">Leave Type</label>
+                            <select class="form-control" name="leave" id="edit-leave">
+                                 {% for s in leave %}
+                                    <option value="{{s.leave}}">{{s.leave}}</option>
+                                {% endfor %}
+                            </select>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Start Date</label>
+                            <input type="date" class="form-control" name="startdate" id="edit-startdate">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">End Date</label>
+                            <input type="date" class="form-control" name="enddate" id="edit-enddate">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Address</label>
+                            <input type="text" class="form-control" name="address" id="edit-address">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Special Order</label>
+                            <input type="text" class="form-control" name="order" id="edit-order">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select class="form-control" name="status" id="edit-status">
+                                <option value="" selected disabled>Select Status</option>
+                                <option value="Duty">Duty</option>
+                                <option value="For Commence">For Commence</option>
+                                <option value="Commenced">Commence</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Save Changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <section class="page-content">
+        <div class="heads">
+            <h1 class="text"><i class='bx bx-home'></i> CGETDC INSTALLATIONS AND SERVICE SUPPORT GROUP</h1><br>
+
+            <div id="datetime" class="text-end text-muted" style="font-size: 15px;"></div>
+        </div>
+        <hr class="bold-line">
+        <div class="bg2 d-flex justify-content-end">
+            <a href="{% url 'activities:generate_personnel_pdf' %}" class="btn btn-warning d-flex align-items-center">
+                <i class="bi bi-people-fill me-2"></i> Accounting of Personnel
+            </a>
+            <br> &nbsp; <br>
+            <button type="button" class="btn btn-info d-flex align-items-center">
+                <i class="bi bi-people-fill me-2"></i> Roster of Troops
+            </button>
+
+
+            <br> &nbsp; <br>
+            <button type="button" class="btn btn-info d-flex align-items-center">
+                <i class="bi bi-people-fill me-2"></i> Attendance
+            </button>
+
+
+        </div>
+
+
+        <div class="d-flex gap-3">
+
+
+            <div class="left">
+
+                <h4 class="mb-4"><i class="fa-solid fa-users-between-lines"></i> <span>Personnel Leave Records</span></h4>
+
+                <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search">
+
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Fullname</th>
+                            <th>Leave Type</th>
+                            <th>Start Date</th>
+                            <th>End date</th>
+                            <th>Address</th>
+                            <th>Special Order</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        {% for p in leave %}
+
+                        <tr>
+
+                            <td>
+                                {{p.fullname}}
+                            </td>
+                            <td>
+                                {{p.leave}}
+                            </td>
+                            <td>
+                                {{p.startdate|date:"F d, Y"}}
+                            </td>
+                            <td>
+                                {{p.enddate|date:"F d, Y"}}
+                            </td>
+                            <td>
+
+                                {{p.address}}
+                            </td>
+
+                            <td>
+                                {{p.order}}
+                            </td>
+                            <td>
+                                {% if p.status %} {% if p.status == "Duty" %}
+                                <span class="badge bg-success">{{ p.status }}</span> {% else %}
+                                <span class="badge bg-secondary">{{ p.status }}</span> {% endif %} {% else %} {% if p.startdate|date:"F d, Y" > today|date:"F d, Y"%}
+                                <span class="badge bg-warning text-dark">For Commence</span> {% else %}
+                                <span class="badge bg-info text-dark">Commenced</span> {% endif %} {% endif %}
+                            </td>
+
+
+
+                            <td style="text-align: center;">
+                                <!-- Pencil icon button to open modal with data -->
+                                <button type="button" class="btn btn-sm btn-primary editBtn" data-bs-toggle="modal" data-bs-target="#editModal2" data-id="{{ p.id }}" data-fullname="{{ p.fullname }}" data-leave="{{p.leave}}" data-startdate="{{ p.startdate|date:'Y-m-d'}}" data-enddate="{{ p.enddate|date:'Y-m-d'}}"
+                                    data-address="{{ p.address }} " data-order="{{p.order}} " data-status="{{p.status}} ">
+                                                                <i class="bi bi-pencil-square "></i>
+                                                            </button>
+
+                                <!-- Delete form -->
+                                <form action=" " method="POST " style="display: inline; ">
+                                    {% csrf_token %}
+                                    <button type="submit " class="btn btn-sm btn-danger " onclick="return confirm( 'Are you sure?') ">
+                                                                    <i class="bi bi-trash "></i>
+                                                                </button>
+                                </form>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+
+
+                    </tbody>
+                </table>
+                <!-- pagination -->
+
+                <nav>
+                    <ul class="pagination justify-content-end " id="pagination ">
+                        <!-- Pagination buttons will go here -->
+                    </ul>
+                </nav>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+    </section>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tableBody = document.getElementById('tableBody');
+            const rows = Array.from(tableBody.querySelectorAll('tr'));
+
+            // 🔢 Sort rows by hidden serial number (last <td>)
+            rows.sort((a, b) => {
+                const serialA = parseInt(a.querySelector('td:last-child').textContent.trim(), 10);
+                const serialB = parseInt(b.querySelector('td:last-child').textContent.trim(), 10);
+                return serialA - serialB; // ascending
+            });
+
+            // 📝 Re-append sorted rows back to the table
+            rows.forEach(row => tableBody.appendChild(row));
+
+            const rowsPerPage = 10;
+            const searchInput = document.getElementById('searchInput');
+            const pagination = document.getElementById('pagination');
+
+            let filteredRows = [...rows];
+            let currentPage = 1;
+
+            function renderTable(page) {
+                const start = (page - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
+
+                rows.forEach(row => row.style.display = 'none');
+                filteredRows.slice(start, end).forEach(row => row.style.display = '');
+
+                renderPagination(filteredRows.length, page);
+            }
+
+            function renderPagination(totalItems, current) {
+                pagination.innerHTML = '';
+                const totalPages = Math.ceil(totalItems / rowsPerPage);
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const li = document.createElement('li');
+                    li.className = `page-item ${i === current ? 'active' : ''}`;
+                    li.innerHTML = `<a class="page-link " href="# ">${i}</a>`;
+                    li.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        currentPage = i;
+                        renderTable(currentPage);
+                    });
+                    pagination.appendChild(li);
+                }
+            }
+
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                filteredRows = rows.filter(row => {
+                    // Convert all td text in this row to one string and search in it
+                    const rowText = Array.from(row.querySelectorAll('td'))
+                        .map(td => td.textContent.toLowerCase())
+                        .join(' ');
+                    return rowText.includes(query);
+                });
+                currentPage = 1;
+                renderTable(currentPage);
+            });
+
+            renderTable(currentPage);
+        });
+    </script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const editModal = document.getElementById('editModal2');
+
+            editModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+
+                const id = button.getAttribute('data-id');
+                const fullname = button.getAttribute('data-fullname');
+                const leave = button.getAttribute('data-leave');
+                const startdate = button.getAttribute('data-startdate');
+                const enddate = button.getAttribute('data-enddate');
+                const address = button.getAttribute('data-address');
+                const order = button.getAttribute('data-order');
+                const status = button.getAttribute('data-status');
+
+
+
+                // Populate modal fields
+                document.getElementById('edit-id').value = id;
+                document.getElementById('edit-fullname').value = fullname;
+                document.getElementById('edit-leave').value = leave;
+                document.getElementById('edit-startdate').value = startdate;
+                document.getElementById('edit-enddate').value = enddate;
+                document.getElementById('edit-address').value = address;
+                document.getElementById('edit-order').value = order;
+                document.getElementById('edit-status').value = status;
+
+                // Set the form action dynamically
+                const form = document.getElementById('editForm2');
+                form.action = "{% url 'activities:edit_leave' 0 %} ".replace('0', id);
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz " crossorigin="anonymous "></script>
+    <script src="../../static/js/color.js "></script>
+</body>
+
+</html>

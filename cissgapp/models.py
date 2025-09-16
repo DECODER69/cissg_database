@@ -431,6 +431,26 @@ class dependents(models.Model):
         return self.serialnumber
     
     
+class leaves(models.Model):
+    leave = models.CharField(max_length=100, default='')
+    
+    
+class record(models.Model):
+    serialnumber = models.CharField(max_length=100, default='')
+    fullname = models.CharField(max_length=100, default='')
+    leave = models.CharField(max_length=100, default='')
+    startdate = models.DateField(max_length=20, default='')
+    enddate = models.DateField(max_length=20, default='')
+    address = models.CharField(max_length=100, default='')
+    order = models.CharField(max_length=100, default='')
+    status = models.CharField(max_length=100, default='')
+    
+    def __str__(self):
+        return self.serialnumber
+    
+    
+    
+    
 
     
     

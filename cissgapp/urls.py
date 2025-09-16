@@ -152,6 +152,12 @@ urlpatterns = [
     path('personnel_profile/', views.personnel_profile, name='personnel_profile'),
     path('view_personnel/<str:serial>', views.view_personnel, name='view_personnel'),
     
+    path('generate_personnel_pdf/', views.generate_personnel_pdf, name='generate_personnel_pdf'),
+    path('add_leave/', views.add_leave, name='add_leave'),
+    path('delete_leave/<str:id>', views.delete_leave, name='delete_leave'),
+    path('leave_record/', views.leave_record, name='leave_record'),
+    path('edit_leave<str:id>', views.edit_leave, name='edit_leave'),
+    
     
     ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

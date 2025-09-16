@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import extenduser, academic, dependents, triple, other_trainings, details,  vocational, coastguard, coastguard_foreign, coastguard_local, military, military_local, military_foreign, appointments, shipboard, collateral, shorebased, collateral2, government, nongovernment, cgawards, cglcommendation, cgappreciation, cgplaque, mawards, mlcommendation, mappreciation, mplaque, clcommendation, cappreciation, cplaque, career, organization, eligibility, retirement
+from .models import extenduser, record, academic, leaves, dependents, triple, other_trainings, details,  vocational, coastguard, coastguard_foreign, coastguard_local, military, military_local, military_foreign, appointments, shipboard, collateral, shorebased, collateral2, government, nongovernment, cgawards, cglcommendation, cgappreciation, cgplaque, mawards, mlcommendation, mappreciation, mplaque, clcommendation, cappreciation, cplaque, career, organization, eligibility, retirement
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
@@ -43,6 +43,8 @@ admin.site.register(retirement)
 admin.site.register(details)
 admin.site.register(dependents)
 admin.site.register(triple)
+admin.site.register(leaves)
+admin.site.register(record)
 
 
 # admin.site.register(CustomUser)
